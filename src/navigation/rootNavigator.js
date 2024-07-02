@@ -13,7 +13,7 @@ export default function RootNavigator() {
 
   return (
     <Stack.Navigator>
-      {user ? (
+      {user?.accessToken ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} />
         </>

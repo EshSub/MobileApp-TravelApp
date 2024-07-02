@@ -1,10 +1,10 @@
 import { Button, ButtonText, EyeIcon, EyeOffIcon, FormControl, Heading, Input, InputField, InputIcon, InputSlot, Link, LinkText, Text, VStack } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { useState } from "react";
-import { BACKEND_URL } from "../constants/utils";
-import { useDispatch } from "react-redux";
-import { login } from "../redux/slices/userSlice";
+import { useEffect, useState } from "react";
+import { BACKEND_URL } from "../helpers/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { login, selectUser } from "../redux/slices/userSlice";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -12,12 +12,16 @@ function Login() {
     const [password, setPassword] = useState()
     const navigation = useNavigation()
     const dispatch = useDispatch() 
-
+    const user = useSelector(selectUser)
     const handleState = () => {
       setShowPassword((showState) => {
         return !showState;
       });
     };
+    useEffect(() => {
+      setUsername(user?.name)
+      setPassword(user?.password)
+    },[user])
 
     const handleClick = async () => {
       try {
@@ -28,6 +32,7 @@ function Login() {
           dispatch(login({
             name: username,
             loggedIn: true,
+            password: password,
             accessToken: response.data.access
           }))
         }
