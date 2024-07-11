@@ -15,6 +15,7 @@ import Carousel from "react-native-reanimated-carousel";
 import { Dimensions } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import MapView, { UrlTile } from "react-native-maps";
+import { WIDTH } from "../helpers/constants";
 
 const imageList = [
     {
@@ -43,7 +44,7 @@ const imageList = [
     },
 ];
 export const PlaceDetails = () => {
-    const width = Dimensions.get("window").width;
+    const width = WIDTH
     return (
         <Background>
             <ScrollView>

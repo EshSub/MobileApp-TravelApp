@@ -31,8 +31,6 @@ function Login() {
           // navigation.navigate("Home")
           dispatch(login({
             name: username,
-            loggedIn: true,
-            password: password,
             accessToken: response.data.access
           }))
         }
