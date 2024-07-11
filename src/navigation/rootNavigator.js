@@ -10,6 +10,8 @@ import { BACKEND_URL } from "../helpers/constants";
 import { HomeScreen } from "../views/home";
 import { PlacesAndActivitiesScreen } from "../views/placesAndActivities";
 import { PlaceDetails } from "../views/placeDetails";
+import { GeneralQuestions } from "../views/generalQuestions";
+import { DayPlanner } from "../views/dayPlanner";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,8 @@ export default function RootNavigator() {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Places&Activities" component={PlacesAndActivitiesScreen} />
           <Stack.Screen name="PlaceDetails" component={PlaceDetails}/>
+          <Stack.Screen name="GeneralQuestions" component={GeneralQuestions}/>
+          <Stack.Screen name="DayPlanner" component={DayPlanner}/>
         </>
       ) : (
         <>

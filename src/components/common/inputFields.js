@@ -1,4 +1,4 @@
-import { EyeIcon, EyeOffIcon, Input, InputField, InputIcon, InputSlot, Text, VStack } from "@gluestack-ui/themed";
+import { EyeIcon, EyeOffIcon, FormControlLabel, FormControlLabelText, Input, InputField, InputIcon, InputSlot, Text, VStack } from "@gluestack-ui/themed";
 import { useState } from "react";
 
 export const TextField = ({onChangeText, value, name}) => {
@@ -46,4 +46,12 @@ export const PasswordField = ({value, onChangeText, name}) => {
             </Input>
           </VStack>
     )
+}
+
+export const FormLabel = ({children, props}) => {
+  return(
+    <FormControlLabel {...props} mb={"$4"}>
+      <FormControlLabelText>{children}</FormControlLabelText>
+    </FormControlLabel>
+  )
 }

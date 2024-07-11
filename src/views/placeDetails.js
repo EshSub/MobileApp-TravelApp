@@ -15,6 +15,7 @@ import Carousel from "react-native-reanimated-carousel";
 import { Dimensions } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import MapView, { UrlTile } from "react-native-maps";
+import { useNavigation } from "@react-navigation/native";
 
 const imageList = [
     {
@@ -44,6 +45,7 @@ const imageList = [
 ];
 export const PlaceDetails = () => {
     const width = Dimensions.get("window").width;
+    const navigation = useNavigation()
     return (
         <Background>
             <ScrollView>
@@ -92,14 +94,11 @@ export const PlaceDetails = () => {
                         </Box>
                     </HStack>
                     <View flex={1} justifyContent="center" alignItems="center">
-                        <Text>
-                            MapView
-                        </Text>
                         <MapView
                             style={{width: width, height: width}}
                             initialRegion={{
-                                latitude: 37.78825,
-                                longitude: -122.4324,
+                                latitude: 7.9483,
+                                longitude: 80.7532,
                                 latitudeDelta: 0.0922,
                                 longitudeDelta: 0.0421,
                             }}
@@ -111,6 +110,12 @@ export const PlaceDetails = () => {
                         </MapView>
                     </View>
                 </View>
+                <Button onPress={() => navigation.navigate("GeneralQuestions")}>
+                    <ButtonText>General questions</ButtonText>
+                </Button>
+                <Button onPress={() => navigation.navigate("DayPlanner")}>
+                    <ButtonText>Day planner</ButtonText>
+                </Button>
             </VStack>
             </ScrollView>
         </Background>
