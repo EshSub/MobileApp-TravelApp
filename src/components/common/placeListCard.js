@@ -10,11 +10,12 @@ import {
 } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
+import { place } from "./placeCard";
 
 export const PlaceListCard = ({name, timeToVisit, image}) => {
     const navigation = useNavigation()
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("PlaceDetails")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Map", {place: place})}>
             <VStack bgColor="#ffffff" p="$2" borderRadius={"$2xl"} space="sm" alignItems="center" shadowColor="#4258841A" mr={"$2"}>
                 <Image
                     borderRadius="$2xl"

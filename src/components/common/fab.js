@@ -167,6 +167,7 @@ const actions = [
     color: "#341A34",
     emoji: <Icon as={SearchIcon} {...iconProps} />,
     border: "#692D6F",
+    path: 'RandomSearch'
   },
   {
     type: "Random",
