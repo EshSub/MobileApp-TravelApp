@@ -4,7 +4,7 @@ export const Textarea = createStyle({
   'w': '100%',
   'borderWidth': 1,
   'borderColor': '$backgroundLight300',
-  'borderRadius': '$sm',
+  'borderRadius': '$xl',
   'h': 100,
   '_input': {
     p: '$3',

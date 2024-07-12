@@ -82,7 +82,7 @@ export const Place = ({ place }) => {
         source={{ uri: place.header_image.url }}
         style={{ borderRadius: 10 }}
       />
-      <Marquee speed={0.5}>
+      <Marquee speed={0.3}>
         <HStack overflow="scroll" gap={5}>
           {place.activities.map((tag, index) => (
             <Badge size="md" variant="solid" action="success" key={index}>
@@ -91,7 +91,7 @@ export const Place = ({ place }) => {
           ))}
         </HStack>
       </Marquee>
-      <Marquee speed={0.5}>
+      <Marquee speed={0.2}>
         <HStack overflow="scroll" gap={5}>
           {place.keywords.map((tag, index) => (
             <Badge size="md" variant="solid" action="info" key={index}>
@@ -119,7 +119,7 @@ export const Place = ({ place }) => {
         height={WIDTH / 2}
         autoPlay={true}
         data={place.images}
-        scrollAnimationDuration={1000}
+        scrollAnimationDuration={3000}
         // onSnapToItem={(index) => console.log("current index:", index)}
         // pagingEnabled={false}
         // customAnimation={animationStyle}

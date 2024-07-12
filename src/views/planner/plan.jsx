@@ -67,6 +67,8 @@ export const Plan = () => {
       activityTimes.map((time) => {
         d.push({
           time: time,
+          // description: 'test',
+          // title: "test2",
           title: <TimelineItem item={plan[day][time]} />,
           icon: (
             <ActivityIcon
@@ -80,14 +82,18 @@ export const Plan = () => {
     setData(d);
   }, []);
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <Background>
       <View style={{ height: "100%" }}>
-        <Text>Plan</Text>
         <Timeline
           style={{
             flex: 1,
             marginTop: 20,
+            width: WIDTH,
           }}
           circleSize={20}
           circleColor="rgba(0,0,0,0)"

@@ -1,26 +1,27 @@
-import { Text, View } from 'react-native';
-import Login from '../views/login';
-import SignUp from '../views/signUp';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, selectUser } from '../redux/slices/userSlice';
-import { Button, ButtonText } from '@gluestack-ui/themed';
-import axios from 'axios';
-import { BACKEND_URL } from '../helpers/constants';
-import { HomeScreen } from '../views/home';
-import { PlacesAndActivitiesScreen } from '../views/placesAndActivities';
-import { useIsAuthenticated } from '../hooks/auth';
-import { PlaceDetails } from '../views/placeDetails';
-import { GeneralQuestions } from '../views/generalQuestions';
-import { DayPlanner } from '../views/dayPlanner';
-import { useNavigation } from '@react-navigation/native';
-import { HomeScreenHeader } from '../components/headers/HomeScreenHeader';
-import { MainDrawer } from '../components/drawer';
-import { getIsIntroDone } from '../redux/selectors';
-import { useEffect } from 'react';
-import { IntroView } from '../views/Intro/IntroView';
-import { BottomTabNavigator } from './bottomTabNavigator';
-import { Plan } from '../views/planner/plan';
+import { Text, View } from "react-native";
+import Login from "../views/login";
+import SignUp from "../views/signUp";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useDispatch, useSelector } from "react-redux";
+import { login, selectUser } from "../redux/slices/userSlice";
+import { Button, ButtonText } from "@gluestack-ui/themed";
+import axios from "axios";
+import { BACKEND_URL } from "../helpers/constants";
+import { HomeScreen } from "../views/home";
+import { PlacesAndActivitiesScreen } from "../views/placesAndActivities";
+import { useIsAuthenticated } from "../hooks/auth";
+import { PlaceDetails } from "../views/placeDetails";
+import { GeneralQuestions } from "../views/generalQuestions";
+import { DayPlanner } from "../views/dayPlanner";
+import { useNavigation } from "@react-navigation/native";
+import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
+import { MainDrawer } from "../components/drawer";
+import { getIsIntroDone } from "../redux/selectors";
+import { useEffect } from "react";
+import { IntroView } from "../views/Intro/IntroView";
+import { BottomTabNavigator } from "./bottomTabNavigator";
+import { Plan } from "../views/planner/plan";
+import AiPlanner from "../components/AiPlanner";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -43,25 +44,30 @@ export default function RootNavigator() {
 
   return (
     <MainDrawer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          // headerBackground: () => <View style={{ backgroundColor: "red" }} />
+        }}
+      >
         <Stack.Screen
-          name='Root'
-          component={HomeScreen}
+          name="Home"
+          component={BottomTabNavigator}
           options={{ headerTransparent: true, header: HomeScreenHeader }}
         />
         <Stack.Screen
-          name='Places&Activities'
+          name="Places&Activities"
           component={PlacesAndActivitiesScreen}
         />
-        <Stack.Screen name='PlaceDetails' component={PlaceDetails} />
-        <Stack.Screen name='GeneralQuestions' component={GeneralQuestions} />
-        <Stack.Screen name='DayPlanner' component={DayPlanner} />
+        <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
+        <Stack.Screen name="GeneralQuestions" component={GeneralQuestions} />
+        <Stack.Screen name="DayPlanner" component={DayPlanner} />
         <Stack.Screen
-          name='Intro'
+          name="Intro"
           component={IntroView}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name='Plan' component={Plan} />
+        <Stack.Screen name="Plan" component={Plan} options={{headerTransparent: true, }} />
+        <Stack.Screen name="Planner" component={AiPlanner} options={{headerTransparent: true, }} />
         {!isAuthenticated && (
           <>
             <Stack.Screen name='Login' component={Login} />
