@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { config } from "@gluestack-ui/config";
+import { config } from './config/gluestack-ui.config';
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { StatusBar } from "expo-status-bar";
 import RootNavigator from "./src/navigation/rootNavigator";
