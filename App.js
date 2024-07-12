@@ -9,8 +9,14 @@ import store from "./src/redux/store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Plan } from "./src/views/planner/plan";
 import AiPlanner from "./src/components/AiPlanner";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
+
+
+
   return (
     <Provider store={store}>
       <GluestackUIProvider config={config}>

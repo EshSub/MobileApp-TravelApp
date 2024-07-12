@@ -44,7 +44,11 @@ export default function RootNavigator() {
 
   return (
     <MainDrawer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          // headerBackground: () => <View style={{ backgroundColor: "red" }} />
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={BottomTabNavigator}
@@ -62,16 +66,8 @@ export default function RootNavigator() {
           component={IntroView}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Plan"
-          component={Plan}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Planner"
-          component={AiPlanner}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="Plan" component={Plan} options={{headerTransparent: true, }} />
+        <Stack.Screen name="Planner" component={AiPlanner} options={{headerTransparent: true, }} />
         {!isAuthenticated && (
           <>
             <Stack.Screen name="Login" component={Login} />
