@@ -5,7 +5,7 @@ import { BACKGROUND_COLOR } from "../helpers/constants";
 export const Background = ({ children }) => {
   return (
     <View height={"100%"} backgroundColor={BACKGROUND_COLOR} p={"$4"}>
-      <ScrollView>
+      {/* <ScrollView> */}
         <SafeAreaView
           style={{
             // backgroundColor: "red",
@@ -18,7 +18,7 @@ export const Background = ({ children }) => {
         >
           {children}
         </SafeAreaView>
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   );
 };

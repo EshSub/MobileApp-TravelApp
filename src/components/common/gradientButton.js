@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { Text, LinearGradient } from "@gluestack-ui/themed";
 import { LinearGradient as ExpoLinearGradient } from "expo-linear-gradient";
 
-export const GradientButton = ({ title, onPress, ...props }) => {
+export const GradientButton = ({ title, onPress, children, ...props }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <LinearGradient
@@ -15,9 +15,19 @@ export const GradientButton = ({ title, onPress, ...props }) => {
         end={[1, 1]}
         as={ExpoLinearGradient}
       >
-        <Text textAlign="center" size="xl" fontWeight={600} color="#fff" px={"$2"}>
-          {title}
-        </Text>
+        {title ? (
+          <Text
+            textAlign="center"
+            size="xl"
+            fontWeight={600}
+            color="#fff"
+            px={"$2"}
+          >
+            {title}
+          </Text>
+        ) : (
+          children
+        )}
       </LinearGradient>
     </TouchableOpacity>
   );

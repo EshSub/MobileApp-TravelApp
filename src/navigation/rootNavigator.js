@@ -4,7 +4,7 @@ import SignUp from "../views/signUp";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectUser } from "../redux/slices/userSlice";
-import { Button, ButtonText } from "@gluestack-ui/themed";
+import { Button, ButtonText, Icon } from "@gluestack-ui/themed";
 import axios from "axios";
 import { BACKEND_URL } from "../helpers/constants";
 import { HomeScreen } from "../views/home";
@@ -14,7 +14,10 @@ import { PlaceDetails } from "../views/placeDetails";
 import { GeneralQuestions } from "../views/generalQuestions";
 import { DayPlanner } from "../views/dayPlanner";
 import { useNavigation } from "@react-navigation/native";
-import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
+import {
+  HeaderWithBackButton,
+  HomeScreenHeader,
+} from "../components/headers/HomeScreenHeader";
 import { MainDrawer } from "../components/drawer";
 import { getIsIntroDone } from "../redux/selectors";
 import { useEffect } from "react";
@@ -22,6 +25,7 @@ import { IntroView } from "../views/Intro/IntroView";
 import { BottomTabNavigator } from "./bottomTabNavigator";
 import { Plan } from "../views/planner/plan";
 import AiPlanner from "../components/AiPlanner";
+import { ChevronLeftIcon } from "lucide-react-native";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -38,17 +42,17 @@ export default function RootNavigator() {
 
   useEffect(() => {
     if (!isIntroDone) {
-      navigation.navigate('Intro');
+      navigation.navigate("Intro");
     }
   }, []);
 
+  const navigateToHome = () => {
+    navigation.navigate("Home");
+  }
+
   return (
     <MainDrawer>
-      <Stack.Navigator
-        screenOptions={{
-          // headerBackground: () => <View style={{ backgroundColor: "red" }} />
-        }}
-      >
+      <Stack.Navigator screenOptions={{ header: HeaderWithBackButton }}>
         <Stack.Screen
           name="Home"
           component={BottomTabNavigator}
@@ -66,12 +70,23 @@ export default function RootNavigator() {
           component={IntroView}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Plan" component={Plan} options={{headerTransparent: true, }} />
-        <Stack.Screen name="Planner" component={AiPlanner} options={{headerTransparent: true, }} />
+        <Stack.Screen
+          name="Plan"
+          component={Plan}
+          options={{
+            headerTransparent: true,
+            header: () => <HeaderWithBackButton onBack={navigateToHome}/>
+          }}
+        />
+        <Stack.Screen
+          name="Planner"
+          component={AiPlanner}
+          options={{ headerTransparent: true }}
+        />
         {!isAuthenticated && (
           <>
-            <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen name='SignUp' component={SignUp} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
           </>
         )}
       </Stack.Navigator>
