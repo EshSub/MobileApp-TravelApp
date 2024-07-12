@@ -20,6 +20,7 @@ import { getIsIntroDone } from "../redux/selectors";
 import { useEffect } from "react";
 import { IntroView } from "../views/Intro/IntroView";
 import { BottomTabNavigator } from "./bottomTabNavigator";
+import { Plan } from "../views/planner/plan";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -32,7 +33,7 @@ export default function RootNavigator() {
   const isAuthenticated = useIsAuthenticated();
 
   const isIntroDone = useSelector(getIsIntroDone);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (!isIntroDone) {
@@ -47,13 +48,16 @@ export default function RootNavigator() {
           name="Root"
           component={HomeScreen}
           options={{ headerTransparent: true, header: HomeScreenHeader }}
-        /> 
-        <Stack.Screen name="Places&Activities" component={PlacesAndActivitiesScreen} />
+        />         
+        <Stack.Screen
+        name="Places&Activities"
+        component={PlacesAndActivitiesScreen}
+        />
         <Stack.Screen name="PlaceDetails" component={PlaceDetails}/>
         <Stack.Screen name="GeneralQuestions" component={GeneralQuestions}/>
         <Stack.Screen name="DayPlanner" component={DayPlanner}/>
         <Stack.Screen name="Intro" component={IntroView} options={{headerShown: false}}/>
-        {/* <Stack.Screen name="Root" component={Root} /> */}
+        <Stack.Screen name="Plan" component={Plan} />
         {!isAuthenticated && (
           <>
             <Stack.Screen name="Login" component={Login} />

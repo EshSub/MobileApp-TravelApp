@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Plan } from "./src/views/planner/plan";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <StatusBar style="auto" />
         <NavigationContainer>
           <GestureHandlerRootView>
+            {/* <Plan /> */}
             <RootNavigator />
           </GestureHandlerRootView>
         </NavigationContainer>

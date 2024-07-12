@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { places } from "../../helpers/places";
+import { places } from "../../helpers/data";
 
 export const placeSlice = createSlice({
   name: "app",
