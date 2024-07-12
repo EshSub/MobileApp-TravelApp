@@ -396,3 +396,115 @@ export const places = [
     ],
   },
 ];
+
+export const plan = {
+  1: {
+    general: {
+      description: "Exiting day with beach activities and nightlife and a fine dining experience.",
+    },
+    morning: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach", "Water Sports"],
+    },
+    evening: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach", "Nightlife"],
+    },
+    accommodation: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach"],
+      Budget: "High",
+    },
+    breakfast: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Local Cuisine"],
+    },
+    lunch: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Seafood", "Local Cuisine"],
+    },
+    dinner: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Fine Dining"],
+    },
+  },
+
+  2: {
+    general: {
+      description: "Relaxing day with beach activities and wildlife in beautiful seaside.",
+    },
+    morning: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach", "Wildlife"],
+    },
+    evening: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach", "Relaxation"],
+    },
+    accommodation: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach"],
+      Budget: "High",
+    },
+    breakfast: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Local Cuisine"],
+    },
+    lunch: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Seafood", "Local Cuisine"],
+    },
+    dinner: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Streetfood", "Local Cuisine"],
+    },
+  },
+  3: {
+    general: {
+      description: "Resting wildlife and nature day with local cuisine for you",
+    },
+    morning: {
+      District: "Hambantota",
+      Province: "Southern",
+      Tags: ["Wildlife", "Nature"],
+    },
+    evening: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach", "Relaxation"],
+    },
+    accommodation: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Beach"],
+      Budget: "High",
+    },
+    breakfast: {
+      District: "Hambantota",
+      Province: "Southern",
+      Tags: ["Local Cuisine"],
+    },
+    lunch: {
+      District: "Hambantota",
+      Province: "Southern",
+      Tags: ["Seafood", "Local Cuisine"],
+    },
+    dinner: {
+      District: "Matara",
+      Province: "Southern",
+      Tags: ["Fine Dining"],
+    },
+  },
+};

@@ -19,6 +19,7 @@ import { MainDrawer } from "../components/drawer";
 import { getIsIntroDone } from "../redux/selectors";
 import { useEffect } from "react";
 import { IntroView } from "../views/Intro/IntroView";
+import { Plan } from "../views/planner/plan";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +29,7 @@ export default function RootNavigator() {
   const isAuthenticated = useIsAuthenticated();
 
   const isIntroDone = useSelector(getIsIntroDone);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (!isIntroDone) {
@@ -38,24 +39,32 @@ export default function RootNavigator() {
 
   return (
     <MainDrawer>
-    <Stack.Navigator>
-           <Stack.Screen
+      <Stack.Navigator>
+        <Stack.Screen
           name="Root"
           component={HomeScreen}
           options={{ headerTransparent: true, header: HomeScreenHeader }}
         />
-          <Stack.Screen name="Places&Activities" component={PlacesAndActivitiesScreen} />
-          <Stack.Screen name="PlaceDetails" component={PlaceDetails}/>
-          <Stack.Screen name="GeneralQuestions" component={GeneralQuestions}/>
-          <Stack.Screen name="DayPlanner" component={DayPlanner}/>
-          <Stack.Screen name="Intro" component={IntroView} options={{headerShown: false}}/>
-         {!isAuthenticated && (
-        <>
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-        </>
-      )}
-    </Stack.Navigator>
+        <Stack.Screen
+          name="Places&Activities"
+          component={PlacesAndActivitiesScreen}
+        />
+        <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
+        <Stack.Screen name="GeneralQuestions" component={GeneralQuestions} />
+        <Stack.Screen name="DayPlanner" component={DayPlanner} />
+        <Stack.Screen
+          name="Intro"
+          component={IntroView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Plan" component={Plan} />
+        {!isAuthenticated && (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+          </>
+        )}
+      </Stack.Navigator>
     </MainDrawer>
   );
 }
