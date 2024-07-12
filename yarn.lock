@@ -7167,15 +7167,6 @@ react-native-animated-nav-tab-bar@^3.1.10:
   resolved "https://registry.yarnpkg.com/react-native-animated-nav-tab-bar/-/react-native-animated-nav-tab-bar-3.1.10.tgz#23ed24f4102ce02c8849f4e8aaf241b5e19506cc"
   integrity sha512-GINXgLsesHLScHVWios4bVX2UU/98ELRzhWwA6hG9BU+LfDPGWAKUwfTja9Yh9NgTy3Jz/tkth8NM632BhJyHw==
 
-react-native-calendar-picker@^8.0.4:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-calendar-picker/-/react-native-calendar-picker-8.0.4.tgz#14bfe73e53169f1c3728470f263b2fadbdbd9d37"
-  integrity sha512-RXiHS8XTlDhrcyiEMnxBInSs6mOOUkAlnhoJmlYIIpgG5FkDWFMXxs0OFoW6ZQ6I0U3CburFloVvZV6nbr5Jsw==
-  dependencies:
-    node-git-hooks "^1.0.1"
-    prop-types "^15.6.0"
-    recyclerlistview "^3.0.0"
-
 react-native-drawer-layout@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/react-native-drawer-layout/-/react-native-drawer-layout-3.3.0.tgz#9e56ca33f9c5f01f30c82c451a2bdc605ff74d9b"
