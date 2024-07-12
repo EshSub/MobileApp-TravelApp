@@ -1,4 +1,4 @@
-import { Box, Button, FlatList, HStack, Heading, Input, InputField, InputIcon, InputSlot, LinearGradient, SearchIcon, VStack, View, Text, ButtonText } from "@gluestack-ui/themed"
+import { Box, Button, FlatList, HStack, Heading, Input, InputField, InputIcon, InputSlot, LinearGradient, SearchIcon, VStack, View, Text, ButtonText, ScrollView } from "@gluestack-ui/themed"
 import { Background } from "../components/background"
 import { PlaceListCard } from "../components/common/placeListCard"
 import { PlaceCard } from "../components/common/placeCard"
@@ -72,7 +72,8 @@ export const PlacesAndActivitiesScreen = () => {
     },[searchPlace])
     return (
         <Background>
-            <VStack flex={1} rowGap={"$4"}>
+            <ScrollView>
+            <VStack flex={1} rowGap={"$4"} height={"100%"}>
                 <AnimatedTextSwitching
                     texts={["Welcome...", "Welkom...", "Herzlich willkommen..."]}
                     size="3xl"
@@ -142,6 +143,7 @@ export const PlacesAndActivitiesScreen = () => {
 
                 </View>
             </VStack>
+            </ScrollView>
         </Background>
     )
 }
