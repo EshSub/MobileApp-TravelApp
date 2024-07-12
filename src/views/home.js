@@ -18,6 +18,7 @@ import { MarqueeIntro, TextMarquee } from "../components/intro/textMarquee.jsx";
 import { ImageMarquee } from "../components/intro/imageMarquee.jsx";
 import { useSelector } from "react-redux";
 import { getPlaces } from "../redux/selectors.js";
+import { Fab } from "../components/common/fab";
 
 export const HomeScreen = () => {
   const navigation = useNavigation();
@@ -66,6 +67,7 @@ export const HomeScreen = () => {
         alt="homePage"
         resizeMethod="center"
       />
+      <Fab />
       {/* <Button onPress={() => navigation.navigate("Places&Activities")}>
         <ButtonText>Places and activities</ButtonText>
       </Button> */}

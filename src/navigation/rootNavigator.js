@@ -21,12 +21,13 @@ import { useEffect } from "react";
 import { IntroView } from "../views/Intro/IntroView";
 import { BottomTabNavigator } from "./bottomTabNavigator";
 import { Plan } from "../views/planner/plan";
+import AiPlanner from "../components/AiPlanner";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
 
-function Root(){
-  return <BottomTabNavigator/>
+function Root() {
+  return <BottomTabNavigator />;
 }
 export default function RootNavigator() {
   const user = useSelector(selectUser);
@@ -45,19 +46,32 @@ export default function RootNavigator() {
     <MainDrawer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Root"
-          component={HomeScreen}
+          name="Home"
+          component={BottomTabNavigator}
           options={{ headerTransparent: true, header: HomeScreenHeader }}
-        />         
-        <Stack.Screen
-        name="Places&Activities"
-        component={PlacesAndActivitiesScreen}
         />
-        <Stack.Screen name="PlaceDetails" component={PlaceDetails}/>
-        <Stack.Screen name="GeneralQuestions" component={GeneralQuestions}/>
-        <Stack.Screen name="DayPlanner" component={DayPlanner}/>
-        <Stack.Screen name="Intro" component={IntroView} options={{headerShown: false}}/>
-        <Stack.Screen name="Plan" component={Plan} />
+        <Stack.Screen
+          name="Places&Activities"
+          component={PlacesAndActivitiesScreen}
+        />
+        <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
+        <Stack.Screen name="GeneralQuestions" component={GeneralQuestions} />
+        <Stack.Screen name="DayPlanner" component={DayPlanner} />
+        <Stack.Screen
+          name="Intro"
+          component={IntroView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Plan"
+          component={Plan}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Planner"
+          component={AiPlanner}
+          options={{ headerShown: false }}
+        />
         {!isAuthenticated && (
           <>
             <Stack.Screen name="Login" component={Login} />
