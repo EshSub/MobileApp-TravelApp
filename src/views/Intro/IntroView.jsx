@@ -16,7 +16,7 @@ const Controls = ({ currentScreen, setCurrentScreen }) => {
   const navigation = useNavigation();
   const navigateToHome = () => {
     navigation.navigate("Home");
-  };s
+  };
   const onNext = () => {
     if (currentScreen == 2) {
       navigateToHome();
