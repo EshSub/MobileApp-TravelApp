@@ -28,17 +28,23 @@ function Login() {
     setPassword(user?.password)
   }, [user])
 
+
   const handleClick = async () => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
-      if (response) {
-        console.log(response.data)
-        // navigation.navigate("Home")
-        dispatch(login({
-          name: username,
-          accessToken: response.data.access
-        }))
-      }
+
+      setTimeout(() => {
+        navigation.navigate("Intro")
+      }, 500)
+
+      // const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
+      // if (response) {
+      //   console.log(response.data)
+      //   // navigation.navigate("Home")
+      //   dispatch(login({
+      //     name: username,
+      //     accessToken: response.data.access
+      //   }))
+      // }
     } catch (error) {
       console.log('error', error)
     }
@@ -46,9 +52,9 @@ function Login() {
   return (
     <Background>
       <FormControl
-        w='90%'
-        p='$4'
-        borderWidth='$1'
+        w='100%'
+        // p='$4'
+        // borderWidth='$1'
         borderRadius='$lg'
         borderColor='$borderLight300'
         $dark-borderWidth='$1' $dark-borderRadius='$lg' $dark-borderColor='$borderDark800'

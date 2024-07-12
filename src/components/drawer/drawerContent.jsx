@@ -10,25 +10,45 @@
 // };
 
 import React from "react";
-import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
-import { useSelector } from "react-redux";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { getIsMainDrawerOpen } from "../../redux/selectors";
 import { SlideIn } from "../animated/SlideIn";
 import { HStack, Icon, VStack } from "@gluestack-ui/themed";
 import { House } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
+import { setMainDrawerOpen } from "../../redux/slices/appSlice";
 
 export const DrawerContent = (props) => {
   const open = useSelector(getIsMainDrawerOpen);
 
+  const dispatch = useDispatch();
+
   const menuItems = [
-    { id: "HomeScreen", label: "Home", icon: House },
-    { id: "Profile", label: "Profile" },
+    // { id: "HomeScreen", label: "Home", icon: House },
+    // { id: "Profile", label: "Profile" },
     { id: "Settings", label: "Settings" },
     { id: "PrivacyPolicy", label: "Privacy Policy" },
     { id: "TermsOfService", label: "Terms of Service" },
-    { id: "Help", label: "Help" },
-    { id: "Logout", label: "Logout" },
+    { id: "Intro", label: "Intro", path: "Intro" },
+    { id: "Logout", label: "Logout", path: "Login" },
   ];
+
+  const navigation = useNavigation();
+
+  const onPress = (item) => {
+    if (item.path) {
+      dispatch(setMainDrawerOpen(false));
+      navigation.navigate(item.path);
+    }
+  };
 
   console.log("drawerProps", { props });
   return (
@@ -44,9 +64,9 @@ export const DrawerContent = (props) => {
             />
           </SafeAreaView>
 
-          <Text style={styles.name}>John Doe </Text>
-          <Text style={styles.userInfo}>jhonnydoe@mail.com </Text>
-          <Text style={styles.userInfo}>Florida </Text>
+          <Text style={styles.name}>Subodha K.</Text>
+          <Text style={styles.userInfo}>subodha@mail.com </Text>
+          <Text style={styles.userInfo}>Colombo, Sri Lanka </Text>
         </View>
       </View>
 
@@ -55,21 +75,31 @@ export const DrawerContent = (props) => {
           {open &&
             menuItems.map((item, index) => {
               return (
-                <SlideIn key={item.id} style={styles.item} delay={index * 100}>
-                  <HStack
-                    p={"$2"}
-                    px={"$5"}
-                    // backgroundColor="white"
-                    // borderRadius={"$10"}
-                    //  m={"$3"}
-                    w={"100%"}
-                    gap={10}
-                    alignItems="center"
+                <TouchableOpacity
+                  onPress={() => {
+                    onPress(item);
+                  }}
+                >
+                  <SlideIn
+                    key={item.id}
+                    style={styles.item}
+                    delay={index * 100}
                   >
-                    <Icon as={item.icon ?? House} size="xl" />
-                    <Text>{item.label}</Text>
-                  </HStack>
-                </SlideIn>
+                    <HStack
+                      p={"$2"}
+                      px={"$5"}
+                      // backgroundColor="white"
+                      // borderRadius={"$10"}
+                      //  m={"$3"}
+                      w={"100%"}
+                      gap={10}
+                      alignItems="center"
+                    >
+                      <Icon as={item.icon ?? House} size="xl" />
+                      <Text>{item.label}</Text>
+                    </HStack>
+                  </SlideIn>
+                </TouchableOpacity>
               );
             })}
         </VStack>

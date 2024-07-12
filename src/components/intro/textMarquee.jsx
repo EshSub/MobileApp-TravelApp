@@ -130,7 +130,7 @@ export const TextMarquee = () => {
     },
     {
       speed: 1,
-      size: 60,
+      size: 10,
     },
     {
       speed: 0.5,
@@ -142,11 +142,11 @@ export const TextMarquee = () => {
     },
     {
       speed: 1,
-      size: 50,
+      size: 30,
     },
     {
       speed: 0.5,
-      size: 30,
+      size: 35,
     },
   ];
 

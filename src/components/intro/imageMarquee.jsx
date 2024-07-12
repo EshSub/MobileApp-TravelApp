@@ -2,31 +2,43 @@ import React from "react";
 import { VStack, Image, HStack, View } from "@gluestack-ui/themed";
 import { Background } from "../background";
 import { Marquee } from "@animatereactnative/marquee";
+import { useSelector } from "react-redux";
+import { getPlaces } from "../../redux/selectors";
 
 export const ImageMarquee = () => {
+
+  const places = useSelector(getPlaces)
+
+  const images = places.map((place) => place.images.map(i => i.url)).flat();
+
+  console.log({ images })
+
   const imagesGroups = [
-    [
-      "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
-      "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-      "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
-      "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-    ],
-    [
-      "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
-      "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-      "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
-      "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-    ],
-    [
-      "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
-      "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-      "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
-      "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-    ],
+    images.slice(0, 5),
+    images.slice(5, 10),
+    images.slice(10, 15),
+    // [
+    //   "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
+    //   "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
+    //   "https://upload.wikimedia.org/wikipedia/commons/4/4c/Beauty_of_Sigiriya_by_Binuka.jpg",
+    //   "https://www.storiesbysoumya.com/wp-content/uploads/2021/11/sigiriya-rock-fortress.jpg",
+    // ],
+    // [
+    //   "https://www.talesofceylon.com/wp-content/uploads/2019/10/Art-Sculpture-and-Poetry-800x1000.jpg",
+    //   "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
+    //   "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
+    //   "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
+    // ],
+    // [
+    //   "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
+    //   "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
+    //   "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
+    //   "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
+    // ],
   ];
 
   return (
-    <Background>
+    // <Background>
       <VStack
         justifyContent="center"
         alignItems="flex-start"
@@ -49,6 +61,7 @@ export const ImageMarquee = () => {
                       width={width + Math.random() * 100}
                       alt="homePage"
                       resizeMethod="center"
+                      style={{backgroundColor: 'white'}}
                     />
                   </View>
                 );
@@ -57,6 +70,6 @@ export const ImageMarquee = () => {
           </Marquee>
         ))}
       </VStack>
-    </Background>
+    // </Background>
   );
 };
