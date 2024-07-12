@@ -11,6 +11,9 @@ import { ActivityCard, activityList } from "../components/common/activityCard"
 import { AnimatedTextSwitching } from "../components/animated/AnimatedTextSwitching"
 import { GradientChip } from "../components/common/gradientButton"
 import { PlacesSearchBar } from "../components/placesSearchBar"
+import { useSelector } from "react-redux"
+import { getPlaces } from "../redux/selectors"
+import { Fab } from "../components/common/fab"
 
 const data = [
     {
@@ -65,6 +68,7 @@ export const PlacesAndActivitiesScreen = () => {
     const [selected, setSelected] = useState(0)
     const [searchPlace, setSearchPlace] = useState()
     const navigation = useNavigation()
+    const places = useSelector(getPlaces)
     useEffect(() => {
         if (searchPlace){
             navigation.navigate('Map', {place: searchPlace})
@@ -89,13 +93,13 @@ export const PlacesAndActivitiesScreen = () => {
                         <GradientChip selected={selected} index={0} onPress={() => setSelected(0)} text={"Sights"}/>
                         <GradientChip selected={selected} index={1} onPress={() => setSelected(1)} text={"Tour"}/>
                         <GradientChip selected={selected} index={2} onPress={() => setSelected(2)} text={"Adventure"}/>
-                        <GradientChip 
+                        {/* <GradientChip 
                             selected={selected} 
                             index={3} 
                             onPress={() => {
                                 setSelected(3)
                                 navigation.navigate('Map', { place : null})}} 
-                            text={"Map"}/>
+                            text={"Map"}/> */}
                     </Box>
                     <View>
                         <Heading fontSize={"$lg"} color="#5E6A81">
@@ -115,14 +119,14 @@ export const PlacesAndActivitiesScreen = () => {
                         loop
                         width={width * 0.9}
                         height={width * 0.6}
-                        autoPlay={false}
-                        data={data}
+                        autoPlay={true}
+                        data={places}
                         mode="parallax"
-                        scrollAnimationDuration={1000}
+                        scrollAnimationDuration={2000}
                         onSnapToItem={(index) => console.log('current index:', index)}
                         renderItem={({ index, item }) => (
                             <View style={{ flex: 1 }}>
-                                <PlaceCard name={item.name} image={item.image} location={item.location} rating={item.rating}/>
+                                <PlaceCard name={item.place_name} image={item.header_image.url} location={item.location} rating={item.rating}/>
                             </View>
                         )}
                     />
@@ -135,15 +139,16 @@ export const PlacesAndActivitiesScreen = () => {
                     </HStack>
                     <FlatList
                         horizontal
-                        data={data}
+                        data={places}
                         renderItem={({ item }) =>
-                            <PlaceListCard name={item.name} startDate={item.startDate} endDate={item.endDate} image={item.image} />
+                            <PlaceListCard name={item.place_name} image={item.header_image.url} timeToVisit={item.best_time_to_visit} />
                         }
                         keyExtractor={(item) => item.id} />
 
                 </View>
             </VStack>
             </ScrollView>
+            <Fab />
         </Background>
     )
 }

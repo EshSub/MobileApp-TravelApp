@@ -20,7 +20,7 @@ export const PlaceCard = ({ name, location, rating, image }) => {
                     </Text>
                     <Badge size="md" variant="solid" borderRadius="$full" alignSelf="flex-end" backgroundColor="#5E6A81">
                         <BadgeIcon fontVariant={"solid"} as={StarIcon} mr="$2" color="#FFC700" tintColor="#FFC700"/>
-                        <BadgeText color="#ffffff">{rating}</BadgeText>
+                        <BadgeText color="#ffffff">{rating ?? 0}</BadgeText>
                     </Badge>
                 </HStack>
             </VStack>

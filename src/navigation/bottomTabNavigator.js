@@ -12,6 +12,7 @@ import { BACKGROUND_COLOR } from "../helpers/constants";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { Map } from "../views/Map";
+import { ChatView } from "../views/chat";
 
 export const BottomTabNavigator = () => {
 
@@ -57,9 +58,14 @@ export const BottomTabNavigator = () => {
           tabBarIcon: () => <MapIcon />,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="P"
         component={PlaceDetails}
+        options={{ headerTitle: "", tabBarIcon: () => <MessageCircleIcon /> }}
+      /> */}
+      <Tab.Screen
+        name="C"
+        component={ChatView}
         options={{ headerTitle: "", tabBarIcon: () => <MessageCircleIcon /> }}
       />
       <Tab.Screen

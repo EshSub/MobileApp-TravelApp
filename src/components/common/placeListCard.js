@@ -11,7 +11,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 
-export const PlaceListCard = ({name, startDate, endDate, image}) => {
+export const PlaceListCard = ({name, timeToVisit, image}) => {
     const navigation = useNavigation()
     return (
         <TouchableOpacity onPress={() => navigation.navigate("PlaceDetails")}>
@@ -39,7 +39,7 @@ export const PlaceListCard = ({name, startDate, endDate, image}) => {
                             },
                         }}
                     >
-                       { `${startDate} ${endDate}, 2024`}
+                       {timeToVisit}
                     </Text>
                 </VStack>
             </VStack>
