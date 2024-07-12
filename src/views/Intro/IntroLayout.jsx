@@ -10,9 +10,12 @@ export const IntroLayout = ({ title, description, content }) => {
       justifyContent="space-evenly"
       // h={"100%"}
       //   backgroundColor="red"
+      gap={50}
     >
-      <Heading>{title}</Heading>
-      <Text>{description}</Text>
+      <VStack>
+        <Heading>{title}</Heading>
+        <Text>{description}</Text>
+      </VStack>
       <View>{content}</View>
     </VStack>
   );

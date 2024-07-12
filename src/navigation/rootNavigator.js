@@ -41,11 +41,11 @@ export default function RootNavigator() {
   const isIntroDone = useSelector(getIsIntroDone);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    if (!isIntroDone) {
-      navigation.navigate("Intro");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!isIntroDone) {
+  //     navigation.navigate("Intro");
+  //   }
+  // }, []);
 
   const navigateToHome = () => {
     navigation.navigate("Home");
@@ -85,12 +85,12 @@ export default function RootNavigator() {
           component={AiPlanner}
           options={{ headerTransparent: true }}
         />
-        {!isAuthenticated && (
+        {/* {!isAuthenticated && ( */}
           <>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
           </>
-        )}
+        {/* )} */}
       </Stack.Navigator>
     </MainDrawer>
   );

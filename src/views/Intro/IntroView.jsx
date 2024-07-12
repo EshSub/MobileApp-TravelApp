@@ -10,10 +10,19 @@ import { Background } from "../../components/background";
 import { ImageMarquee } from "../../components/intro/imageMarquee";
 import { HEIGHT, WIDTH } from "../../helpers/constants";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Controls = ({ currentScreen, setCurrentScreen }) => {
+  const navigation = useNavigation();
+  const navigateToHome = () => {
+    navigation.navigate("Home");
+  };s
   const onNext = () => {
-    setCurrentScreen(currentScreen + 1);
+    if (currentScreen == 2) {
+      navigateToHome();
+    } else {
+      setCurrentScreen(currentScreen + 1);
+    }
   };
 
   const onBack = () => {
@@ -63,18 +72,18 @@ export const IntroView = () => {
                 key={index}
                 initial={{
                   opacity: 0,
-                //   scale: 0,
-                //   translateX: WIDTH,
+                  //   scale: 0,
+                  //   translateX: WIDTH,
                 }}
                 animate={{
                   opacity: 1,
-                //   scale: 1,
-                //   translateX: 0,
+                  //   scale: 1,
+                  //   translateX: 0,
                 }}
                 exit={{
                   opacity: 0,
-                //   scale: 1,
-                //   translateX: -WIDTH,
+                  //   scale: 1,
+                  //   translateX: -WIDTH,
                 }}
                 style={{
                   position: "absolute",
