@@ -7,10 +7,11 @@ import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
 import { PlacesAndActivitiesScreen } from "../views/placesAndActivities";
 import { DayPlanner } from "../views/dayPlanner";
 import { MainDrawer } from "../components/drawer";
-import { HomeIcon } from "lucide-react-native";
+import { HomeIcon, MapIcon, MessageCircleIcon } from "lucide-react-native";
 import { BACKGROUND_COLOR } from "../helpers/constants";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
+import { Map } from "../views/Map";
 
 export const BottomTabNavigator = () => {
 
@@ -39,29 +40,27 @@ export const BottomTabNavigator = () => {
     >
       <Tab.Screen
         name="H"
-        component={HomeScreen}
+        component={PlacesAndActivitiesScreen}
         options={{
           headerTransparent: true,
           header: HomeScreenHeader,
-
           tabBarIcon: () => <HomeIcon />,
-
           showLabel: false,
         }}
       />
       <Tab.Screen
         name="A"
-        component={PlacesAndActivitiesScreen}
+        component={Map}
         options={{
           headerShown: true,
           label: "",
-          tabBarIcon: () => <HomeIcon />,
+          tabBarIcon: () => <MapIcon />,
         }}
       />
       <Tab.Screen
         name="P"
         component={PlaceDetails}
-        options={{ headerTitle: "", tabBarIcon: () => <HomeIcon /> }}
+        options={{ headerTitle: "", tabBarIcon: () => <MessageCircleIcon /> }}
       />
       <Tab.Screen
         name="D"
