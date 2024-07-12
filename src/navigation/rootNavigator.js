@@ -1,32 +1,32 @@
-import { Text, View } from "react-native";
-import Login from "../views/login";
-import SignUp from "../views/signUp";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser } from "../redux/slices/userSlice";
-import { Button, ButtonText } from "@gluestack-ui/themed";
-import axios from "axios";
-import { BACKEND_URL } from "../helpers/constants";
-import { HomeScreen } from "../views/home";
-import { PlacesAndActivitiesScreen } from "../views/placesAndActivities";
-import { useIsAuthenticated } from "../hooks/auth";
-import { PlaceDetails } from "../views/placeDetails";
-import { GeneralQuestions } from "../views/generalQuestions";
-import { DayPlanner } from "../views/dayPlanner";
-import { useNavigation } from "@react-navigation/native";
-import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
-import { MainDrawer } from "../components/drawer";
-import { getIsIntroDone } from "../redux/selectors";
-import { useEffect } from "react";
-import { IntroView } from "../views/Intro/IntroView";
-import { BottomTabNavigator } from "./bottomTabNavigator";
-import { Plan } from "../views/planner/plan";
+import { Text, View } from 'react-native';
+import Login from '../views/login';
+import SignUp from '../views/signUp';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectUser } from '../redux/slices/userSlice';
+import { Button, ButtonText } from '@gluestack-ui/themed';
+import axios from 'axios';
+import { BACKEND_URL } from '../helpers/constants';
+import { HomeScreen } from '../views/home';
+import { PlacesAndActivitiesScreen } from '../views/placesAndActivities';
+import { useIsAuthenticated } from '../hooks/auth';
+import { PlaceDetails } from '../views/placeDetails';
+import { GeneralQuestions } from '../views/generalQuestions';
+import { DayPlanner } from '../views/dayPlanner';
+import { useNavigation } from '@react-navigation/native';
+import { HomeScreenHeader } from '../components/headers/HomeScreenHeader';
+import { MainDrawer } from '../components/drawer';
+import { getIsIntroDone } from '../redux/selectors';
+import { useEffect } from 'react';
+import { IntroView } from '../views/Intro/IntroView';
+import { BottomTabNavigator } from './bottomTabNavigator';
+import { Plan } from '../views/planner/plan';
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
 
-function Root(){
-  return <BottomTabNavigator/>
+function Root() {
+  return <BottomTabNavigator />;
 }
 export default function RootNavigator() {
   const user = useSelector(selectUser);
@@ -37,7 +37,7 @@ export default function RootNavigator() {
 
   useEffect(() => {
     if (!isIntroDone) {
-      navigation.navigate("Intro");
+      navigation.navigate('Intro');
     }
   }, []);
 
@@ -45,23 +45,27 @@ export default function RootNavigator() {
     <MainDrawer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Root"
+          name='Root'
           component={HomeScreen}
           options={{ headerTransparent: true, header: HomeScreenHeader }}
-        />         
-        <Stack.Screen
-        name="Places&Activities"
-        component={PlacesAndActivitiesScreen}
         />
-        <Stack.Screen name="PlaceDetails" component={PlaceDetails}/>
-        <Stack.Screen name="GeneralQuestions" component={GeneralQuestions}/>
-        <Stack.Screen name="DayPlanner" component={DayPlanner}/>
-        <Stack.Screen name="Intro" component={IntroView} options={{headerShown: false}}/>
-        <Stack.Screen name="Plan" component={Plan} />
+        <Stack.Screen
+          name='Places&Activities'
+          component={PlacesAndActivitiesScreen}
+        />
+        <Stack.Screen name='PlaceDetails' component={PlaceDetails} />
+        <Stack.Screen name='GeneralQuestions' component={GeneralQuestions} />
+        <Stack.Screen name='DayPlanner' component={DayPlanner} />
+        <Stack.Screen
+          name='Intro'
+          component={IntroView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name='Plan' component={Plan} />
         {!isAuthenticated && (
           <>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name='Login' component={Login} />
+            <Stack.Screen name='SignUp' component={SignUp} />
           </>
         )}
       </Stack.Navigator>
