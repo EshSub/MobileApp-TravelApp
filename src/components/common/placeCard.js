@@ -9,20 +9,18 @@ export const PlaceCard = ({ name, location, rating, image }) => {
                     alt="placeImage"
                     source={{ uri: image }}
                     width={300}
-                    height={200}
+                    height={180}
                 />
-                <HStack justifyContent="space-between">
-                    <Box>
-                    <Heading fontFamily="$heading" size={'$xl'} fontWeight={600}>
+                <Heading fontFamily="$heading" size={'$xl'} fontWeight={600}>
                         {name}
                     </Heading>
-                    <Text fontSize={'$md'} fontWeight={300}>
+                <HStack justifyContent="space-between">
+                    <Text fontSize={'$md'} fontWeight={300} mr={"$2"}>
                         {location}
                     </Text>
-                    </Box>
                     <Badge size="md" variant="solid" borderRadius="$full" alignSelf="flex-end" backgroundColor="#5E6A81">
                         <BadgeIcon fontVariant={"solid"} as={StarIcon} mr="$2" color="#FFC700" tintColor="#FFC700"/>
-                        <BadgeText color="#ffffff">4.4</BadgeText>
+                        <BadgeText color="#ffffff">{rating}</BadgeText>
                     </Badge>
                 </HStack>
             </VStack>

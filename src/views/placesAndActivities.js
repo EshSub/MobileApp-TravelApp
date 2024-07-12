@@ -5,8 +5,10 @@ import { PlaceCard } from "../components/common/placeCard"
 import { Dimensions, TouchableOpacity } from "react-native"
 import Carousel from "react-native-reanimated-carousel"
 import { useRef, useState } from "react"
-import { LinearGradient as ExpoLinearGradient} from "expo-linear-gradient"
+import { LinearGradient as ExpoLinearGradient } from "expo-linear-gradient"
 import { useNavigation } from "@react-navigation/native"
+import { ActivityCard, activityList } from "../components/common/activityCard"
+import { AnimatedTextSwitching } from "../components/animated/AnimatedTextSwitching"
 
 const data = [
     {
@@ -15,7 +17,8 @@ const data = [
         startDate: '25 March',
         endDate: '27 March',
         image: "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg",
-        location: 'Dambulla'
+        location: 'Dambulla',
+        rating: '4.4'
     },
     {
         id: 2,
@@ -23,7 +26,8 @@ const data = [
         startDate: '25 March',
         endDate: '27 March',
         image: "https://3.bp.blogspot.com/-mHkQBNKl85w/UnTsdstl3-I/AAAAAAAAAGY/IGrlXNPwDuQ/s1600/anuradhapura-1300.jpg",
-        location: 'Anuradhapura'
+        location: 'Anuradhapura',
+        rating: '4.4'
     },
     {
         id: 3,
@@ -31,7 +35,8 @@ const data = [
         startDate: '25 March',
         endDate: '27 March',
         image: "https://i.pinimg.com/originals/e5/d5/96/e5d5961fc5c4099f5b0f8e90b4ea9c15.jpg",
-        location: 'Trincomalee'
+        location: 'Trincomalee',
+        rating: '4.4'
     },
     {
         id: 4,
@@ -39,7 +44,8 @@ const data = [
         startDate: '25 March',
         endDate: '27 March',
         image: "https://1.bp.blogspot.com/-qy0lO7dfudM/XmUtEmH7GxI/AAAAAAAAGjM/RES7neMeC1sU6yVAJ9KHIcpXwMW2SnBpwCLcBGAsYHQ/s1600/20180724_160024.jpg",
-        location: 'Polonnaruwa'
+        location: 'Polonnaruwa',
+        rating: '4.4'
     },
     {
         id: 5,
@@ -47,7 +53,8 @@ const data = [
         startDate: '25 March',
         endDate: '27 March',
         image: "https://media.timeout.com/images/102950271/image.jpg",
-        location: 'Dambulla'
+        location: 'Dambulla',
+        rating: '4.4'
     },]
 
 export const PlacesAndActivitiesScreen = () => {
@@ -58,6 +65,13 @@ export const PlacesAndActivitiesScreen = () => {
     return (
         <Background>
             <VStack flex={1} rowGap={"$4"}>
+                <AnimatedTextSwitching
+                    texts={["Welcome...", "Welkom...", "Herzlich willkommen..."]}
+                    size="3xl"
+                    fontWeight={600}
+                    textAlign="center"
+                
+                />
                 <View flex={0.1}>
                     <Input borderRadius={"$2xl"} borderBottomColor="#BFBFBF">
                         <InputSlot pl="$3" borderColor="#BFBFBF">
@@ -73,13 +87,13 @@ export const PlacesAndActivitiesScreen = () => {
                                 p="$2"
                                 pl={"$5"}
                                 pr={"$5"}
-                                colors={selected == 0  ? ["#5495FF", "#8BD8F9"] :[ "#ffffff", "#ffffff"]}
+                                colors={selected == 0 ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
                                 borderRadius="$2xl"
                                 start={[0, 0]}
                                 end={[1, 1]}
                                 as={ExpoLinearGradient}
                             >
-                                <Text  textAlign="center" size="md" fontWeight={600} color={selected == 0 ? "#ffffff" : "#5E6A81"}>
+                                <Text textAlign="center" size="md" fontWeight={600} color={selected == 0 ? "#ffffff" : "#5E6A81"}>
                                     Sights
                                 </Text>
                             </LinearGradient>
@@ -89,13 +103,13 @@ export const PlacesAndActivitiesScreen = () => {
                                 p="$2"
                                 pl={"$5"}
                                 pr={"$5"}
-                                colors={selected == 1  ? ["#5495FF", "#8BD8F9"] :[ "#ffffff", "#ffffff"]}
+                                colors={selected == 1 ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
                                 borderRadius="$2xl"
                                 start={[0, 0]}
                                 end={[1, 1]}
                                 as={ExpoLinearGradient}
                             >
-                                <Text  textAlign="center" size="md" fontWeight={600} color={selected == 1 ? "#ffffff" : "#5E6A81"}>
+                                <Text textAlign="center" size="md" fontWeight={600} color={selected == 1 ? "#ffffff" : "#5E6A81"}>
                                     Tour
                                 </Text>
                             </LinearGradient>
@@ -105,7 +119,7 @@ export const PlacesAndActivitiesScreen = () => {
                                 p="$2"
                                 pl={"$5"}
                                 pr={"$5"}
-                                colors={selected == 2  ? ["#5495FF", "#8BD8F9"] :[ "#ffffff", "#ffffff"]}
+                                colors={selected == 2 ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
                                 borderRadius="$2xl"
                                 start={[0, 0]}
                                 end={[1, 1]}
@@ -117,35 +131,50 @@ export const PlacesAndActivitiesScreen = () => {
                             </LinearGradient>
                         </TouchableOpacity>
                     </Box>
+                    <View>
+                        <Heading fontSize={"$lg"} color="#5E6A81">
+                            Fun activities
+                        </Heading>
+                        <FlatList
+                            numColumns={2}
+                            data={activityList}
+                            renderItem={({ item }) => (<ActivityCard name={item.name} imageUrl={item.imageUrl}/>)}
+                            keyExtractor={(item) => item.id} />
+                    </View>
+                    <Heading fontSize={"$lg"} color="#5E6A81">
+                        Historical sights
+                    </Heading>
                     <Carousel
                         ref={ref}
                         loop
                         width={width * 0.9}
-                        height={width}
+                        height={width * 0.6}
                         autoPlay={false}
                         data={data}
                         mode="parallax"
                         scrollAnimationDuration={1000}
                         onSnapToItem={(index) => console.log('current index:', index)}
                         renderItem={({ index, item }) => (
-                            <View style={{ flex: 1, marginRight: "12.5%" }}>
-                                <PlaceCard name={item.name} image={item.image} location={item.location} />
+                            <View style={{ flex: 1 }}>
+                                <PlaceCard name={item.name} image={item.image} location={item.location} rating={item.rating}/>
                             </View>
                         )}
                     />
                 </View>
-                <View flex={0.45}>
+                <View>
                     <HStack>
                         <Heading fontSize={"$lg"} color="#5E6A81">
-                            Popular
+                            Popular places
                         </Heading>
                     </HStack>
                     <FlatList
+                        horizontal
                         data={data}
                         renderItem={({ item }) =>
                             <PlaceListCard name={item.name} startDate={item.startDate} endDate={item.endDate} image={item.image} />
                         }
                         keyExtractor={(item) => item.id} />
+
                 </View>
             </VStack>
         </Background>

@@ -15,14 +15,14 @@ export const PlaceListCard = ({name, startDate, endDate, image}) => {
     const navigation = useNavigation()
     return (
         <TouchableOpacity onPress={() => navigation.navigate("PlaceDetails")}>
-            <HStack width={'100%'} bgColor="#ffffff" p="$2" borderRadius={"$2xl"} space="sm" alignItems="center" my={"$1"} shadowColor="#4258841A">
+            <VStack bgColor="#ffffff" p="$2" borderRadius={"$2xl"} space="sm" alignItems="center" shadowColor="#4258841A" mr={"$2"}>
                 <Image
                     borderRadius="$2xl"
                     alt="placeImage"
                     source={{uri : image}}
                 />
                 <VStack flex={1}>
-                    <Heading size="xl" fontFamily="$heading" mb="$4" color="#767676">
+                    <Heading size="sm" fontFamily="$heading" textAlign="center" color="#767676">
                         {name}
                     </Heading>
                     <Text
@@ -42,14 +42,7 @@ export const PlaceListCard = ({name, startDate, endDate, image}) => {
                        { `${startDate} ${endDate}, 2024`}
                     </Text>
                 </VStack>
-                <View>
-                    <Icon
-                        as={ChevronRightIcon}
-                        size="xl"
-                        color="#425884"
-                    />
-                </View>
-            </HStack>
+            </VStack>
         </TouchableOpacity>
     );
 };
