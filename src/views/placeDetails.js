@@ -46,13 +46,13 @@ const imageList = [
     url: "https://live.staticflickr.com/3165/2379255017_92e6c7a4ae_n.jpg",
   },
 ];
-export const PlaceDetails = () => {
+export const PlaceDetails = ({place}) => {
   const navigation = useNavigation();
   const width = WIDTH;
   const places = useSelector(getPlaces);
 
-  const place = places[0];
-  const COUNT = place.images.length;
+  // const place = places[0];
+  const COUNT = place?.images?.length ?? 1;
   const PAGE_WIDTH = WIDTH * 0.9;
 
   const baseOptions = {
@@ -70,16 +70,17 @@ export const PlaceDetails = () => {
     <VStack h={"100%"} bgColor="white">
       <View padding={5} paddingHorizontal={20} width={WIDTH}>
         <HStack justifyContent="space-between">
-          <Heading>Sigiriya</Heading>
-          <Text>$50</Text>
+          <Heading>{place?.place_name}</Heading>
+          <Text>{`USD ${place?.ticket_price}`}</Text>
         </HStack>
         <HStack justifyContent="space-between" mb={"$4"}>
-          <Text>Dambulla</Text>
+          <Text>{place?.city}</Text>
           <Text>Per person</Text>
         </HStack>
       </View>
       <View flex={0.3}>
-        <Carousel
+      <Image source={{ uri: place?.header_image.url }} alt="placeImage" size="full" />
+        {/* <Carousel
           loop
           width={width}
           height={width / 2}
@@ -90,15 +91,15 @@ export const PlaceDetails = () => {
           renderItem={({ index, item }) => (
             <Image source={{ uri: item.url }} alt="placeImage" size="full" />
           )}
-        />
+        /> */}
       </View>
       <View flex={0.7} p={"$5"} bgColor="white">
-        <Text mb={"$3"}>Ancient rock fortress near Dambulla, Sri Lanka</Text>
+        <Text mb={"$3"}>{place?.description}</Text>
         <HStack justifyContent="left" mb={"$4"}>
           <EvilIcons name="location" size={24} color="#15A9E8" />
           <Box ml={"$6"}>
-            <Text>Dambulla, Sri Lanka</Text>
-            <Text>Sigiriya</Text>
+            <Text>{place?.city}</Text>
+            <Text>Sri Lanka</Text>
           </Box>
           {/* <Button bgColor="#425884" size="xs">
                             <ButtonText>
@@ -120,7 +121,7 @@ export const PlaceDetails = () => {
           width={WIDTH * 0.8}
           height={WIDTH / 2}
           autoPlay={true}
-          data={place.images}
+          data={place?.images}
           scrollAnimationDuration={3000}
           // onSnapToItem={(index) => console.log("current index:", index)}
           // pagingEnabled={false}
@@ -134,7 +135,7 @@ export const PlaceDetails = () => {
             <View
               style={{
                 borderRadius: 10,
-                backgroundColor: "red",
+                backgroundColor: "white",
                 overflow: "hidden",
               }}
             >

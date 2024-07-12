@@ -126,7 +126,7 @@ export const PlacesAndActivitiesScreen = () => {
                         onSnapToItem={(index) => console.log('current index:', index)}
                         renderItem={({ index, item }) => (
                             <View style={{ flex: 1 }}>
-                                <PlaceCard name={item.place_name} image={item.header_image.url} location={item.location} rating={item.rating}/>
+                                <PlaceCard index={item.place_id} name={item.place_name} image={item.header_image.url} location={item.location} rating={item.rating}/>
                             </View>
                         )}
                     />
@@ -141,7 +141,7 @@ export const PlacesAndActivitiesScreen = () => {
                         horizontal
                         data={places}
                         renderItem={({ item }) =>
-                            <PlaceListCard name={item.place_name} image={item.header_image.url} timeToVisit={item.best_time_to_visit} />
+                            <PlaceListCard index={item.place_id} name={item.place_name} image={item.header_image.url} timeToVisit={item.best_time_to_visit} />
                         }
                         keyExtractor={(item) => item.id} />
 
