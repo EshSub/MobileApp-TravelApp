@@ -22,3 +22,24 @@ export const GradientButton = ({ title, onPress, ...props }) => {
     </TouchableOpacity>
   );
 };
+
+export const GradientChip = ({ text, selected, index, onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <LinearGradient
+        p="$2"
+        pl={"$5"}
+        pr={"$5"}
+        colors={selected == index ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
+        borderRadius="$2xl"
+        start={[0, 0]}
+        end={[1, 1]}
+        as={ExpoLinearGradient}
+      >
+        <Text textAlign="center" size="sm" fontWeight={600} color={selected == index ? "#ffffff" : "#5E6A81"}>
+          {text}
+        </Text>
+      </LinearGradient>
+    </TouchableOpacity>
+  )
+}

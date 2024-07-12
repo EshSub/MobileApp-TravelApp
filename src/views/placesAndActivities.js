@@ -4,11 +4,13 @@ import { PlaceListCard } from "../components/common/placeListCard"
 import { PlaceCard } from "../components/common/placeCard"
 import { Dimensions, TouchableOpacity } from "react-native"
 import Carousel from "react-native-reanimated-carousel"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { LinearGradient as ExpoLinearGradient } from "expo-linear-gradient"
 import { useNavigation } from "@react-navigation/native"
 import { ActivityCard, activityList } from "../components/common/activityCard"
 import { AnimatedTextSwitching } from "../components/animated/AnimatedTextSwitching"
+import { GradientChip } from "../components/common/gradientButton"
+import { PlacesSearchBar } from "../components/placesSearchBar"
 
 const data = [
     {
@@ -61,7 +63,13 @@ export const PlacesAndActivitiesScreen = () => {
     const width = Dimensions.get('window').width;
     const ref = useRef()
     const [selected, setSelected] = useState(0)
+    const [searchPlace, setSearchPlace] = useState()
     const navigation = useNavigation()
+    useEffect(() => {
+        if (searchPlace){
+            navigation.navigate('Map', {place: searchPlace})
+        }
+    },[searchPlace])
     return (
         <Background>
             <VStack flex={1} rowGap={"$4"}>
@@ -73,63 +81,20 @@ export const PlacesAndActivitiesScreen = () => {
                 
                 />
                 <View flex={0.1}>
-                    <Input borderRadius={"$2xl"} borderBottomColor="#BFBFBF">
-                        <InputSlot pl="$3" borderColor="#BFBFBF">
-                            <InputIcon as={SearchIcon} />
-                        </InputSlot>
-                        <InputField borderColor="#BFBFBF" placeholder="Search..." />
-                    </Input>
+                    <PlacesSearchBar searchPlace={searchPlace} setSearchPlace={setSearchPlace}/>
                 </View>
                 <View flex={0.4}>
                     <Box flexDirection="row" justifyContent="space-between">
-                        <TouchableOpacity onPress={() => setSelected(0)}>
-                            <LinearGradient
-                                p="$2"
-                                pl={"$5"}
-                                pr={"$5"}
-                                colors={selected == 0 ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
-                                borderRadius="$2xl"
-                                start={[0, 0]}
-                                end={[1, 1]}
-                                as={ExpoLinearGradient}
-                            >
-                                <Text textAlign="center" size="md" fontWeight={600} color={selected == 0 ? "#ffffff" : "#5E6A81"}>
-                                    Sights
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => setSelected(1)}>
-                            <LinearGradient
-                                p="$2"
-                                pl={"$5"}
-                                pr={"$5"}
-                                colors={selected == 1 ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
-                                borderRadius="$2xl"
-                                start={[0, 0]}
-                                end={[1, 1]}
-                                as={ExpoLinearGradient}
-                            >
-                                <Text textAlign="center" size="md" fontWeight={600} color={selected == 1 ? "#ffffff" : "#5E6A81"}>
-                                    Tour
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => setSelected(2)}>
-                            <LinearGradient
-                                p="$2"
-                                pl={"$5"}
-                                pr={"$5"}
-                                colors={selected == 2 ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
-                                borderRadius="$2xl"
-                                start={[0, 0]}
-                                end={[1, 1]}
-                                as={ExpoLinearGradient}
-                            >
-                                <Text textAlign="center" size="md" fontWeight={600} color={selected == 2 ? "#ffffff" : "#5E6A81"}>
-                                    Adventure
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
+                        <GradientChip selected={selected} index={0} onPress={() => setSelected(0)} text={"Sights"}/>
+                        <GradientChip selected={selected} index={1} onPress={() => setSelected(1)} text={"Tour"}/>
+                        <GradientChip selected={selected} index={2} onPress={() => setSelected(2)} text={"Adventure"}/>
+                        <GradientChip 
+                            selected={selected} 
+                            index={3} 
+                            onPress={() => {
+                                setSelected(3)
+                                navigation.navigate('Map', { place : null})}} 
+                            text={"Map"}/>
                     </Box>
                     <View>
                         <Heading fontSize={"$lg"} color="#5E6A81">

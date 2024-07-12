@@ -22,6 +22,7 @@ import { IntroView } from "../views/Intro/IntroView";
 import { BottomTabNavigator } from "./bottomTabNavigator";
 import { Plan } from "../views/planner/plan";
 import AiPlanner from "../components/AiPlanner";
+import { Map } from "../views/Map";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -68,6 +69,7 @@ export default function RootNavigator() {
         />
         <Stack.Screen name="Plan" component={Plan} options={{headerTransparent: true, }} />
         <Stack.Screen name="Planner" component={AiPlanner} options={{headerTransparent: true, }} />
+        <Stack.Screen name="Map" component={Map}/>
         {!isAuthenticated && (
           <>
             <Stack.Screen name='Login' component={Login} />
