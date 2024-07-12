@@ -1,7 +1,7 @@
 import { Box, Button, FlatList, HStack, Heading, Input, InputField, InputIcon, InputSlot, LinearGradient, SearchIcon, VStack, View, Text, ButtonText } from "@gluestack-ui/themed"
 import { Background } from "../components/background"
 import { PlaceListCard } from "../components/common/placeListCard"
-// import { PlaceCard } from "../components/common/placeCard"
+import { PlaceCard } from "../components/common/placeCard"
 import { Dimensions, TouchableOpacity } from "react-native"
 import Carousel from "react-native-reanimated-carousel"
 import { useRef, useState } from "react"
@@ -129,7 +129,7 @@ export const PlacesAndActivitiesScreen = () => {
                         onSnapToItem={(index) => console.log('current index:', index)}
                         renderItem={({ index, item }) => (
                             <View style={{ flex: 1, marginRight: "12.5%" }}>
-                                {/* <PlaceCard name={item.name} image={item.image} location={item.location} /> */}
+                                <PlaceCard name={item.name} image={item.image} location={item.location} />
                             </View>
                         )}
                     />
