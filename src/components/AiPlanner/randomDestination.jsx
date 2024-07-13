@@ -53,6 +53,7 @@ export const RandomDestination = () => {
         
           <>
             <PlaceCard 
+              index={destination.place_id}
               name={destination.place_name} 
               rating={4} // Adjust if needed
               location={destination.place_name} // Adjust if needed
