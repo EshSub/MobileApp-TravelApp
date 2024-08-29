@@ -27,6 +27,7 @@ import { Plan } from "../views/planner/plan";
 import AiPlanner from "../components/AiPlanner";
 import { Map } from "../views/Map";
 import { ChevronLeftIcon } from "lucide-react-native";
+import ActivitiesScreen from "../views/activities";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -80,6 +81,7 @@ export default function RootNavigator() {
           }}
         />
         <Stack.Screen name="Map" component={Map}/>
+        <Stack.Screen name="Activities" component={ActivitiesScreen} />
         <Stack.Screen
           name="Planner"
           component={AiPlanner}
