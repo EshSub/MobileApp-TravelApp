@@ -16,6 +16,7 @@ import { GradientButton } from '../common/gradientButton';
 import { useSelector } from 'react-redux';
 import { getPlaces } from '../../redux/selectors';
 import { PlaceCard } from '../common/placeCard';
+import { Background } from "../background";
 
 const getRandomObject = (array) => {
   const randomIndex = Math.floor(Math.random() * array.length);
@@ -37,6 +38,7 @@ export const RandomDestination = () => {
   }
 
   return (
+    <Background>
     <VStack gap={0}>
       <AnimatedText delay={100} style={headerStyles}>
         Lets Go Wild!
@@ -51,6 +53,7 @@ export const RandomDestination = () => {
         
           <>
             <PlaceCard 
+              index={destination.place_id}
               name={destination.place_name} 
               rating={4} // Adjust if needed
               location={destination.place_name} // Adjust if needed
@@ -61,5 +64,6 @@ export const RandomDestination = () => {
              )}
       </Fade>
     </VStack>
+    </Background>
   );
 };

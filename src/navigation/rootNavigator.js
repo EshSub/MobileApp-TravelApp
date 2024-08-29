@@ -28,6 +28,7 @@ import AiPlanner from "../components/AiPlanner";
 import { Map } from "../views/Map";
 import { ChevronLeftIcon } from "lucide-react-native";
 import ActivitiesScreen from "../views/activities";
+import { RandomDestination } from "../components/AiPlanner/randomDestination";
 // import HomeNavigator from "./homeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -87,6 +88,7 @@ export default function RootNavigator() {
           component={AiPlanner}
           options={{ headerTransparent: true }}
         />
+        <Stack.Screen name="RandomSearch" component={RandomDestination} options={{ headerTransparent: true}}/>
         {/* {!isAuthenticated && ( */}
           <>
             <Stack.Screen name="Login" component={Login} />

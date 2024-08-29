@@ -177,6 +177,7 @@ export const PlacesAndActivitiesScreen = () => {
               renderItem={({ index, item }) => (
                 <View style={{ flex: 1 }}>
                   <PlaceCard
+                    index={item.place_id}
                     name={item.place_name}
                     image={item.header_image.url}
                     location={item.location}
@@ -197,6 +198,7 @@ export const PlacesAndActivitiesScreen = () => {
               data={places}
               renderItem={({ item }) => (
                 <PlaceListCard
+                  index={item.place_id}
                   name={item.place_name}
                   image={item.header_image.url}
                   timeToVisit={item.best_time_to_visit}

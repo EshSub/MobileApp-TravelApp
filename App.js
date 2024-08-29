@@ -11,7 +11,6 @@ import { Plan } from "./src/views/planner/plan";
 import AiPlanner from "./src/components/AiPlanner";
 import { LogBox } from "react-native";
 import { SettingsPage } from "./src/views/settings";
-import { RandomDestination } from "./src/components/AiPlanner/randomDestination";
 
 LogBox.ignoreAllLogs();
 
@@ -22,7 +21,6 @@ export default function App() {
         <StatusBar style="auto" />
         <NavigationContainer>
           <GestureHandlerRootView>
-            {/* <RandomDestination /> */}
             <RootNavigator />
           </GestureHandlerRootView>
         </NavigationContainer>
