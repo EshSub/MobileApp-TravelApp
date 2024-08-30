@@ -31,20 +31,15 @@ function Login() {
 
   const handleClick = async () => {
     try {
-
-      setTimeout(() => {
+      const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
+      if (response) {
+        console.log(response.data)
         navigation.navigate("Intro")
-      }, 500)
-
-      // const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
-      // if (response) {
-      //   console.log(response.data)
-      //   // navigation.navigate("Home")
-      //   dispatch(login({
-      //     name: username,
-      //     accessToken: response.data.access
-      //   }))
-      // }
+        dispatch(login({
+          name: username,
+          accessToken: response.data.access
+        }))
+      }
     } catch (error) {
       console.log('error', error)
     }
@@ -65,7 +60,7 @@ function Login() {
           </Heading>
           <VStack space='xs'>
             <Text color='$text500' lineHeight='$xs'>
-              Email
+              Username
             </Text>
             <Input>
               <InputField

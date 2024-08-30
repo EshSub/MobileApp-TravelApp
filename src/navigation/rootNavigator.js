@@ -92,12 +92,12 @@ export default function RootNavigator() {
         <Stack.Screen name="RandomSearch" component={RandomDestination} options={{ headerTransparent: true}}/>
         <Stack.Screen name="Activity" component={ActivityPage} options={{headerTransparent: true}}/>
 
-        {/* {!isAuthenticated && ( */}
+        {!isAuthenticated && (
           <>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
           </>
-        {/* )} */}
+        )}
       </Stack.Navigator>
     </MainDrawer>
   );

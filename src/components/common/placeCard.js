@@ -1,4 +1,4 @@
-import { Box, Heading, VStack, Text, Image, View, HStack, Badge, BadgeText, BadgeIcon, StarIcon } from "@gluestack-ui/themed"
+import { Box, Heading, VStack, Text, Image, View, HStack, Badge, BadgeText, BadgeIcon, StarIcon, Card } from "@gluestack-ui/themed"
 import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native"
 import { useSelector } from "react-redux"
@@ -10,7 +10,7 @@ export const PlaceCard = ({ index, name, location, rating, image }) => {
     const place = places.find((item) => item.place_id == index)
     return (
         <TouchableOpacity onPress={() => navigation.navigate('Map', {place: place})}>
-            <Box backgroundColor="#ffffff" width={'100px'} p="$3" borderRadius={"$2xl"}>
+            <Card backgroundColor="#ffffff" width={'100px'} p="$3" borderRadius={"$2xl"} mx={"$2"}>
                 <VStack justifyContent="center" alignItems="center">
                     <Image
                         borderRadius="$2xl"
@@ -32,7 +32,7 @@ export const PlaceCard = ({ index, name, location, rating, image }) => {
                         </Badge>
                     </HStack>
                 </VStack>
-            </Box>
+            </Card>
         </TouchableOpacity>
     )
 }
