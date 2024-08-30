@@ -23,7 +23,7 @@ export const PlaceListCard = ({index, name, timeToVisit, image}) => {
                 <Image
                     borderRadius="$2xl"
                     alt="placeImage"
-                    source={{uri : image}}
+                    source={{uri : image ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg"}}
                 />
                 <VStack flex={1}>
                     <Heading size="sm" fontFamily="$heading" textAlign="center" color="#767676">

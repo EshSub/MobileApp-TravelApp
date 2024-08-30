@@ -3,10 +3,13 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import { getPlaces } from "../redux/selectors"
 import { TouchableOpacity } from "react-native"
+import { useDataProvider } from "../apis"
 
 export const PlacesSearchBar = ({searchPlace, setSearchPlace}) => {
     const [filteredPlaces, setFilteredPlaces] = useState([])
-    const places = useSelector(getPlaces)
+    // const places = useSelector(getPlaces)
+    const dataprovider = useDataProvider()
+    const { data: places , loading : placeLoading } = dataprovider.places.get();
     const [searchText, setSearchText] = useState("")
     const filterPlaces = (input) => {
         if (input) {
@@ -33,7 +36,8 @@ export const PlacesSearchBar = ({searchPlace, setSearchPlace}) => {
                     <FlatList
                         data={filteredPlaces}
                         keyExtractor={(item) => item.id}
-                        
+                        height={300}
+                        scrollEnabled={true}
                         renderItem={({ item }) =>
                             <TouchableOpacity onPress={() => {
                                 setSearchText(item.place_name)

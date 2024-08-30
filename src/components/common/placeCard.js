@@ -15,7 +15,7 @@ export const PlaceCard = ({ index, name, location, rating, image }) => {
                     <Image
                         borderRadius="$2xl"
                         alt="placeImage"
-                        source={{ uri: image }}
+                        source={{ uri: image ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg" }}
                         width={300}
                         height={180}
                     />
