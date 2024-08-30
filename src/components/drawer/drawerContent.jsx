@@ -35,7 +35,7 @@ export const DrawerContent = (props) => {
     // { id: "HomeScreen", label: "Home", icon: House },
     // { id: "Profile", label: "Profile" },
     { id: "Settings", label: "Settings" , path: "Settings"},
-    { id: "PrivacyPolicy", label: "Privacy Policy" },
+    { id: "PrivacyPolicy", label: "Privacy Policy", path: "PrivacyPolicy" },
     { id: "TermsOfService", label: "Terms of Service" },
     { id: "Intro", label: "Intro", path: "Intro" },
     { id: "Logout", label: "Logout", path: "Login" },

@@ -31,6 +31,7 @@ import ActivitiesScreen from '../views/activities';
 import { RandomDestination } from '../components/AiPlanner/randomDestination';
 import { ActivityPage } from '../views/activityPage';
 import { SettingsPage } from '../views/settings';
+import { PrivacyPolicy } from '../views/privacyPolicy';
 
 // import HomeNavigator from "./homeNavigator";
 
@@ -80,6 +81,12 @@ export default function RootNavigator() {
           name='Settings'
           component={SettingsPage}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='PrivacyPolicy'
+          component={PrivacyPolicy}
+          options={{headerTransparent: true,
+          }}
         />
         <Stack.Screen
           name='Plan'
