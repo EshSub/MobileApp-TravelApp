@@ -1,6 +1,7 @@
 import { Box, Heading, HStack, Image, Text } from "@gluestack-ui/themed"
 import { TouchableOpacity } from "react-native"
 import { WIDTH } from "../../helpers/constants"
+import { useNavigation } from "@react-navigation/native"
 
 export const activityList = [
     {
@@ -24,11 +25,12 @@ export const activityList = [
         imageUrl: "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220"
     }
 ]
-export const ActivityCard = ({ name, imageUrl }) => {
+export const ActivityCard = ({ name, imageUrl, id }) => {
+    const navigation = useNavigation()
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Activity", {id : id})}>
             <HStack 
-                width={WIDTH * 0.4} 
+                width={WIDTH * 0.4}
                 height={80} 
                 bgColor={"white"} 
                 borderRadius={"$10"} 

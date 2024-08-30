@@ -156,7 +156,7 @@ export const PlacesAndActivitiesScreen = () => {
                 numColumns={2}
                 data={activityList}
                 renderItem={({ item }) => (
-                  <ActivityCard name={item.name} imageUrl={item.imageUrl} />
+                  <ActivityCard name={item.name} imageUrl={item.imageUrl} id={item.id}/>
                 )}
                 keyExtractor={(item) => item.id}
               />
