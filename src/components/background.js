@@ -2,9 +2,9 @@ import { ScrollView, View } from "@gluestack-ui/themed";
 import { SafeAreaView, Text } from "react-native";
 import { BACKGROUND_COLOR } from "../helpers/constants";
 
-export const Background = ({ children }) => {
+export const Background = ({ children, props }) => {
   return (
-    <View height={"100%"} backgroundColor={BACKGROUND_COLOR} p={"$4"}>
+    <View height={"100%"} backgroundColor={BACKGROUND_COLOR}>
       {/* <ScrollView> */}
         <SafeAreaView
           style={{

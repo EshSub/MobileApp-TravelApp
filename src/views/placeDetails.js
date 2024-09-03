@@ -79,7 +79,7 @@ export const PlaceDetails = ({place}) => {
         </HStack>
       </View>
       <View flex={0.3}>
-      <Image source={{ uri: place?.header_image.url }} alt="placeImage" size="full" />
+      <Image source={{ uri: place?.header_image?.url ?? "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220" }} alt="placeImage" size="full" />
         {/* <Carousel
           loop
           width={width}
@@ -139,7 +139,7 @@ export const PlaceDetails = ({place}) => {
                 overflow: "hidden",
               }}
             >
-              <Image source={{ uri: item.url }} alt="placeImage" size="full" />
+              <Image source={{ uri: item.url ?? "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220" }} alt="placeImage" size="full" />
             </View>
           )}
         />

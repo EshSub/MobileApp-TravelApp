@@ -14,9 +14,12 @@ import {
 import { SafeAreaView } from "react-native";
 import { PlaceDetails } from "./placeDetails";
 import { Place } from "./planner/place";
+import { useDataProvider } from "../apis";
 
 export const Map = ({ route }) => {
-  const places = useSelector(getPlaces);
+  // const places = useSelector(getPlaces);
+  const dataprovider = useDataProvider()
+  const { data: places , loading : placeLoading } = dataprovider.places.get();
 
   const handlePress = (props) => {
     console.log({ props });
@@ -50,7 +53,7 @@ export const Map = ({ route }) => {
   }, [searchPlace]);
 
   const bottomSheetModalRef = useRef(null);
-
+  
   // variables
   const snapPoints = useMemo(() => ["25%", "85%"], []);
   const handlePresentModalPress = useCallback(() => {
@@ -87,7 +90,7 @@ export const Map = ({ route }) => {
             urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             maximumZ={19}
           />
-          {places.map((item) => (
+          {places?.map((item) => (
             <Marker
               key={item.place_id}
               title={item.place_name}
@@ -118,11 +121,11 @@ export const Map = ({ route }) => {
                 />
               </View>
               {/* <Text>Map</Text> */}
-              <Button
+              {/* <Button
                 onPress={handlePresentModalPress}
                 title="Present Modal"
                 color="black"
-              />
+              /> */}
             </VStack>
           </SafeAreaView>
 

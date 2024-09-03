@@ -24,7 +24,6 @@ export const HomeScreen = () => {
   const navigation = useNavigation();
 
   const places = useSelector(getPlaces);
-  console.log({ places });
 
   return (
     <Background>

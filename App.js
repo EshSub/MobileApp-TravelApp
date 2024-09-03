@@ -5,26 +5,29 @@ import { StatusBar } from "expo-status-bar";
 import RootNavigator from "./src/navigation/rootNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-import store from "./src/redux/store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Plan } from "./src/views/planner/plan";
 import AiPlanner from "./src/components/AiPlanner";
 import { LogBox } from "react-native";
 import { SettingsPage } from "./src/views/settings";
+import { persistor, store } from "./src/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
     <Provider store={store}>
-      <GluestackUIProvider config={config}>
-        <StatusBar style="auto" />
-        <NavigationContainer>
-          <GestureHandlerRootView>
-            <RootNavigator />
-          </GestureHandlerRootView>
-        </NavigationContainer>
-      </GluestackUIProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <GluestackUIProvider config={config}>
+          <StatusBar style="auto" />
+          <NavigationContainer>
+            <GestureHandlerRootView>
+              <RootNavigator />
+            </GestureHandlerRootView>
+          </NavigationContainer>
+        </GluestackUIProvider>
+      </PersistGate>
     </Provider>
   );
 }

@@ -120,6 +120,12 @@ export default function RootNavigator() {
           <Stack.Screen name='SignUp' component={SignUp} />
         </>
         {/* )} */}
+        {!isAuthenticated && (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+          </>
+        )}
       </Stack.Navigator>
     </MainDrawer>
   );

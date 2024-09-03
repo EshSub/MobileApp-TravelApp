@@ -28,7 +28,7 @@ export const TimelineItem = ({ item }) => {
   const backgroundColor = useGetBackgroundColorFromUrl();
 
   return (
-    <View sx={{borderRadius: BORDER_RADIUS, backgroundColor: backgroundColor, overflow: 'hidden'}}>
+    <View sx={{borderRadius: 20, backgroundColor: backgroundColor, overflow: 'hidden'}}>
       <Accordion
         size="md"
         variant="filled"

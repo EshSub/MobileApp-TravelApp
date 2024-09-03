@@ -10,7 +10,7 @@ export const GradientButton = ({ title, onPress, children, ...props }) => {
         p="$3"
         // width="50%"
         colors={["#5495FF", "#8BD8F9"]}
-        borderRadius="20px"
+        borderRadius={10}
         start={[0, 0]}
         end={[1, 1]}
         as={ExpoLinearGradient}
@@ -41,7 +41,7 @@ export const GradientChip = ({ text, selected, index, onPress }) => {
         pl={"$5"}
         pr={"$5"}
         colors={selected == index ? ["#5495FF", "#8BD8F9"] : ["#ffffff", "#ffffff"]}
-        borderRadius="$2xl"
+        style={{borderRadius: 10}}
         start={[0, 0]}
         end={[1, 1]}
         as={ExpoLinearGradient}

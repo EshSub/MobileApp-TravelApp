@@ -74,10 +74,10 @@ function SignUp() {
           w="100%"
           p="$4"
           borderWidth="$1"
-          borderRadius="$lg"
+          style={{borderRadius: 10}}
           borderColor="$borderLight300"
           $dark-borderWidth="$1"
-          $dark-borderRadius="$lg"
+          // $dark-borderRadius="$lg"
           $dark-borderColor="$borderDark800"
         >
           <VStack space="xl">
