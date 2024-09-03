@@ -114,48 +114,44 @@ export const TextMarquee = () => {
   const marquees = [
     {
       speed: 1,
-      size: 20,
+      size: 15, // 20
     },
     {
       speed: 0.7,
-      size: 50,
+      size: 28, //50
     },
     {
       speed: 1,
-      size: 30,
+      size: 20, //30
     },
     {
       speed: 0.8,
-      size: 20,
+      size: 25,
     },
     {
       speed: 1,
-      size: 10,
+      size: 15, // 10
     },
     {
       speed: 0.5,
-      size: 30,
+      size: 29, //30
     },
     {
       speed: 0.8,
-      size: 20,
+      size: 17, //20
     },
     {
       speed: 1,
-      size: 30,
-    },
-    {
-      speed: 0.5,
-      size: 35,
-    },
+      size: 27, //30
+    }
   ];
 
   return (
-      <VStack gap={5}>
+      <VStack gap={5} >
         {marquees.map((marquee, index) => {
           return (
-            <Marquee spacing={marquee.size * 2} speed={marquee.speed}>
-              <Text fontSize={marquee.size} m={0} lineHeight={0}>
+            <Marquee key={index} spacing={marquee.size * 2} speed={marquee.speed}>
+              <Text fontSize={marquee.size} m={0} lineHeight={"$xl"}>
                 {travelWords.sort((a, b) => Math.random() - 0.5).join(" ")}
               </Text>
             </Marquee>

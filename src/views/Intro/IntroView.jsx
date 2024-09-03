@@ -29,7 +29,7 @@ const Controls = ({ currentScreen, setCurrentScreen }) => {
     setCurrentScreen(currentScreen - 1);
   };
   return (
-    <HStack p={"$10"} justifyContent="space-between" space="md">
+    <HStack justifyContent= "space-evenly" width={WIDTH}>
       {currentScreen !== 0 && <GradientButton title="Back" onPress={onBack} />}
       
       <GradientButton
