@@ -9,6 +9,7 @@ import {
 } from "lucide-react-native";
 import { Icon } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
+import Entypo from '@expo/vector-icons/Entypo';
 
 export function Fab() {
   const [expanded, setExpanded] = useState(false);
@@ -18,7 +19,8 @@ export function Fab() {
         Click the button in the bottom right!
       </Text> */}
       <Pressable
-        onPress={() => setExpanded(!expanded)}
+        onPress={() => {
+          setExpanded(!expanded)}}
         style={[
           styles.button2,
           {
@@ -36,7 +38,7 @@ export function Fab() {
           }}
         >
           {/* <Text>🎁</Text> */}
-          <PlusIcon />
+          <Entypo name="plus" size={24} color="white" />
         </MotiView>
       </Pressable>
       <AnimatePresence>

@@ -20,7 +20,7 @@ export const PlaceListCard = ({ index, name, timeToVisit, image }) => {
     const place = places.find((item) => item.place_id == index)
     return (
         <TouchableOpacity onPress={() => navigation.navigate("Map", { place: place })}>
-            <Card width={150} mx="$2" p="$0" height={150}>
+            <Card width={150} mx="$2" p="$0" height={100}>
                 <VStack bgColor="#ffffff" p="$2" style={{ borderRadius: 10 }} space="sm" alignItems="center" shadowColor="#4258841A" mr={"$2"}>
                     <Image
                         style={{borderRadius: 10}}

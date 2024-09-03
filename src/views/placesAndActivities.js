@@ -91,16 +91,16 @@ export const PlacesAndActivitiesScreen = () => {
                                 text={"Adventure"}
                             />
                         </Box> */}
-                        <View>
+                        <View >
                             <HStack justifyContent="space-between" alignItems="center">
-                                <Heading color="#5E6A81">
+                                <Heading color="#5E6A81" ml="$2">
                                     Fun activities
                                 </Heading>
                                 <Button
                                     variant="link"
                                     onPress={() => navigation.navigate("Activities")}
                                 >
-                                    <Text>View all</Text>
+                                    <Text mr="$2">View all</Text>
                                 </Button>
                             </HStack>
                             <FlatList
@@ -116,13 +116,13 @@ export const PlacesAndActivitiesScreen = () => {
                                 keyExtractor={(item) => item.id}
                             />
                         </View>
-                        <Heading color="#5E6A81">
+                        <Heading color="#5E6A81" ml="$2">
                             Historical sights
                         </Heading>
                         <Carousel
                             ref={ref}
                             loop
-                            width={width * 0.9}
+                            width={width}
                             height={width * 0.6}
                             autoPlay={true}
                             data={places}
@@ -144,7 +144,7 @@ export const PlacesAndActivitiesScreen = () => {
                     </View>
                     <View>
                         <HStack>
-                            <Heading color="#5E6A81">
+                            <Heading color="#5E6A81" ml="$2">
                                 Popular places
                             </Heading>
                         </HStack>

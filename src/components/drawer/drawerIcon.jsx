@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
 import { AnimatePresence, MotiView } from "moti";
 import { CloseIcon, Icon, MenuIcon } from "@gluestack-ui/themed";
+import Feather from '@expo/vector-icons/Feather';
 
 // const MotiLine = motifySvg(Line)();
 
@@ -43,7 +44,7 @@ const DrawerIcon = ({ color = "black", size = 24, ...otherProps }) => {
           </Anim>
         ) : (
           <Anim>
-            <Icon as={MenuIcon} {...iconProps} />
+            <Feather name="menu" size={26} color="black" {...iconProps}/>
           </Anim>
         )}
       </AnimatePresence>

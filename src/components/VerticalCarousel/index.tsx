@@ -29,6 +29,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import type { TransformsStyle } from "react-native";
 import type { ScaledSize } from "react-native";
 import { Dimensions } from "react-native";
+import { useDataProvider } from "../../apis";
 
 export const isWeb = Platform.OS === "web";
 
@@ -320,10 +321,13 @@ function VerticalCarousel() {
     },
     [RIGHT_OFFSET]
   );
-
+  
+  const dataprovider = useDataProvider()
+  const {data : activities} = dataprovider.activities.get();
+  console.log({activities})
   return (
     <View style={{ flex: 1 }}>
-      <Image
+      {/* <Image
         source={{
           uri: `https://ychef.files.bbci.co.uk/1280x720/p0b7n6dm.jpg`,
         }}
@@ -332,7 +336,7 @@ function VerticalCarousel() {
           height: PAGE_HEIGHT,
           position: "absolute",
         }}
-      />
+      /> */}
       {/* <BlurView
         intensity={80}
         tint="dark"
@@ -353,8 +357,8 @@ function VerticalCarousel() {
         width={ITEM_WIDTH}
         pagingEnabled={false}
         height={ITEM_HEIGHT}
-        data={[...new Array(10).keys()]}
-        renderItem={({ index }) => {
+        data={activities}
+        renderItem={({ index, item }) => {
           return (
             <View key={index} style={{ flex: 1, padding: 10 }}>
               <View
@@ -390,7 +394,7 @@ function VerticalCarousel() {
                       color: "white",
                     }}
                   >
-                    dog
+                    {"dog"}
                   </Text>
                 </View>
                 <View

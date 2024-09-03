@@ -7,12 +7,13 @@ import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
 import { PlacesAndActivitiesScreen } from "../views/placesAndActivities";
 import { DayPlanner } from "../views/dayPlanner";
 import { MainDrawer } from "../components/drawer";
-import { HomeIcon, MapIcon, MessageCircleIcon } from "lucide-react-native";
 import { BACKGROUND_COLOR } from "../helpers/constants";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { Map } from "../views/Map";
 import { ChatView } from "../views/chat";
+import Entypo from '@expo/vector-icons/Entypo';
+import Feather from '@expo/vector-icons/Feather';
 
 export const BottomTabNavigator = () => {
 
@@ -45,7 +46,7 @@ export const BottomTabNavigator = () => {
         options={{
           headerTransparent: true,
           header: HomeScreenHeader,
-          tabBarIcon: () => <HomeIcon />,
+          tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
           showLabel: false,
         }}
       />
@@ -55,7 +56,7 @@ export const BottomTabNavigator = () => {
         options={{
           headerShown: true,
           label: "",
-          tabBarIcon: () => <MapIcon />,
+          tabBarIcon: () => <Entypo name="map" size={24} color="black" />,
         }}
       />
       {/* <Tab.Screen
@@ -66,13 +67,13 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="C"
         component={ChatView}
-        options={{ headerTitle: "", tabBarIcon: () => <MessageCircleIcon /> }}
+        options={{ headerTitle: "", tabBarIcon: () => <Feather name="message-circle" size={24} color="black" /> }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="D"
         component={DayPlanner}
         options={{ tabBarIcon: () => <HomeIcon /> }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
