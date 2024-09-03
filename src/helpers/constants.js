@@ -1,6 +1,6 @@
 import { Dimensions } from "react-native";
 
-export const BACKEND_URL = "https://qq56xm5r-8000.inc1.devtunnels.ms";
+export const BACKEND_URL = "https://api.touracross.com";
 
 export const HEIGHT = Dimensions.get("window").height;
 export const WIDTH = Dimensions.get("window").width;
