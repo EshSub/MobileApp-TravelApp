@@ -1,5 +1,3 @@
-import { motifySvg } from "moti/svg";
-// import { Line, Svg } from "react-native-svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getIsMainDrawerOpen } from "../../redux/selectors";
 import { TouchableOpacity } from "react-native-gesture-handler";

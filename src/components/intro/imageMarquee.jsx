@@ -11,8 +11,6 @@ export const ImageMarquee = () => {
 
   const images = places.map((place) => place.images.map(i => i.url)).flat();
 
-  console.log({ images })
-
   const imagesGroups = [
     images.slice(0, 5),
     images.slice(5, 10),

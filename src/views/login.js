@@ -33,7 +33,6 @@ function Login() {
     try {
       const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
       if (response) {
-        console.log(response.data)
         navigation.navigate("Intro")
         dispatch(login({
           name: username,
@@ -50,9 +49,11 @@ function Login() {
         w='100%'
         // p='$4'
         // borderWidth='$1'
-        borderRadius='$lg'
+        style={{borderRadius: 10}}
         borderColor='$borderLight300'
-        $dark-borderWidth='$1' $dark-borderRadius='$lg' $dark-borderColor='$borderDark800'
+        $dark-borderWidth='$1'
+      //  $dark-borderRadius='$lg' 
+       $dark-borderColor='$borderDark800'
       >
         <VStack space='xl'>
           <Heading color='$text900' lineHeight='$md'>

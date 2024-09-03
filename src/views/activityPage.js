@@ -104,15 +104,15 @@ export const ActivityPage = ({ route }) => {
             <ParallaxScrollView
                 headerImage={
                     <Image
-                        borderRadius={"$2xl"}
+                        style={{borderRadius: 10}}
                         size="full"
-                        source={{ uri: activity?.imageUrl }}
+                        source={{ uri: activity?.imageUrl ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg" }}
                     />
                 }
                 headerBackgroundColor={BACKGROUND_COLOR}
             >
                 <Text>{activity?.description}</Text>
-            <Heading fontSize={"$lg"} color="#5E6A81" pl={"$2"}>
+            <Heading color="#5E6A81" pl={"$2"}>
                 Top picks
             </Heading>
             <Carousel

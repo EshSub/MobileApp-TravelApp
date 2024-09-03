@@ -33,7 +33,7 @@ export const ActivityCard = ({ name, imageUrl, id }) => {
                 width={WIDTH * 0.4}
                 height={80} 
                 bgColor={"white"} 
-                borderRadius={"$10"} 
+                style={{borderRadius: 10}} 
                 m={"$3"} 
                 px="$0"
                 justifyContent="center" 
@@ -47,11 +47,11 @@ export const ActivityCard = ({ name, imageUrl, id }) => {
                         source={{uri: imageUrl ?? "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220"}}
                         width={WIDTH*0.4}
                         height={80}
-                        borderRadius={"$10"}
-                        opacity={"0.7"}
+                        style={{borderRadius: 10}}
+                        opacity={0.7}
                         
                         />
-                    <Heading fontSize={"$14"} m="$2" color="$white" position="absolute" top={"50%"} textAlign="center">{name}</Heading>
+                    <Heading fontSize={14} m="$2" color="$white" position="absolute" top={"50%"} textAlign="center">{name}</Heading>
                 </Box>
             </Card>
         </TouchableOpacity>

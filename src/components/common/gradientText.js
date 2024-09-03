@@ -10,7 +10,7 @@ const GradientText = (props) => {
         // p="$3"
         // width="50%"
         colors={["#5495FF", "#8BD8F9"]}
-        borderRadius="20px"
+        borderRadius={10}
         start={[0, 0]}
         end={[1, 1]}
         as={ExpoLinearGradient}

@@ -45,7 +45,6 @@ export const PlacesAndActivitiesScreen = () => {
 
     const { data: places , loading : placeLoading } = dataprovider.places.get();
     const { data: activities, loading : activityLoading } = dataprovider.activities.get();
-    console.log({activities})
     useEffect(() => {
         if (searchPlace) {
             navigation.navigate("Map", { place: searchPlace });
@@ -94,7 +93,7 @@ export const PlacesAndActivitiesScreen = () => {
                         </Box> */}
                         <View>
                             <HStack justifyContent="space-between" alignItems="center">
-                                <Heading fontSize={"$lg"} color="#5E6A81">
+                                <Heading color="#5E6A81">
                                     Fun activities
                                 </Heading>
                                 <Button
@@ -117,7 +116,7 @@ export const PlacesAndActivitiesScreen = () => {
                                 keyExtractor={(item) => item.id}
                             />
                         </View>
-                        <Heading fontSize={"$lg"} color="#5E6A81">
+                        <Heading color="#5E6A81">
                             Historical sights
                         </Heading>
                         <Carousel
@@ -145,7 +144,7 @@ export const PlacesAndActivitiesScreen = () => {
                     </View>
                     <View>
                         <HStack>
-                            <Heading fontSize={"$lg"} color="#5E6A81">
+                            <Heading color="#5E6A81">
                                 Popular places
                             </Heading>
                         </HStack>
