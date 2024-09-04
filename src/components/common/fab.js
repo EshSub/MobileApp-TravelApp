@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet, Pressable, TouchableOpacity, Platform } from "react-native";
 import { AnimatePresence, MotiView } from "moti";
 import { useState } from "react";
 import {
@@ -19,8 +19,8 @@ export function Fab() {
         Click the button in the bottom right!
       </Text> */}
       <Pressable
-        onPress={() => {
-          setExpanded(!expanded)}}
+        onPress={() => 
+          setExpanded(!expanded)}
         style={[
           styles.button2,
           {
@@ -94,9 +94,9 @@ function ActionButton({ action, index }) {
         translateY: 0,
       }}
     >
-      <Pressable
+      <TouchableOpacity
         onPress={() => {
-          console.log({ action });
+          
           if (action.path) {
             navigation.navigate(action.path);
           }
@@ -104,14 +104,13 @@ function ActionButton({ action, index }) {
         style={[
           styles.button,
           {
-            backgroundColor: action.color,
-            shadowColor: action.color,
-            borderColor: action.border,
-          },
-        ]}
+          backgroundColor: action.color,
+          shadowColor: action.color,
+          borderColor: action.border,
+        }, styles.button]}
       >
         <Text style={{ fontSize: 18 }}>{action.emoji}</Text>
-      </Pressable>
+      </TouchableOpacity>
     </MotiView>
   );
 }
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     height: 45,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
+    // position: "absolute",
     bottom: 0,
     right: 0,
     shadowOffset: { width: 0, height: 2 },
