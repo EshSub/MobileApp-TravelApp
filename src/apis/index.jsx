@@ -3,40 +3,47 @@ import { useEffect, useRef, useState } from "react"
 import { BACKEND_URL } from "../helpers/constants"
 import { useSelector } from "react-redux"
 import { getUser } from "../redux/selectors"
-
-const useQuery = (endpoint) => {
-
-    return () => {
-        const [data, setData] = useState()
-        const [loading, setLoading] = useState(true)
-        const user = useSelector(getUser)
-        const initial = useRef(true)
-        useEffect(() => {
-            if (initial.current || true) {
-                initial.current = false;
-                axios.get(endpoint).then(res => {
-                    setData(res.data)
-                    setLoading(false)
-                }).catch(e => {
-                    console.error(e)
-                })
-            }
-        }, [])
-
-        return { data, loading, }
-    }
-}
+import { useMutation, useQuery } from "@tanstack/react-query"
 
 export const useDataProvider = () => {
     return {
         "places": {
-            "get": useQuery(`${BACKEND_URL}/place/`)
+            "get": () => useQuery({
+                queryKey: ["places"], queryFn: async () => {
+                    const response = await axios.get(
+                        `${BACKEND_URL}/place/`,
+                    );
+                    return response.data;
+                }
+            })
         },
         "activities": {
-            "get" : useQuery(`${BACKEND_URL}/activity/`)
+            "get": () => useQuery({
+                queryKey: ["activity"], queryFn: async () => {
+                    const response = await axios.get(
+                        `${BACKEND_URL}/activity/`,
+                    );
+                    return response.data;
+                }
+            })
         },
         "placeactivity": {
-            "get" : useQuery(`${BACKEND_URL}/placeactivity/`)
+            "get": () => useQuery({
+                queryKey: ["placeactivity"], queryFn: async () => {
+                    const response = await axios.get(
+                        `${BACKEND_URL}/placectivity/`,
+                    );
+                    return response.data;
+                }
+            })
+        },
+        "auth": {
+            "login": () => useMutation({
+                mutationFn: ({username, password}) => {
+                    console.log({ username, password })
+                    return axios.post(`${BACKEND_URL}/api/token/`, { username, password })
+                }
+            })
         }
     }
 }

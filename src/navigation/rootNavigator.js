@@ -113,12 +113,10 @@ export default function RootNavigator() {
           component={ActivityPage}
           options={{ headerTransparent: true }}
         />
-        {!isAuthenticated && (
-          <>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-          </>
-        )}
+        
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+
       </Stack.Navigator>
     </MainDrawer>
   );
