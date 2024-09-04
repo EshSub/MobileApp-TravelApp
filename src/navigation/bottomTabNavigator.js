@@ -13,9 +13,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { Map } from "../views/Map";
 import { ChatView } from "../views/chat";
+import { ChatList } from "../views/chatList";
+import { ChatNavigator } from "./chatNavigator";
 
 export const BottomTabNavigator = () => {
-
   // const navigation = useNavigation()
 
   // useEffect(() => {
@@ -65,8 +66,12 @@ export const BottomTabNavigator = () => {
       /> */}
       <Tab.Screen
         name="C"
-        component={ChatView}
-        options={{ headerTitle: "", tabBarIcon: () => <MessageCircleIcon /> }}
+        component={ChatNavigator}
+        options={{
+          headerTitle: "",
+          tabBarIcon: () => <MessageCircleIcon />,
+          headerShown: false,
+        }}
       />
       <Tab.Screen
         name="D"

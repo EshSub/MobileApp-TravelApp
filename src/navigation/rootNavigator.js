@@ -52,7 +52,7 @@ export default function RootNavigator() {
 
   const navigateToHome = () => {
     navigation.navigate("Home");
-  }
+  };
 
   return (
     <MainDrawer>
@@ -60,7 +60,7 @@ export default function RootNavigator() {
         <Stack.Screen
           name="Home"
           component={BottomTabNavigator}
-          options={{ headerTransparent: true, header: HomeScreenHeader }}
+          options={{ headerTransparent: true, headerShown: false }}
         />
         <Stack.Screen
           name="Places&Activities"
@@ -79,18 +79,26 @@ export default function RootNavigator() {
           component={Plan}
           options={{
             headerTransparent: true,
-            header: () => <HeaderWithBackButton onBack={navigateToHome}/>
+            header: () => <HeaderWithBackButton onBack={navigateToHome} />,
           }}
         />
-        <Stack.Screen name="Map" component={Map}/>
+        <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="Activities" component={ActivitiesScreen} />
         <Stack.Screen
           name="Planner"
           component={AiPlanner}
           options={{ headerTransparent: true }}
         />
-        <Stack.Screen name="RandomSearch" component={RandomDestination} options={{ headerTransparent: true}}/>
-        <Stack.Screen name="Activity" component={ActivityPage} options={{headerTransparent: true}}/>
+        <Stack.Screen
+          name="RandomSearch"
+          component={RandomDestination}
+          options={{ headerTransparent: true }}
+        />
+        <Stack.Screen
+          name="Activity"
+          component={ActivityPage}
+          options={{ headerTransparent: true }}
+        />
 
         {!isAuthenticated && (
           <>

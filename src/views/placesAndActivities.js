@@ -128,7 +128,6 @@ export const PlacesAndActivitiesScreen = () => {
                             data={places}
                             mode="parallax"
                             scrollAnimationDuration={2000}
-                            onSnapToItem={(index) => console.log("current index:", index)}
                             renderItem={({ index, item }) => (
                                 <View style={{ flex: 1 }}>
                                     <PlaceCard
