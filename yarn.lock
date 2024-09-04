@@ -7321,7 +7321,7 @@ react-native-screens@3.31.1:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-svg@^13.4.0:
+react-native-svg@^13.14.1:
   version "13.14.1"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-13.14.1.tgz#265ec50b57dc042b8b8bd55d03aaf394d1ba9f7a"
   integrity sha512-0DSa0EOySzV0J9utmRFVE5Vr4mKRXA7GtH1Ga1B6fzR967HGFW1ytH6hmnOf36316hjYpXMMB7s4oVe1FqghlQ==
@@ -7510,6 +7510,11 @@ recyclerlistview@^3.0.0:
     lodash.debounce "4.0.8"
     prop-types "15.5.8"
     ts-object-utils "0.0.5"
+
+redux-persist@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+  integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
 
 redux-thunk@^3.1.0:
   version "3.1.0"
