@@ -10,3 +10,4 @@ export const getSelectedEndDate = (state) => state.formState.selectedEndDate;
 export const getSelectedActivities = (state) => state.formState.selectedActivities;
 export const getDescription = (state) => state.formState.description;
 export const getDuration = (state) => state.formState.duration;
+export const getAiPlan = (state) => state.formState.aiPlan;

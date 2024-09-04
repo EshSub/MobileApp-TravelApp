@@ -7,7 +7,8 @@ export const formStateSlice = createSlice({
         selectedEndDate: null,
         duration: null,
         selectedActivities: [],
-        description: null
+        description: null,
+        aiPlan: null
     },
     reducers: {
         setSelectedStartDate: (state, action) => {
@@ -24,9 +25,12 @@ export const formStateSlice = createSlice({
         },
         setDescription: (state, action) => {
             state.description = action.payload
+        },
+        setAiPlan: (state, action) => {
+            state.aiPlan = action.payload
         }
     }
 })
 
-export const { setSelectedStartDate, setSelectedEndDate, setSelectedActivities, setDescription, setDuration } = formStateSlice.actions;
+export const { setSelectedStartDate, setSelectedEndDate, setSelectedActivities, setDescription, setDuration, setAiPlan } = formStateSlice.actions;
 export default formStateSlice.reducer;
