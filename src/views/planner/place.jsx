@@ -120,7 +120,6 @@ export const Place = ({ place }) => {
         autoPlay={true}
         data={place.images}
         scrollAnimationDuration={3000}
-        // onSnapToItem={(index) => console.log("current index:", index)}
         // pagingEnabled={false}
         // customAnimation={animationStyle}
         mode="parallax"

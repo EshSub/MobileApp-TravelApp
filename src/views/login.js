@@ -1,4 +1,20 @@
-import { Button, ButtonText, EyeIcon, EyeOffIcon, FormControl, Heading, HStack, Input, InputField, InputIcon, InputSlot, Link, LinkText, Text, VStack } from "@gluestack-ui/themed";
+import {
+  Button,
+  ButtonText,
+  EyeIcon,
+  EyeOffIcon,
+  FormControl,
+  Heading,
+  HStack,
+  Input,
+  InputField,
+  InputIcon,
+  InputSlot,
+  Link,
+  LinkText,
+  Text,
+  VStack,
+} from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -13,54 +29,60 @@ import { StyleSheet, View } from "react-native";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
-  const navigation = useNavigation()
-  const dispatch = useDispatch()
-  const user = useSelector(selectUser)
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const handleState = () => {
     setShowPassword((showState) => {
       return !showState;
     });
   };
   useEffect(() => {
-    setUsername(user?.name)
-    setPassword(user?.password)
-  }, [user])
-
+    setUsername(user?.name);
+    setPassword(user?.password);
+  }, [user]);
 
   const handleClick = async () => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
+      const response = await axios.post(`${BACKEND_URL}/api/token/`, {
+        username: username,
+        password: password,
+      });
       if (response) {
-        navigation.navigate("Intro")
-        dispatch(login({
-          name: username,
-          accessToken: response.data.access
-        }))
+        console.log("response", response.data);
+        navigation.navigate("Intro");
+        dispatch(
+          login(response.data)
+          // login({
+          //   name: username,
+          //   accessToken: response.data.access,
+          // })
+        );
       }
     } catch (error) {
-      console.log('error', error)
+      console.log("error", error);
     }
-  }
+  };
   return (
     <Background>
       <FormControl
-        w='100%'
+        w="100%"
         // p='$4'
         // borderWidth='$1'
-        style={{borderRadius: 10}}
-        borderColor='$borderLight300'
-        $dark-borderWidth='$1'
-      //  $dark-borderRadius='$lg' 
-       $dark-borderColor='$borderDark800'
+        style={{ borderRadius: 10 }}
+        borderColor="$borderLight300"
+        $dark-borderWidth="$1"
+        //  $dark-borderRadius='$lg'
+        $dark-borderColor="$borderDark800"
       >
-        <VStack space='xl'>
-          <Heading color='$text900' lineHeight='$md'>
+        <VStack space="xl">
+          <Heading color="$text900" lineHeight="$md">
             Login
           </Heading>
-          <VStack space='xs'>
-            <Text color='$text500' lineHeight='$xs'>
+          <VStack space="xs">
+            <Text color="$text500" lineHeight="$xs">
               Username
             </Text>
             <Input>
@@ -71,19 +93,22 @@ function Login() {
               />
             </Input>
           </VStack>
-          <VStack space='xs'>
-            <Text color='$text500' lineHeight='$xs'>
+          <VStack space="xs">
+            <Text color="$text500" lineHeight="$xs">
               Password
             </Text>
-            <Input textAlign='center'>
+            <Input textAlign="center">
               <InputField
                 value={password}
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 onChangeText={(text) => setPassword(text)}
               />
-              <InputSlot pr='$3' onPress={handleState}>
+              <InputSlot pr="$3" onPress={handleState}>
                 {/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
-                <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} color='$darkBlue500' />
+                <InputIcon
+                  as={showPassword ? EyeIcon : EyeOffIcon}
+                  color="$darkBlue500"
+                />
               </InputSlot>
             </Input>
           </VStack>
@@ -98,7 +123,9 @@ function Login() {
                 borderBottomWidth: StyleSheet.hairlineWidth,
               }}
             />
-            <Text ml={"$2"} mr={"$2"}>OR</Text>
+            <Text ml={"$2"} mr={"$2"}>
+              OR
+            </Text>
             <View
               style={{
                 borderBottomColor: "black",
@@ -109,7 +136,7 @@ function Login() {
           </HStack>
           <GoogleLogin />
           <AppleLogin />
-          <Link onPress={() => navigation.navigate('SignUp')}>
+          <Link onPress={() => navigation.navigate("SignUp")}>
             <LinkText size="sm">Don't have an account ? Sign up</LinkText>
           </Link>
         </VStack>

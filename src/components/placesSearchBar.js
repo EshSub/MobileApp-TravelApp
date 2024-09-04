@@ -23,7 +23,7 @@ export const PlacesSearchBar = ({searchPlace, setSearchPlace}) => {
     console.log({filteredPlaces})
     return (
         <View>
-            <Input style={{borderRadius: 10}} bgColor="white" opacity={0.5}>
+            <Input style={{borderRadius: 10}} bgColor="white" opacity={0.5} mx="$2">
                 <InputSlot pl="$3">
                     <InputIcon as={SearchIcon} />
                 </InputSlot>
