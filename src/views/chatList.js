@@ -1,12 +1,13 @@
-import { Box, HStack } from "@gluestack-ui/themed";
+import { Box, Divider, HStack, Text, View } from "@gluestack-ui/themed";
 import { useState } from "react";
-import { Button, Text } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { Button } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import { Background } from "../components/background";
 import { useDataProvider } from "../apis";
 import axios from "axios";
 import authAxios from "../apis/axios";
 import { useNavigation } from "@react-navigation/native";
+import { WIDTH } from "../helpers/constants";
 
 export const ChatList = () => {
   const [conversations, setConversations] = useState([]);
@@ -48,7 +49,7 @@ export const ChatList = () => {
           </Box>
         </HStack>
       </TouchableOpacity>
-      <Box>
+      <Box style={{ width: WIDTH, height: "100%" }}>
         {data?.map((conversation) => {
           return (
             <TouchableOpacity
@@ -56,12 +57,10 @@ export const ChatList = () => {
                 navigateToConversation(conversation.id);
               }}
             >
-              <HStack>
-                <Box>
-                  <Text>{conversation.id}</Text>
-                  <Text>{conversation?.lastMessage ?? "lastMessage"}</Text>
-                </Box>
-              </HStack>
+              <ListItem
+                title={conversation.id}
+                subtitle={conversation?.lastMessage}
+              />
             </TouchableOpacity>
           );
         })}
@@ -69,3 +68,40 @@ export const ChatList = () => {
     </Background>
   );
 };
+
+const ListItem = ({ title, subtitle, avatar_url }) => (
+  <View style={styles.itemContainer}>
+    {/* <Image source={{ uri: avatar_url }} style={styles.avatar} /> */}
+    <View style={styles.textContainer}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.subtitle}>{subtitle}</Text>
+      <Divider style={{ width: WIDTH }} />
+    </View>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    flexDirection: "row",
+    padding: 16,
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#ccc",
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  textContainer: {
+    marginLeft: 16,
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  subtitle: {
+    fontSize: 14,
+    color: "gray",
+  },
+});

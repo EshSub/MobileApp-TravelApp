@@ -45,10 +45,11 @@ export const BottomTabNavigator = () => {
         name="H"
         component={PlacesAndActivitiesScreen}
         options={{
-          headerTransparent: true,
-          header: HomeScreenHeader,
-          tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
-          showLabel: false,
+          // headerTransparent: true,
+          // header: HomeScreenHeader,
+          headerShown: true,
+          tabBarIcon: () => <Entypo name="home" size={24} color="black" />
+          // showLabel: false,
         }}
       />
       <Tab.Screen
