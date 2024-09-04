@@ -60,7 +60,7 @@ export const PlacesAndActivitiesScreen = () => {
       <ScrollView>
         <VStack flex={1} space='xl' height={'100%'} justifyContent='center'>
           <AnimatedTextSwitching
-            texts={['Welcome...', 'Welkom...', 'Herzlich willkommen...']}
+            texts={['Welcome', 'Welkom', 'Herzlich Willkommen']}
             size='3xl'
             fontWeight={600}
             textAlign='center'
@@ -120,7 +120,7 @@ export const PlacesAndActivitiesScreen = () => {
                 />
               </View>
             </View>
-            <Heading color='#5E6A81' ml='$6'>
+            <Heading color='#5E6A81' ml='$6' style={{ marginTop: 20 }}>
               Popular Locations
             </Heading>
             <Carousel
