@@ -20,15 +20,15 @@ export const PlaceListCard = ({ index, name, timeToVisit, image }) => {
     const place = places.find((item) => item.place_id == index)
     return (
         <TouchableOpacity onPress={() => navigation.navigate("Map", { place: place })}>
-            <Card width={150} mx="$2" p="$0" height={150}>
-                <VStack bgColor="#ffffff" p="$2" style={{ borderRadius: 10 }} space="sm" alignItems="center" shadowColor="#4258841A" mr={"$2"}>
+            <Card width={120} mx="$2" p="$0" height={150} marginBottom={20}>
+                <VStack bgColor="#ffffff" p="$0" pb={3} style={{ borderRadius: 10 }} space="sm" alignItems="center" shadowColor="#4258841A" marginBottom={'$10'}>
                     <Image
-                        style={{borderRadius: 10}}
+                        style={{borderTopLeftRadius: 10,borderTopRightRadius:10, width: '100%'}}
                         alt="placeImage"
                         source={{ uri: image ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg" }}
                     />
-                    <VStack flex={1}>
-                        <Heading size="sm" fontFamily="$heading" textAlign="center" color="#767676">
+                    {/* <VStack flex={1}> */}
+                        <Heading size="sm" fontFamily="$heading" textAlign="center" color="#767676" lineHeight={15} pt={2}>
                             {name}
                         </Heading>
                         <Text
@@ -46,7 +46,7 @@ export const PlaceListCard = ({ index, name, timeToVisit, image }) => {
                         >
                             {timeToVisit}
                         </Text>
-                    </VStack>
+                    {/* </VStack> */}
                 </VStack>
             </Card>
         </TouchableOpacity>
