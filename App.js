@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { config } from "./config/gluestack-ui.config";
-import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { GluestackUIProvider, View } from "@gluestack-ui/themed";
 import { StatusBar } from "expo-status-bar";
 import RootNavigator from "./src/navigation/rootNavigator";
 import { NavigationContainer } from "@react-navigation/native";
@@ -12,15 +12,19 @@ import { LogBox } from "react-native";
 import { SettingsPage } from "./src/views/settings";
 import { persistor, store } from "./src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import Constants from 'expo-constants';
 
 LogBox.ignoreAllLogs();
 
 export default function App() {
+  
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <GluestackUIProvider config={config}>
-          <StatusBar style="auto" />
+          <View style={{height: Constants.statusBarHeight}}>
+            <StatusBar style="auto"/>
+          </View>
           <NavigationContainer>
             <GestureHandlerRootView>
               <RootNavigator />

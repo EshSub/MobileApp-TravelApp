@@ -43,8 +43,8 @@ export const PlacesAndActivitiesScreen = () => {
 
     const dataprovider = useDataProvider();
 
-    const { data: places , loading : placeLoading } = dataprovider.places.get();
-    const { data: activities, loading : activityLoading } = dataprovider.activities.get();
+    const { data: places, loading: placeLoading } = dataprovider.places.get();
+    const { data: activities, loading: activityLoading } = dataprovider.activities.get();
     useEffect(() => {
         if (searchPlace) {
             navigation.navigate("Map", { place: searchPlace });
@@ -57,14 +57,14 @@ export const PlacesAndActivitiesScreen = () => {
     return (
         <Background>
             <ScrollView>
-                <VStack flex={1} rowGap={"$4"} height={"100%"}>
+                <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
                     <AnimatedTextSwitching
                         texts={["Welcome...", "Welkom...", "Herzlich willkommen..."]}
                         size="3xl"
                         fontWeight={600}
                         textAlign="center"
                     />
-                    <View flex={0.1}>
+                    <View flex={0.1} marginHorizontal={"$6"}>
                         <PlacesSearchBar
                             searchPlace={searchPlace}
                             setSearchPlace={setSearchPlace}
@@ -93,36 +93,38 @@ export const PlacesAndActivitiesScreen = () => {
                         </Box> */}
                         <View>
                             <HStack justifyContent="space-between" alignItems="center">
-                                <Heading color="#5E6A81">
+                                <Heading color="#5E6A81" ml="$6">
                                     Fun activities
                                 </Heading>
                                 <Button
                                     variant="link"
                                     onPress={() => navigation.navigate("Activities")}
                                 >
-                                    <Text>View all</Text>
+                                    <Text mr="$6">View all</Text>
                                 </Button>
                             </HStack>
-                            <FlatList
-                                numColumns={2}
-                                data={activities.slice(0,4)}
-                                renderItem={({ item }) => (
-                                    <ActivityCard
-                                        name={item.activity_name}
-                                        imageUrl={item.imageUrl}
-                                        id={item.activity_id}
-                                    />
-                                )}
-                                keyExtractor={(item) => item.id}
-                            />
+                            <View display="flex" justifyContent="center" alignItems="center">
+                                <FlatList
+                                    numColumns={2}
+                                    data={activities.slice(0, 4)}
+                                    renderItem={({ item }) => (
+                                        <ActivityCard
+                                            name={item.activity_name}
+                                            imageUrl={item.imageUrl}
+                                            id={item.activity_id}
+                                        />
+                                    )}
+                                    keyExtractor={(item) => item.id}
+                                />
+                            </View>
                         </View>
-                        <Heading color="#5E6A81">
+                        <Heading color="#5E6A81" ml="$6">
                             Historical sights
                         </Heading>
                         <Carousel
                             ref={ref}
                             loop
-                            width={width * 0.9}
+                            width={width}
                             height={width * 0.6}
                             autoPlay={true}
                             data={places}
@@ -143,7 +145,7 @@ export const PlacesAndActivitiesScreen = () => {
                     </View>
                     <View>
                         <HStack>
-                            <Heading color="#5E6A81">
+                            <Heading color="#5E6A81" ml="$6">
                                 Popular places
                             </Heading>
                         </HStack>
