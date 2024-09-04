@@ -1,63 +1,83 @@
-import { Button, ButtonText, EyeIcon, EyeOffIcon, FormControl, Heading, HStack, Input, InputField, InputIcon, InputSlot, Link, LinkText, Text, VStack } from "@gluestack-ui/themed";
-import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { BACKEND_URL } from "../helpers/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser } from "../redux/slices/userSlice";
-import { Background } from "../components/background";
-import { GoogleLogin } from "../components/googleLogin";
-import { AppleLogin } from "../components/appleLogin";
-import { GradientButton } from "../components/common/gradientButton";
-import { StyleSheet, View } from "react-native";
+import {
+  Button,
+  ButtonText,
+  EyeIcon,
+  EyeOffIcon,
+  FormControl,
+  Heading,
+  HStack,
+  Input,
+  InputField,
+  InputIcon,
+  InputSlot,
+  Link,
+  LinkText,
+  Text,
+  VStack,
+} from '@gluestack-ui/themed';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { BACKEND_URL } from '../helpers/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectUser } from '../redux/slices/userSlice';
+import { Background } from '../components/background';
+import { GoogleLogin } from '../components/googleLogin';
+import { AppleLogin } from '../components/appleLogin';
+import { GradientButton } from '../components/common/gradientButton';
+import { StyleSheet, View } from 'react-native';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
-  const navigation = useNavigation()
-  const dispatch = useDispatch()
-  const user = useSelector(selectUser)
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const handleState = () => {
     setShowPassword((showState) => {
       return !showState;
     });
   };
   useEffect(() => {
-    setUsername(user?.name)
-    setPassword(user?.password)
-  }, [user])
-
+    setUsername(user?.name);
+    setPassword(user?.password);
+  }, [user]);
 
   const handleClick = async () => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/token/`, { username: username, password: password })
+      const response = await axios.post(`${BACKEND_URL}/api/token/`, {
+        username: username,
+        password: password,
+      });
       if (response) {
-        navigation.navigate("Intro")
-        dispatch(login({
-          name: username,
-          accessToken: response.data.access
-        }))
+        navigation.navigate('Intro');
+        dispatch(
+          login({
+            name: username,
+            accessToken: response.data.access,
+          })
+        );
       }
     } catch (error) {
-      console.log('error', error)
+      console.log('error', error);
     }
-  }
+  };
   return (
     <Background>
       <FormControl
         w='100%'
         // p='$4'
         // borderWidth='$1'
-        style={{borderRadius: 10}}
+        style={{ borderRadius: 10 }}
         borderColor='$borderLight300'
         $dark-borderWidth='$1'
-      //  $dark-borderRadius='$lg' 
-       $dark-borderColor='$borderDark800'
+        //  $dark-borderRadius='$lg'
+        $dark-borderColor='$borderDark800'
       >
         <VStack space='xl'>
           <Heading color='$text900' lineHeight='$md'>
-            Login
+            Log in
           </Heading>
           <VStack space='xs'>
             <Text color='$text500' lineHeight='$xs'>
@@ -65,7 +85,7 @@ function Login() {
             </Text>
             <Input>
               <InputField
-                type="text"
+                type='text'
                 value={username}
                 onChangeText={(text) => setUsername(text)}
               />
@@ -83,25 +103,30 @@ function Login() {
               />
               <InputSlot pr='$3' onPress={handleState}>
                 {/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
-                <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} color='$darkBlue500' />
+                <InputIcon
+                  as={showPassword ? EyeIcon : EyeOffIcon}
+                  color='$darkBlue500'
+                />
               </InputSlot>
             </Input>
           </VStack>
 
-          <GradientButton onPress={handleClick} title={"Login"} />
+          <GradientButton onPress={handleClick} title={'Login'} />
 
-          <HStack justifyContent="center" alignItems="center">
+          <HStack justifyContent='center' alignItems='center'>
             <View
               style={{
-                borderBottomColor: "black",
+                borderBottomColor: 'black',
                 flex: 1 / 2,
                 borderBottomWidth: StyleSheet.hairlineWidth,
               }}
             />
-            <Text ml={"$2"} mr={"$2"}>OR</Text>
+            <Text ml={'$2'} mr={'$2'}>
+              OR
+            </Text>
             <View
               style={{
-                borderBottomColor: "black",
+                borderBottomColor: 'black',
                 flex: 1 / 2,
                 borderBottomWidth: StyleSheet.hairlineWidth,
               }}
@@ -110,7 +135,7 @@ function Login() {
           <GoogleLogin />
           <AppleLogin />
           <Link onPress={() => navigation.navigate('SignUp')}>
-            <LinkText size="sm">Don't have an account ? Sign up</LinkText>
+            <LinkText size='sm'>Don't have an account ? Sign up</LinkText>
           </Link>
         </VStack>
       </FormControl>

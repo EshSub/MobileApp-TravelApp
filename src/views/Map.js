@@ -1,25 +1,25 @@
-import { Button, Text, VStack, View } from "@gluestack-ui/themed";
-import MapView, { Marker, UrlTile, AnimatedRegion } from "react-native-maps";
-import { HEIGHT, WIDTH } from "../helpers/constants";
-import { useSelector } from "react-redux";
-import { getPlaces } from "../redux/selectors";
-import { PlacesSearchBar } from "../components/placesSearchBar";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useMemo } from "react";
+import { Button, Text, VStack, View } from '@gluestack-ui/themed';
+import MapView, { Marker, UrlTile, AnimatedRegion } from 'react-native-maps';
+import { HEIGHT, WIDTH } from '../helpers/constants';
+import { useSelector } from 'react-redux';
+import { getPlaces } from '../redux/selectors';
+import { PlacesSearchBar } from '../components/placesSearchBar';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import {
   BottomSheetModal,
   BottomSheetView,
   BottomSheetModalProvider,
-} from "@gorhom/bottom-sheet";
-import { SafeAreaView } from "react-native";
-import { PlaceDetails } from "./placeDetails";
-import { Place } from "./planner/place";
-import { useDataProvider } from "../apis";
+} from '@gorhom/bottom-sheet';
+import { SafeAreaView } from 'react-native';
+import { PlaceDetails } from './placeDetails';
+import { Place } from './planner/place';
+import { useDataProvider } from '../apis';
 
 export const Map = ({ route }) => {
   // const places = useSelector(getPlaces);
-  const dataprovider = useDataProvider()
-  const { data: places , loading : placeLoading } = dataprovider.places.get();
+  const dataprovider = useDataProvider();
+  const { data: places, loading: placeLoading } = dataprovider.places.get();
 
   const handlePress = (props) => {
     console.log({ props });
@@ -53,15 +53,15 @@ export const Map = ({ route }) => {
   }, [searchPlace]);
 
   const bottomSheetModalRef = useRef(null);
-  
+
   // variables
-  const snapPoints = useMemo(() => ["25%", "85%"], []);
+  const snapPoints = useMemo(() => ['25%', '85%'], []);
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
   const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
+    console.log('handleSheetChanges', index);
     if (index == -1) {
       setSearchPlace(null);
     }
@@ -72,7 +72,7 @@ export const Map = ({ route }) => {
       <View>
         <MapView
           style={{
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 0,
             width: WIDTH,
@@ -84,10 +84,14 @@ export const Map = ({ route }) => {
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LATITUDE_DELTA * ASPECT_RATIO,
           }}
+          scrollEnabled={true} // Allows panning
+          zoomEnabled={true} // Allows pinch-to-zoom
+          rotateEnabled={true} // Optionally, allow rotation
+          pitchEnabled={true}
           ref={mapRef}
         >
           <UrlTile
-            urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            urlTemplate='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             maximumZ={19}
           />
           {places?.map((item) => (
@@ -98,18 +102,18 @@ export const Map = ({ route }) => {
                 latitude: item.latitude,
                 longitude: item.longitude,
               }}
-              pinColor="red"
+              pinColor='red'
               onPress={() => handlePress(item.place_id)}
             />
           ))}
         </MapView>
 
         <View>
-          <SafeAreaView style={{ zIndex: 100, height: "100%" }}>
+          <SafeAreaView style={{ zIndex: 100, height: '100%' }}>
             <VStack
               flex={1}
               // justifyContent="center"
-              alignItems="center"
+              alignItems='center'
               paddingTop={60}
               // height={1000}
               // backgroundColor="red"
@@ -138,7 +142,6 @@ export const Map = ({ route }) => {
             <BottomSheetView>
               {/* <Text>Awesome 🎉</Text> */}
               <PlaceDetails place={searchPlace} />
-              
             </BottomSheetView>
           </BottomSheetModal>
         </View>
