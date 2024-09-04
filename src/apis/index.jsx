@@ -6,6 +6,7 @@ import { getUser } from "../redux/selectors"
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 export const useDataProvider = () => {
+    const token = "3452342"
     return {
         "places": {
             "get": () => useQuery({
@@ -42,6 +43,17 @@ export const useDataProvider = () => {
                 mutationFn: ({username, password}) => {
                     console.log({ username, password })
                     return axios.post(`${BACKEND_URL}/api/token/`, { username, password })
+                }
+            })
+        },
+        "aiPlanner": {
+            "plan": () => useMutation({
+                mutationFn: ({duration, description, preferred_activities}) => {
+                    return axios.post(`${BACKEND_URL}/plan/`, { "input_data" : {duration, description, preferred_activities} }, {
+                        headers: {
+                            "Authorization": `bearer ${token}`
+                        }
+                    })
                 }
             })
         }
