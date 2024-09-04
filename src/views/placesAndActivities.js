@@ -63,12 +63,12 @@ export const PlacesAndActivitiesScreen = () => {
         <HomeScreenHeader />
       </HStack>
       <AnimatedTextSwitching
-        texts={["Welcome...", "Welkom...", "Herzlich willkommen..."]}
+        texts={["Welcome", "Welkom", "Herzlich Willkommen"]}
         size="3xl"
         fontWeight={600}
         textAlign="center"
       />
-      <ScrollView>
+      <ScrollView style={{marginTop: 20}}>
         <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
           <View flex={0.1} marginHorizontal={"$6"}>
             <PlacesSearchBar
@@ -125,7 +125,7 @@ export const PlacesAndActivitiesScreen = () => {
               </View>
             </View>
             <Heading color="#5E6A81" ml="$6">
-              Historical sights
+              Popular places
             </Heading>
             <Carousel
               ref={ref}
@@ -149,7 +149,7 @@ export const PlacesAndActivitiesScreen = () => {
               )}
             />
           </View>
-          <View>
+          {/* <View>
             <HStack>
               <Heading color="#5E6A81" ml="$6">
                 Popular places
@@ -168,7 +168,7 @@ export const PlacesAndActivitiesScreen = () => {
               )}
               keyExtractor={(item) => item.id}
             />
-          </View>
+          </View> */}
         </VStack>
       </ScrollView>
       <Fab />
