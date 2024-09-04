@@ -69,37 +69,40 @@ function Login() {
         w='100%'
         // p='$4'
         // borderWidth='$1'
-        style={{ borderRadius: 10 }}
+        style={{ borderRadius: 10, padding: 10 }}
         borderColor='$borderLight300'
         $dark-borderWidth='$1'
         //  $dark-borderRadius='$lg'
         $dark-borderColor='$borderDark800'
       >
         <VStack space='xl'>
-          <Heading color='$text900' lineHeight='$md'>
+          <Heading
+            color='$text900'
+            lineHeight='$md'
+            style={{ alignSelf: 'center', fontSize: 25, padding: 10 }} // Center the heading
+          >
             Log in
           </Heading>
-          <VStack space='xs'>
-            <Text color='$text500' lineHeight='$xs'>
-              Username
-            </Text>
-            <Input>
+          <VStack space='xl' style={{ padding: 15 }}>
+            <Input textAlign='center' style={{ height: 50 }}>
               <InputField
                 type='text'
                 value={username}
                 onChangeText={(text) => setUsername(text)}
+                placeholder='Username' // Added placeholder for username
+                style={{
+                  paddingHorizontal: 10,
+                }}
               />
             </Input>
-          </VStack>
-          <VStack space='xs'>
-            <Text color='$text500' lineHeight='$xs'>
-              Password
-            </Text>
-            <Input textAlign='center'>
+
+            <Input textAlign='center' style={{ height: 50 }}>
               <InputField
                 value={password}
                 type={showPassword ? 'text' : 'password'}
                 onChangeText={(text) => setPassword(text)}
+                placeholder='Password' // Added placeholder for password
+                style={{ paddingHorizontal: 10 }}
               />
               <InputSlot pr='$3' onPress={handleState}>
                 {/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
@@ -110,8 +113,9 @@ function Login() {
               </InputSlot>
             </Input>
           </VStack>
-
-          <GradientButton onPress={handleClick} title={'Login'} />
+          <View style={{ marginHorizontal: 25 }}>
+            <GradientButton onPress={handleClick} title={'Login'} p={'$2'} />
+          </View>
 
           <HStack justifyContent='center' alignItems='center'>
             <View
@@ -132,9 +136,15 @@ function Login() {
               }}
             />
           </HStack>
-          <GoogleLogin />
-          <AppleLogin />
-          <Link onPress={() => navigation.navigate('SignUp')}>
+          <VStack space='md' style={{ padding: 10 }}>
+            <GoogleLogin text='Login with Google' />
+            <AppleLogin text='Login with Apple' />
+          </VStack>
+
+          <Link
+            style={{ alignItems: 'center' }}
+            onPress={() => navigation.navigate('SignUp')}
+          >
             <LinkText size='sm'>Don't have an account ? Sign up</LinkText>
           </Link>
         </VStack>
