@@ -87,7 +87,6 @@ export const PlaceDetails = ({place}) => {
           autoPlay={false}
           data={imageList}
           scrollAnimationDuration={1000}
-          onSnapToItem={(index) => console.log("current index:", index)}
           renderItem={({ index, item }) => (
             <Image source={{ uri: item.url }} alt="placeImage" size="full" />
           )}
@@ -123,7 +122,6 @@ export const PlaceDetails = ({place}) => {
           autoPlay={true}
           data={place?.images}
           scrollAnimationDuration={3000}
-          // onSnapToItem={(index) => console.log("current index:", index)}
           // pagingEnabled={false}
           // customAnimation={animationStyle}
           mode="parallax"

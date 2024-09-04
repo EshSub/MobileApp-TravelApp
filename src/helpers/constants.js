@@ -1,6 +1,9 @@
 import { Dimensions } from 'react-native';
+import Constants from "expo-constants";
+const version = Constants.expoConfig.version;
 
-export const BACKEND_URL = 'https://api.touracross.com';
+export const VERSION = version+"U2";
+export const BACKEND_URL = "https://api.touracross.com";
 
 export const HEIGHT = Dimensions.get('window').height;
 export const WIDTH = Dimensions.get('window').width;

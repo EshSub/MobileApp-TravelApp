@@ -26,4 +26,9 @@ export const randomSort = (a, b) => {
   return 0.5 - Math.random();
 };
 
+export const currentDateString = () => {
+  const date = new Date();
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
 

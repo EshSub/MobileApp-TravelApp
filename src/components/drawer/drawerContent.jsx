@@ -26,6 +26,7 @@ import { House } from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
 import { USER_LOGOUT } from "../../helpers/constants";
+import { VERSION } from "../../helpers/constants";
 
 export const DrawerContent = (props) => {
   const open = useSelector(getIsMainDrawerOpen);
@@ -74,7 +75,7 @@ export const DrawerContent = (props) => {
         </View>
       </View>
 
-      <View style={styles.body}>
+      <VStack style={styles.body} justifyContent="space-between" flex={1} >
         <VStack gap={10} pt={"$10"}>
           {open &&
             menuItems.map((item, index) => {
@@ -107,12 +108,16 @@ export const DrawerContent = (props) => {
               );
             })}
         </VStack>
-      </View>
+        <Text style={{textAlign: 'center'}}>{VERSION}</Text>
+      </VStack>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   header: {
     backgroundColor: "#DCDCDC",
   },
@@ -135,13 +140,13 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     fontSize: 16,
-    color: "#778899",
+    // color: "#778899",
     fontWeight: "600",
   },
   body: {
     backgroundColor: "#778899",
-    height: 700,
-    alignItems: "flex-start",
+    // height: 700,
+    // alignItems: "flex-start",
   },
   item: {
     flexDirection: "row",

@@ -59,3 +59,12 @@ export const useDataProvider = () => {
         }
     }
 }
+
+
+// message: {
+//     post: useMutation(`${BACKEND_URL}/message/`),
+//   //   get: (params) => useQuery(`${BACKEND_URL}/message/`, params),
+//   },
+//   conversation: {
+//     post: useMutation(`${BACKEND_URL}/conversation/`),
+//     get: useQuery(`${BACKEND_URL}/conversation/`),

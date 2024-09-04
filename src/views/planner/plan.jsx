@@ -48,6 +48,10 @@ const ActivityIcon = ({ time, props }) => {
 export const Plan = () => {
   const [data, setData] = React.useState([]);
 
+  const planTemplate = {
+    
+  }
+
   const activityTimes = [
     "breakfast",
     "morning",

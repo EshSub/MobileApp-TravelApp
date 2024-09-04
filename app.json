@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "TravelAgent",
-    "slug": "TravelAgent",
-    "version": "1.0.0",
+    "slug": "tour-across-mobile-app",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,16 +12,33 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.touracross.mobile"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/applogo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.touracross.mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3b466417-dd98-453a-bacc-79921711da31"
+      }
+    },
+    "owner": "touracross",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3b466417-dd98-453a-bacc-79921711da31"
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

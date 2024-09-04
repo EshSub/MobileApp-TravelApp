@@ -32,7 +32,7 @@ export const ActivityCard = ({ name, imageUrl, id }) => {
             <Card 
                 width={WIDTH * 0.4}
                 height={80} 
-                bgColor={"white"} 
+                bgColor={"black"} 
                 style={{borderRadius: 10}} 
                 m={"$3"} 
                 px="$0"
@@ -48,7 +48,7 @@ export const ActivityCard = ({ name, imageUrl, id }) => {
                         width={WIDTH*0.4}
                         height={80}
                         style={{borderRadius: 10}}
-                        opacity={0.7}
+                        opacity={0.8}
                         
                         />
                     <Heading fontSize={14} m="$2" color="$white" position="absolute" top={"50%"} textAlign="center">{name}</Heading>
