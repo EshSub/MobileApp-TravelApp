@@ -32,6 +32,8 @@ import { useSelector } from "react-redux";
 import { getPlaces } from "../redux/selectors";
 import { Fab } from "../components/common/fab";
 import { useDataProvider } from "../apis";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
 import { WIDTH } from "../helpers/constants";
 
@@ -45,12 +47,18 @@ export const PlacesAndActivitiesScreen = () => {
 
   const dataprovider = useDataProvider();
 
-  const { data: places, loading: placeLoading } = dataprovider.places.get();
-  const { data: activities, loading: activityLoading } =
-    dataprovider.activities.get();
-  useEffect(() => {
-    if (searchPlace) {
-      navigation.navigate("Map", { place: searchPlace });
+    const { data: places, isLoading: placeLoading, error } = dataprovider.places.get();
+    const { data: activities, loading: activityLoading } = dataprovider.activities.get();
+    console.log({places,error})
+    
+    useEffect(() => {
+        if (searchPlace) {
+            navigation.navigate("Map", { place: searchPlace });
+        }
+    }, [searchPlace]);
+
+    if (placeLoading || activityLoading) {
+        return <Text>Loading</Text>
     }
   }, [searchPlace]);
 

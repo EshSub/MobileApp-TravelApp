@@ -2,9 +2,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
 import appReducer from "./slices/appSlice";
 import placeReducer from "./slices/placeSlice";
+import formStateReducer from "./slices/formStateSlice"
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { USER_LOGOUT } from "../helpers/constants";
+import { useIsAuthenticated } from "../hooks/auth";
 
 const persistConfig = {
   key: 'root',
@@ -14,7 +16,8 @@ const persistConfig = {
 const contentReducer = combineReducers(({
   auth: userReducer, 
   app: appReducer, 
-  place: placeReducer
+  place: placeReducer,
+  formState: formStateReducer
 }))
 
 const rootReducer = (state, action) => {

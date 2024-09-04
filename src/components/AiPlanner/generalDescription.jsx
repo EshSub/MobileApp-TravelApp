@@ -11,9 +11,14 @@ import { AnimatedText } from "../animated/AnimatedText";
 import { headerStyles, subHeaderStyles } from "./styles";
 import { Fade } from "../animated/Fade";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDescription } from "../../redux/selectors";
+import { setDescription } from "../../redux/slices/formStateSlice";
 
 export const GeneralDescription = () => {
-  const [description, setDescription] = useState("");
+  const description = useSelector(getDescription)
+  const dispatch = useDispatch()
+  console.log({description})
   return (
     <VStack gap={0}>
       <AnimatedText delay={100} style={headerStyles}>
@@ -33,11 +38,11 @@ export const GeneralDescription = () => {
         >
           <TextareaInput
             placeholder="I want my trip to be..."
-            onChangeText={(text) => setDescription(text)}
+            onChangeText={(text) => dispatch(setDescription(text))}
           />
         </Textarea>
         <HStack justifyContent="flex-end">
-            <Text fontSize={11}>{`${description.length}/1000`}</Text>
+            <Text fontSize={11}>{`${description?.length}/1000`}</Text>
         </HStack>
       </Fade>
     </VStack>

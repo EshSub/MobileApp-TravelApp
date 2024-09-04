@@ -1,62 +1,70 @@
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { BACKEND_URL } from "../helpers/constants";
-import { useSelector } from "react-redux";
-import { getUser } from "../redux/selectors";
-import authAxios from "./axios";
-
-const useQuery = (endpoint) => {
-  return () => {
-    // console.log({ params });
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const user = useSelector(getUser);
-    const initial = useRef(true);
-    useEffect(() => {
-      if (initial.current || true) {
-        initial.current = false;
-        authAxios
-          .get(endpoint)
-          .then((res) => {
-            setData(res.data);
-            setLoading(false);
-          })
-          .catch((e) => {
-            console.error(e);
-          });
-      }
-    }, []);
-
-    return { data, loading };
-  };
-};
-
-const useMutation = (endpoint) => {
-  return (data) => {
-    console.log("endpoint");
-    return authAxios.post(endpoint, data);
-  };
-};
+import axios from "axios"
+import { useEffect, useRef, useState } from "react"
+import { BACKEND_URL } from "../helpers/constants"
+import { useSelector } from "react-redux"
+import { getUser } from "../redux/selectors"
+import { useMutation, useQuery } from "@tanstack/react-query"
 
 export const useDataProvider = () => {
-  return {
-    places: {
-      get: useQuery(`${BACKEND_URL}/place/`),
-      post: useMutation(`${BACKEND_URL}/place/`),
-    },
-    activities: {
-      get: useQuery(`${BACKEND_URL}/activity/`),
-    },
-    placeactivity: {
-      get: useQuery(`${BACKEND_URL}/placeactivity/`),
-    },
-    message: {
-      post: useMutation(`${BACKEND_URL}/message/`),
-    //   get: (params) => useQuery(`${BACKEND_URL}/message/`, params),
-    },
-    conversation: {
-      post: useMutation(`${BACKEND_URL}/conversation/`),
-      get: useQuery(`${BACKEND_URL}/conversation/`),
-    },
-  };
-};
+    const token = "3452342"
+    return {
+        "places": {
+            "get": () => useQuery({
+                queryKey: ["places"], queryFn: async () => {
+                    const response = await axios.get(
+                        `${BACKEND_URL}/place/`,
+                    );
+                    return response.data;
+                }
+            })
+        },
+        "activities": {
+            "get": () => useQuery({
+                queryKey: ["activity"], queryFn: async () => {
+                    const response = await axios.get(
+                        `${BACKEND_URL}/activity/`,
+                    );
+                    return response.data;
+                }
+            })
+        },
+        "placeactivity": {
+            "get": () => useQuery({
+                queryKey: ["placeactivity"], queryFn: async () => {
+                    const response = await axios.get(
+                        `${BACKEND_URL}/placectivity/`,
+                    );
+                    return response.data;
+                }
+            })
+        },
+        "auth": {
+            "login": () => useMutation({
+                mutationFn: ({username, password}) => {
+                    console.log({ username, password })
+                    return axios.post(`${BACKEND_URL}/api/token/`, { username, password })
+                }
+            })
+        },
+        "aiPlanner": {
+            "plan": () => useMutation({
+                mutationFn: ({duration, description, preferred_activities}) => {
+                    return axios.post(`${BACKEND_URL}/plan/`, { "input_data" : {duration, description, preferred_activities} }, {
+                        headers: {
+                            "Authorization": `bearer ${token}`
+                        }
+                    })
+                }
+            })
+        }
+    }
+}
+
+
+// message: {
+//     post: useMutation(`${BACKEND_URL}/message/`),
+//   //   get: (params) => useQuery(`${BACKEND_URL}/message/`, params),
+//   },
+//   conversation: {
+//     post: useMutation(`${BACKEND_URL}/conversation/`),
+//     get: useQuery(`${BACKEND_URL}/conversation/`),

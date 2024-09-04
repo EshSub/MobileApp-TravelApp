@@ -25,6 +25,7 @@ import { HStack, Icon, VStack } from "@gluestack-ui/themed";
 import { House } from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
+import { USER_LOGOUT } from "../../helpers/constants";
 import { VERSION } from "../../helpers/constants";
 
 export const DrawerContent = (props) => {
@@ -48,6 +49,9 @@ export const DrawerContent = (props) => {
     if (item.path) {
       dispatch(setMainDrawerOpen(false));
       navigation.navigate(item.path);
+    }
+    if(item.id == "Logout"){
+      dispatch({type: USER_LOGOUT})
     }
   };
 

@@ -26,45 +26,43 @@ import { GoogleLogin } from "../components/googleLogin";
 import { AppleLogin } from "../components/appleLogin";
 import { GradientButton } from "../components/common/gradientButton";
 import { StyleSheet, View } from "react-native";
+import { useDataProvider } from "../apis";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const dataprovider = useDataProvider()
+  const user = useSelector(selectUser)
   const handleState = () => {
     setShowPassword((showState) => {
       return !showState;
     });
   };
   useEffect(() => {
-    setUsername(user?.name);
-    setPassword(user?.password);
-  }, [user]);
+    setUsername(user?.name)
+    setPassword(user?.password)
+  }, [user])
 
+  const { mutate } = dataprovider.auth.login()
+
+  
   const handleClick = async () => {
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/token/`, {
-        username: username,
-        password: password,
-      });
-      if (response) {
-        console.log("response", response.data);
-        navigation.navigate("Intro");
-        dispatch(
-          login(response.data)
-          // login({
-          //   name: username,
-          //   accessToken: response.data.access,
-          // })
-        );
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+    mutate({ username, password }, {
+      onSuccess: (data) => {
+        dispatch(login({
+          name: username,
+          accessToken: data.data.access
+        }))
+        navigation.navigate("Intro")
+        console.log(data.data.access)
+
+      },
+      onError: (error) => console.log(error)
+    })
+  }
   return (
     <Background>
       <FormControl
@@ -72,10 +70,10 @@ function Login() {
         // p='$4'
         // borderWidth='$1'
         style={{ borderRadius: 10 }}
-        borderColor="$borderLight300"
-        $dark-borderWidth="$1"
-        //  $dark-borderRadius='$lg'
-        $dark-borderColor="$borderDark800"
+        borderColor='$borderLight300'
+        $dark-borderWidth='$1'
+        //  $dark-borderRadius='$lg' 
+        $dark-borderColor='$borderDark800'
       >
         <VStack space="xl">
           <Heading color="$text900" lineHeight="$md">
