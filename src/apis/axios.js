@@ -12,7 +12,7 @@ authAxios.interceptors.request.use(
   async (config) => {
     const state = store.getState();
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2OTE5MzU4LCJpYXQiOjE3MjUzODMzNTgsImp0aSI6ImVkMjdmMGMwMjY0OTQ1OWI5ZmNjZjFjMGQxMzliMTg5IiwidXNlcl9pZCI6MX0.ilkURvG_hgPqHinjvHnfOV-Aa7da6ffWRpihySv5HtM"; //selectAccessToken(state);
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2OTc2MTg3LCJpYXQiOjE3MjU0NDAxODcsImp0aSI6IjkzNDNjYjNkMDVhODRlMjFhZWUzY2VlMGI0MmZhOTNmIiwidXNlcl9pZCI6Mn0.S1s9k8vR2EG0TdhgKiKRgvbFQeG0M1lxdGSxElZRHJk"; //selectAccessToken(state);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

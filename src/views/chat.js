@@ -17,79 +17,77 @@ import { currentDateString } from "../helpers/utils";
 
 export const ChatView = () => {
   const [messages, setMessages] = useState([]);
-  const [conversationId, setConversationId] = useState(1);
+  const [conversationId, setConversationId] = useState(6);
 
-  //   const { data, loading } = useDataProvider().message.get({
-  //     conversation: conversationId,
-  //   })();
+  const getMessageObjectFromResponse = (message) => {
+    const user = message.guide ? "guide" : "user";
+    return {
+      _id: message.id,
+      text: message.message,
+      createdAt: new Date(message.date + "T" + message.time),
+      user: {
+        _id: user,
+        name: user,
+        avatar: (props) => {
+          console.log({ props });
+          return (
+            <View
+              style={{
+                height: props[0].height,
+                width: props[0].width,
+                backgroundColor: "red",
+              }}
+            />
+          );
+        },
+      },
+    };
+  };
 
   useEffect(() => {
     authAxios
-      .get(`/message/`, { query: { conversation: conversationId } })
+      .get(`/message/`, { params: { conversation: conversationId } })
       .then((response) => {
-        console.log({ data: response.data });
+        console.log({ messages_get: response.data });
         const data = response.data;
+
         if (data) {
-          console.log({ data });
           setMessages(
-            data?.map((message) => {
-              return {
-                _id: message.id,
-                text: message.text,
-                createdAt: new Date(date + "T" + time),
-                user: {
-                  _id: 1,
-                  name: "test",
-                },
-              };
-            })
+            data.map((message) => getMessageObjectFromResponse(message))
           );
         }
       }, []);
   }, [conversationId]);
-
-  const dataprovider = useDataProvider();
-
-  //   useEffect(() => {
-  //     console.log({ data });
-  //     if (data) {
-  //     //   console.log({ data });
-  //       //   setMessages(
-  //       //     data?.map((message) => {
-  //       //       return {
-  //       //         _id: message.id,
-  //       //         text: message.text,
-  //       //         createdAt: new Date(message.createdAt),
-  //       //         user: {
-  //       //           _id: message.user.id,
-  //       //           name: message.user.name,
-  //       //           avatar: message.user.avatar,
-  //       //         },
-  //       //       };
-  //       //     })
-  //       //   );
-  //     }
-  //   }, [data]);
 
   const onSend = useCallback((messages = []) => {
     // setMessages(previousMessages =>
     //   GiftedChat.append(previousMessages, messages),
     // )
 
-    console.log({messages});
+    console.log({ messages });
 
-    authAxios.post(`/message/`, {
-        conversation: conversationId,
-        date: currentDateString(),
-        time: new Date().toISOString(),
-        message: messages[0].text,
-    }).then((response) => {
-        console.log({ response });
-        // setMessages((prev) => GiftedChat.append(prev, response));
-    }).catch((error) => {
-        console.error(error);
+    GiftedChat.append({
+      _id: 'new',
+      text: messages[0].text,
+      createdAt: new Date(),
+      user: {
+        _id: "user",
+        name: "user",
+      },
     });
 
+    authAxios
+      .post(`/message/`, {
+        conversation: conversationId,
+        message: messages[0].text,
+      })
+      .then((response) => {
+        console.log({ response });
+        setMessages((prev) => GiftedChat.append(prev, response));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     // const hardCodedReplies = [
     //     `Sigiriya, often referred to as the "Lion Rock," is a stunning ancient fortress located in Sri Lanka.
@@ -120,33 +118,33 @@ export const ChatView = () => {
     // }, 1000);
   }, []);
 
-  useEffect(() => {
-    const msgs = [
-      {
-        conversation: 1,
-        date: "2024-09-04",
-        guide: null,
-        id: 1,
-        message: "Test message",
-        place: 1,
-        time: "07:59:41",
-      },
-    ];
-    setMessages(
-      msgs.map((message) => {
-        const userId = message.guide ? message.guide : "user";
-        return {
-          _id: message.id,
-          text: message.message,
-          createdAt: new Date(message.date + "T" + message.time),
-          user: {
-            _id: userId,
-            name: "test",
-          },
-        };
-      })
-    );
-  }, []);
+  //   useEffect(() => {
+  //     const msgs = [
+  //       {
+  //         conversation: 1,
+  //         date: "2024-09-04",
+  //         guide: null,
+  //         id: 1,
+  //         message: "Test message",
+  //         place: 1,
+  //         time: "07:59:41",
+  //       },
+  //     ];
+  //     setMessages(
+  //       msgs.map((message) => {
+  //         const userId = message.guide ? message.guide : "user";
+  //         return {
+  //           _id: message.id,
+  //           text: message.message,
+  //           createdAt: new Date(message.date + "T" + message.time),
+  //           user: {
+  //             _id: userId,
+  //             name: "test",
+  //           },
+  //         };
+  //       })
+  //     );
+  //   }, []);
 
   //   useEffect(() => {
   //     setMessages([
