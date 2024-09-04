@@ -1,20 +1,20 @@
 import {
-    Box,
-    Button,
-    FlatList,
-    HStack,
-    Heading,
-    Input,
-    InputField,
-    InputIcon,
-    InputSlot,
-    LinearGradient,
-    SearchIcon,
-    VStack,
-    View,
-    Text,
-    ButtonText,
-    ScrollView,
+  Box,
+  Button,
+  FlatList,
+  HStack,
+  Heading,
+  Input,
+  InputField,
+  InputIcon,
+  InputSlot,
+  LinearGradient,
+  SearchIcon,
+  VStack,
+  View,
+  Text,
+  ButtonText,
+  ScrollView,
 } from "@gluestack-ui/themed";
 import { Background } from "../components/background";
 import { PlaceListCard } from "../components/common/placeListCard";
@@ -32,46 +32,52 @@ import { useSelector } from "react-redux";
 import { getPlaces } from "../redux/selectors";
 import { Fab } from "../components/common/fab";
 import { useDataProvider } from "../apis";
+import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
+import { WIDTH } from "../helpers/constants";
 
 export const PlacesAndActivitiesScreen = () => {
-    const width = Dimensions.get("window").width;
-    const ref = useRef();
-    const [selected, setSelected] = useState(0);
-    const [searchPlace, setSearchPlace] = useState();
-    const navigation = useNavigation();
-    // const places = useSelector(getPlaces);
+  const width = Dimensions.get("window").width;
+  const ref = useRef();
+  const [selected, setSelected] = useState(0);
+  const [searchPlace, setSearchPlace] = useState();
+  const navigation = useNavigation();
+  // const places = useSelector(getPlaces);
 
-    const dataprovider = useDataProvider();
+  const dataprovider = useDataProvider();
 
-    const { data: places, loading: placeLoading } = dataprovider.places.get();
-    const { data: activities, loading: activityLoading } = dataprovider.activities.get();
-    useEffect(() => {
-        if (searchPlace) {
-            navigation.navigate("Map", { place: searchPlace });
-        }
-    }, [searchPlace]);
-
-    if (placeLoading || activityLoading) {
-        return <Text>Loading</Text>
+  const { data: places, loading: placeLoading } = dataprovider.places.get();
+  const { data: activities, loading: activityLoading } =
+    dataprovider.activities.get();
+  useEffect(() => {
+    if (searchPlace) {
+      navigation.navigate("Map", { place: searchPlace });
     }
-    return (
-        <Background>
-            <ScrollView>
-                <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
-                    <AnimatedTextSwitching
-                        texts={["Welcome...", "Welkom...", "Herzlich willkommen..."]}
-                        size="3xl"
-                        fontWeight={600}
-                        textAlign="center"
-                    />
-                    <View flex={0.1} marginHorizontal={"$6"}>
-                        <PlacesSearchBar
-                            searchPlace={searchPlace}
-                            setSearchPlace={setSearchPlace}
-                        />
-                    </View>
-                    <View flex={0.4}>
-                        {/* <Box flexDirection="row" justifyContent="space-between">
+  }, [searchPlace]);
+
+  if (placeLoading || activityLoading) {
+    return <Text>Loading</Text>;
+  }
+  return (
+    <Background>
+      <HStack justifyContent="flex-start" alignItems="center" width={WIDTH}>
+        <HomeScreenHeader />
+      </HStack>
+      <AnimatedTextSwitching
+        texts={["Welcome...", "Welkom...", "Herzlich willkommen..."]}
+        size="3xl"
+        fontWeight={600}
+        textAlign="center"
+      />
+      <ScrollView>
+        <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
+          <View flex={0.1} marginHorizontal={"$6"}>
+            <PlacesSearchBar
+              searchPlace={searchPlace}
+              setSearchPlace={setSearchPlace}
+            />
+          </View>
+          <View flex={0.4}>
+            {/* <Box flexDirection="row" justifyContent="space-between">
                             <GradientChip
                                 selected={selected}
                                 index={0}
@@ -91,81 +97,81 @@ export const PlacesAndActivitiesScreen = () => {
                                 text={"Adventure"}
                             />
                         </Box> */}
-                        <View>
-                            <HStack justifyContent="space-between" alignItems="center">
-                                <Heading color="#5E6A81" ml="$6">
-                                    Fun activities
-                                </Heading>
-                                <Button
-                                    variant="link"
-                                    onPress={() => navigation.navigate("Activities")}
-                                >
-                                    <Text mr="$6">View all</Text>
-                                </Button>
-                            </HStack>
-                            <View display="flex" justifyContent="center" alignItems="center">
-                                <FlatList
-                                    numColumns={2}
-                                    data={activities.slice(0, 4)}
-                                    renderItem={({ item }) => (
-                                        <ActivityCard
-                                            name={item.activity_name}
-                                            imageUrl={item.imageUrl}
-                                            id={item.activity_id}
-                                        />
-                                    )}
-                                    keyExtractor={(item) => item.id}
-                                />
-                            </View>
-                        </View>
-                        <Heading color="#5E6A81" ml="$6">
-                            Historical sights
-                        </Heading>
-                        <Carousel
-                            ref={ref}
-                            loop
-                            width={width}
-                            height={width * 0.6}
-                            autoPlay={true}
-                            data={places}
-                            mode="parallax"
-                            scrollAnimationDuration={2000}
-                            renderItem={({ index, item }) => (
-                                <View style={{ flex: 1 }}>
-                                    <PlaceCard
-                                        index={item.place_id}
-                                        name={item.place_name}
-                                        image={item.header_image?.url}
-                                        location={item.location}
-                                        rating={item.rating}
-                                    />
-                                </View>
-                            )}
-                        />
-                    </View>
-                    <View>
-                        <HStack>
-                            <Heading color="#5E6A81" ml="$6">
-                                Popular places
-                            </Heading>
-                        </HStack>
-                        <FlatList
-                            horizontal
-                            data={places}
-                            renderItem={({ item }) => (
-                                <PlaceListCard
-                                    index={item.place_id}
-                                    name={item.place_name}
-                                    image={item.header_image?.url}
-                                    timeToVisit={item.best_time_to_visit}
-                                />
-                            )}
-                            keyExtractor={(item) => item.id}
-                        />
-                    </View>
-                </VStack>
-            </ScrollView>
-            <Fab />
-        </Background>
-    );
+            <View>
+              <HStack justifyContent="space-between" alignItems="center">
+                <Heading color="#5E6A81" ml="$6">
+                  Fun activities
+                </Heading>
+                <Button
+                  variant="link"
+                  onPress={() => navigation.navigate("Activities")}
+                >
+                  <Text mr="$6">View all</Text>
+                </Button>
+              </HStack>
+              <View display="flex" justifyContent="center" alignItems="center">
+                <FlatList
+                  numColumns={2}
+                  data={activities.slice(0, 4)}
+                  renderItem={({ item }) => (
+                    <ActivityCard
+                      name={item.activity_name}
+                      imageUrl={item.imageUrl}
+                      id={item.activity_id}
+                    />
+                  )}
+                  keyExtractor={(item) => item.id}
+                />
+              </View>
+            </View>
+            <Heading color="#5E6A81" ml="$6">
+              Historical sights
+            </Heading>
+            <Carousel
+              ref={ref}
+              loop
+              width={width}
+              height={width * 0.6}
+              autoPlay={true}
+              data={places}
+              mode="parallax"
+              scrollAnimationDuration={2000}
+              renderItem={({ index, item }) => (
+                <View style={{ flex: 1 }}>
+                  <PlaceCard
+                    index={item.place_id}
+                    name={item.place_name}
+                    image={item.header_image?.url}
+                    location={item.location}
+                    rating={item.rating}
+                  />
+                </View>
+              )}
+            />
+          </View>
+          <View>
+            <HStack>
+              <Heading color="#5E6A81" ml="$6">
+                Popular places
+              </Heading>
+            </HStack>
+            <FlatList
+              horizontal
+              data={places}
+              renderItem={({ item }) => (
+                <PlaceListCard
+                  index={item.place_id}
+                  name={item.place_name}
+                  image={item.header_image?.url}
+                  timeToVisit={item.best_time_to_visit}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+        </VStack>
+      </ScrollView>
+      <Fab />
+    </Background>
+  );
 };
