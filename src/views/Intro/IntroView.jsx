@@ -9,7 +9,7 @@ import { GradientButton } from "../../components/common/gradientButton";
 import { Background } from "../../components/background";
 import { ImageMarquee } from "../../components/intro/imageMarquee";
 import { HEIGHT, WIDTH } from "../../helpers/constants";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const Controls = ({ currentScreen, setCurrentScreen }) => {
@@ -29,8 +29,9 @@ const Controls = ({ currentScreen, setCurrentScreen }) => {
     setCurrentScreen(currentScreen - 1);
   };
   return (
-    <HStack p={"$10"} justifyContent="space-evenly">
+    <HStack justifyContent= "space-evenly" width={WIDTH}>
       {currentScreen !== 0 && <GradientButton title="Back" onPress={onBack} />}
+      
       <GradientButton
         title={currentScreen == 0 ? "Start" : "Next"}
         onPress={onNext}
@@ -47,7 +48,7 @@ export const IntroView = () => {
       component: WelcomeScreen,
     },
     {
-      title: "Thousands of activies",
+      title: "Thousands of activities",
       description: "Discover experiences around you",
       component: (props) => (
         <IntroLayout {...props} content={<TextMarquee />} />
@@ -100,12 +101,21 @@ export const IntroView = () => {
                   duration: 500,
                 }}
               >
+                <View style={{
+                  alignItems: "center",
+                  marginBottom: 20,
+                }}>
+                  <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+                    {screen?.title}
+                  </Text>
+                  <Text style={{ fontSize: 16, color: "gray" }}>
+                    {screen?.description}
+                  </Text>
+                </View>
                 <screen.component
                   key={index}
                   setCurrentScreen={setCurrentScreen}
                   currentScreen={currentScreen}
-                  title={screen?.title}
-                  description={screen?.description}
                 />
               </MotiView>
             );
