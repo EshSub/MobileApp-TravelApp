@@ -12,7 +12,6 @@ import { LogBox } from "react-native";
 import { SettingsPage } from "./src/views/settings";
 import { persistor, store } from "./src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import Constants from 'expo-constants';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import { CheckUpdates } from "./src/components/UpdatesCheck";

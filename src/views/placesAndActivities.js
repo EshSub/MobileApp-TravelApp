@@ -47,18 +47,18 @@ export const PlacesAndActivitiesScreen = () => {
 
   const dataprovider = useDataProvider();
 
-    const { data: places, isLoading: placeLoading, error } = dataprovider.places.get();
-    const { data: activities, loading: activityLoading } = dataprovider.activities.get();
-    console.log({places,error})
-    
-    useEffect(() => {
-        if (searchPlace) {
-            navigation.navigate("Map", { place: searchPlace });
-        }
-    }, [searchPlace]);
+  const {
+    data: places,
+    isLoading: placeLoading,
+    error,
+  } = dataprovider.places.get();
+  const { data: activities, loading: activityLoading } =
+    dataprovider.activities.get();
+  console.log({ places, error });
 
-    if (placeLoading || activityLoading) {
-        return <Text>Loading</Text>
+  useEffect(() => {
+    if (searchPlace) {
+      navigation.navigate("Map", { place: searchPlace });
     }
   }, [searchPlace]);
 
@@ -76,7 +76,7 @@ export const PlacesAndActivitiesScreen = () => {
         fontWeight={600}
         textAlign="center"
       />
-      <ScrollView style={{marginTop: 20}}>
+      <ScrollView style={{ marginTop: 20 }}>
         <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
           <View flex={0.1} marginHorizontal={"$6"}>
             <PlacesSearchBar
