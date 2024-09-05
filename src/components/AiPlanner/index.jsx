@@ -8,7 +8,7 @@ import { ChooseDates } from "./ChooseDates";
 import { ChooseActivities } from "./chooseActivities";
 import { GeneralDescription } from "./generalDescription";
 import LottieView from "lottie-react-native";
-import { WIDTH } from "../../helpers/constants";
+import { BORDER_RADIUS, WIDTH } from "../../helpers/constants";
 import GeneratingResponse from "./generatingResponse.jsx";
 
 const AiPlanner = () => {
@@ -49,8 +49,9 @@ const AiPlanner = () => {
   };
 
   const buttonTextStyle = {
-    color: "#686868",
+    color: "white",
     fontWeight: "bold",
+    margin: 10
   };
 
   const viewStyle = {
@@ -58,6 +59,11 @@ const AiPlanner = () => {
     padding: 15,
   };
 
+  const buttonStyle = {
+    backgroundColor: "#FAA916",
+    padding: 5,
+    borderRadius: BORDER_RADIUS
+  }
   return (
     <View style={{ flex: 1, marginTop: 50 }}>
       <LottieView
@@ -86,6 +92,7 @@ const AiPlanner = () => {
           scrollViewProps={defaultScrollViewProps}
           nextBtnTextStyle={buttonTextStyle}
           previousBtnTextStyle={buttonTextStyle}
+          nextBtnStyle={buttonStyle}
         >
           <View style={viewStyle}>
             <WelcomeStep />
@@ -98,6 +105,8 @@ const AiPlanner = () => {
           scrollViewProps={defaultScrollViewProps}
           nextBtnTextStyle={buttonTextStyle}
           previousBtnTextStyle={buttonTextStyle}
+          nextBtnStyle={buttonStyle}
+          previousBtnStyle={buttonStyle}
         >
           <View style={viewStyle}>
             <ChooseDates />
@@ -110,6 +119,8 @@ const AiPlanner = () => {
           scrollViewProps={defaultScrollViewProps}
           nextBtnTextStyle={buttonTextStyle}
           previousBtnTextStyle={buttonTextStyle}
+          nextBtnStyle={buttonStyle}
+          previousBtnStyle={buttonStyle}
         >
           <View style={viewStyle}>
             <ChooseActivities />
@@ -122,6 +133,8 @@ const AiPlanner = () => {
           scrollViewProps={defaultScrollViewProps}
           nextBtnTextStyle={buttonTextStyle}
           previousBtnTextStyle={buttonTextStyle}
+          nextBtnStyle={buttonStyle}
+          previousBtnStyle={buttonStyle}
         >
           <View style={viewStyle}>
             <GeneralDescription />
@@ -130,10 +143,13 @@ const AiPlanner = () => {
         <ProgressStep
           label="Fifth"
           onPrevious={onPrevStep}
-          onSubmit={onSubmitSteps}
+          // onSubmit={onSubmitSteps}
           scrollViewProps={defaultScrollViewProps}
-          nextBtnTextStyle={buttonTextStyle}
+          // nextBtnTextStyle={buttonTextStyle}
           previousBtnTextStyle={buttonTextStyle}
+          // nextBtnStyle={buttonStyle}
+          nextBtnDisabled={true}
+          previousBtnStyle={buttonStyle}
         >
           <View style={viewStyle}>
             <GeneratingResponse />
