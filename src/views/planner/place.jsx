@@ -3,10 +3,14 @@ import {
   View,
   Badge,
   BadgeText,
+  BadgeIcon,
   HStack,
   Image,
   VStack,
   Text,
+  Heading,
+  Divider,
+  StarIcon,
 } from "@gluestack-ui/themed";
 import { WIDTH } from "../../helpers/constants";
 import { CircleDollarSignIcon, ClockIcon, Icon } from "lucide-react-native";
@@ -73,34 +77,38 @@ export const Place = ({ place }) => {
   }, []);
 
   return (
-    <VStack gap={10} 
-    // backgroundColor="blue"
-     m={0}>
+    <VStack
+      gap={10}
+      // backgroundColor="blue"
+      m={0}
+    >
       <Image
         width={"100%"}
         height={200}
         source={{ uri: place.header_image.url }}
         style={{ borderRadius: 10 }}
       />
-      <Marquee speed={0.3}>
-        <HStack overflow="scroll" gap={5}>
-          {place.activities.map((tag, index) => (
-            <Badge size="md" variant="solid" action="success" key={index}>
-              <BadgeText>{tag}</BadgeText>
-            </Badge>
-          ))}
-        </HStack>
-      </Marquee>
-      <Marquee speed={0.2}>
-        <HStack overflow="scroll" gap={5}>
-          {place.keywords.map((tag, index) => (
-            <Badge size="md" variant="solid" action="info" key={index}>
-              <BadgeText>{tag}</BadgeText>
-            </Badge>
-          ))}
-        </HStack>
-      </Marquee>
-      <HStack gap={10}>
+      <HStack gap={10} paddingHorizontal={15} alignItems={'center'} >
+        <Heading>{place?.place_name}</Heading>
+        <Badge
+          size="md"
+          variant="solid"
+          style={{ borderRadius: 10 }}
+          // alignSelf="flex-end"
+          backgroundColor="#5E6A81"
+        >
+          <BadgeIcon
+            fontVariant={"solid"}
+            as={StarIcon}
+            mr="$2"
+            color="#FFC700"
+            tintColor="#FFC700"
+          />
+          <BadgeText color="#ffffff">{place.rating ?? 4.5}</BadgeText>
+        </Badge>
+      </HStack>
+      <Text paddingHorizontal={15}>{place?.description}</Text>
+      <HStack gap={10} paddingHorizontal={15}>
         <IconWithText
           Icon={CircleDollarSignIcon}
           text={<Text>{`${place.ticket_price}${place.currency ?? ""}`}</Text>}
@@ -110,6 +118,33 @@ export const Place = ({ place }) => {
           text={<Text>{place.best_time_to_visit}</Text>}
         />
       </HStack>
+
+      <VStack gap={5}>
+        <Divider w={"90%"} mx={"5%"} />
+        <Text paddingHorizontal={15}>Activities</Text>
+        <Marquee speed={0.3}>
+          <HStack overflow="scroll" gap={5}>
+            {place.activities.map((tag, index) => (
+              <Badge size="md" variant="solid" action="success" key={index}>
+                <BadgeText>{tag}</BadgeText>
+              </Badge>
+            ))}
+          </HStack>
+        </Marquee>
+      </VStack>
+      <VStack gap={5}>
+        <Divider w={"90%"} mx={"5%"} />
+        <Text paddingHorizontal={15}>Similar places</Text>
+        <Marquee speed={0.2}>
+          <HStack overflow="scroll" gap={5}>
+            {place.keywords.map((tag, index) => (
+              <Badge size="md" variant="solid" action="info" key={index}>
+                <BadgeText>{tag}</BadgeText>
+              </Badge>
+            ))}
+          </HStack>
+        </Marquee>
+      </VStack>
 
       <Carousel
         {...baseOptions}
@@ -124,9 +159,9 @@ export const Place = ({ place }) => {
         // customAnimation={animationStyle}
         mode="parallax"
         modeConfig={{
-            parallaxScrollingScale: 0.9,
-            parallaxScrollingOffset: 50,
-          }}
+          parallaxScrollingScale: 0.9,
+          parallaxScrollingOffset: 50,
+        }}
         renderItem={({ index, item }) => (
           <View
             style={{
