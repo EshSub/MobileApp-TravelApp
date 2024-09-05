@@ -14,7 +14,7 @@ import { SendHorizonalIcon } from "lucide-react-native";
 import { TouchableOpacity } from "react-native";
 import { useDataProvider } from "../apis";
 import authAxios from "../apis/axios";
-import { currentDateString } from "../helpers/utils";
+import { currentDateString, getDateObjFromDateAndTime } from "../helpers/utils";
 import { useRoute } from "@react-navigation/native";
 
 export const ChatView = ({ route }) => {
@@ -29,17 +29,12 @@ export const ChatView = ({ route }) => {
 
   const getMessageObjectFromResponse = (message) => {
     const user = message.guide ? "guide" : "user";
-    const dateObj = new Date(message.date + "T" + message.time);
-    const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-    console.log({ dateObj, timezoneOffset });
-
-    dateObj.setTime(dateObj.getTime() - timezoneOffset);
 
     return {
       _id: message.id,
       text: message.message,
-      createdAt: dateObj,
+      createdAt: getDateObjFromDateAndTime(message.date, message.time),
       user: {
         _id: user,
         name: user,
