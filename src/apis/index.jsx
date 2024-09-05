@@ -64,8 +64,29 @@ export const useDataProvider = () => {
                     return response.data;
                 }
             }),
-        }
+            "post": () => useMutation({
+                mutationFn: () => {
+                    return authAxios.post(`${BACKEND_URL}/conversation/`, {})
+                }
+            }),
+        },
+        "message": {
+            "get": () => useQuery({
+                queryKey: ["message"], queryFn: async () => {
+                    const response = await authAxios.get(
+                        `${BACKEND_URL}/message/`,
+                    );
+                    return response.data;
+
+                }
+        }),
+        "post": () => useMutation({
+            mutationFn: ({message, conversation_id}) => {
+                return authAxios.post(`${BACKEND_URL}/message/`, {message, conversation_id})
+            }
+        })
     }
+}
 }
 
 

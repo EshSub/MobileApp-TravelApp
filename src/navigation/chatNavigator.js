@@ -13,7 +13,7 @@ export const ChatNavigator = () => {
       <Stack.Screen
         name="ChatList"
         component={ChatList}
-        options={{ headerLeft: DrawerIcon }}
+        options={{ headerLeft: DrawerIcon, headerTitle: "Conversations" }}
       />
       <Stack.Screen
         name="Chat"
