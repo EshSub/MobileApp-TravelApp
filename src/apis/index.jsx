@@ -18,12 +18,13 @@ export const useDataProvider = () => {
             return response.data;
           },
         }),
-      getPlacesForPlan: (params) =>
+      getPlaceForPlan: (params) =>
         useQuery({
           queryKey: ["places"],
+          cacheTime: 0,
           queryFn: async () => {
             console.log({ params });
-            const response = await authAxios.get(`${BACKEND_URL}/place/`, {
+            const response = await authAxios.get(`${BACKEND_URL}/place/get_places`, {
               params,
             });
             return response.data;
@@ -108,6 +109,16 @@ export const useDataProvider = () => {
           },
         }),
     },
+    district: {
+        get: () =>
+          useQuery({
+            queryKey: ["district"],
+            queryFn: async () => {
+              const response = await axios.get(`${BACKEND_URL}/district/`);
+              return response.data;
+            },
+          }),
+    }
   };
 };
 
