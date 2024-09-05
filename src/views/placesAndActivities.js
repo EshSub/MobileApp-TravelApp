@@ -123,7 +123,7 @@ export const PlacesAndActivitiesScreen = () => {
                   data={activities.slice(0, 4)}
                   renderItem={({ item }) => (
                     <ActivityCard
-                      name={item.activity_name}
+                      name={item.name}
                       imageUrl={item.imageUrl}
                       id={item.activity_id}
                     />
