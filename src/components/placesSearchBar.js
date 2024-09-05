@@ -10,7 +10,6 @@ export const PlacesSearchBar = ({searchPlace, setSearchPlace}) => {
     // const places = useSelector(getPlaces)
     const dataprovider = useDataProvider()
     const { data: places , loading : placeLoading } = dataprovider.places.get();
-    console.log({placeLoading})
     const [searchText, setSearchText] = useState("")
     const filterPlaces = (input) => {
         if (input) {
@@ -20,7 +19,6 @@ export const PlacesSearchBar = ({searchPlace, setSearchPlace}) => {
             setFilteredPlaces([])
         }
     }
-    console.log({filteredPlaces})
     return (
         <View>
             <Input style={{borderRadius: 10}} bgColor="white" opacity={0.5} mx="$2">

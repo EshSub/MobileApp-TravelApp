@@ -14,10 +14,14 @@ import { Marquee } from "@animatereactnative/marquee";
 import { Fade } from "../animated/Fade";
 import { Touchable } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useDispatch, useSelector } from "react-redux";
+import { getSelectedActivities } from "../../redux/selectors";
+import { setSelectedActivities } from "../../redux/slices/formStateSlice";
 
 export const ChooseActivities = () => {
-  const [selectedActivities, setSelectedActivites] = useState([]);
-
+  const selectedActivities = useSelector(getSelectedActivities)
+  const dispatch = useDispatch()
+  console.log({selectedActivities})
   const activitiesList = [
     [
       "Hiking",
@@ -95,7 +99,7 @@ export const ChooseActivities = () => {
                       <BadgeText
                         fontSize={(Math.random() / 2) * 20 + 12}
                         onPress={() => {
-                          setSelectedActivites((a) => [...a, activity]);
+                          dispatch(setSelectedActivities([...selectedActivities, activity]));
                         }}
                       >
                         {activity}
@@ -115,7 +119,7 @@ export const ChooseActivities = () => {
         {selectedActivities.map((activity, i) => (
           <TouchableOpacity
             onPress={() => {
-              setSelectedActivites((a) => a.filter((act) => act !== activity));
+              dispatch(setSelectedActivities((a) => a.filter((act) => act !== activity)));
             }}
           >
             <Badge size="md" variant="solid" action="info" key={i} p={5}>

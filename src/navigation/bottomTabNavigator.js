@@ -12,11 +12,12 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { Map } from "../views/Map";
 import { ChatView } from "../views/chat";
-import Entypo from '@expo/vector-icons/Entypo';
-import Feather from '@expo/vector-icons/Feather';
+import { ChatList } from "../views/chatList";
+import { ChatNavigator } from "./chatNavigator";
+import { Entypo } from "@expo/vector-icons";
+import { MessageCircleIcon } from "@gluestack-ui/themed";
 
 export const BottomTabNavigator = () => {
-
   // const navigation = useNavigation()
 
   // useEffect(() => {
@@ -44,10 +45,11 @@ export const BottomTabNavigator = () => {
         name="H"
         component={PlacesAndActivitiesScreen}
         options={{
-          headerTransparent: true,
-          header: HomeScreenHeader,
-          tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
-          showLabel: false,
+          // headerTransparent: true,
+          // header: HomeScreenHeader,
+          headerShown: true,
+          tabBarIcon: () => <Entypo name="home" size={24} color="black" />
+          // showLabel: false,
         }}
       />
       <Tab.Screen
@@ -66,8 +68,12 @@ export const BottomTabNavigator = () => {
       /> */}
       <Tab.Screen
         name="C"
-        component={ChatView}
-        options={{ headerTitle: "", tabBarIcon: () => <Feather name="message-circle" size={24} color="black" /> }}
+        component={ChatNavigator}
+        options={{
+          headerTitle: "",
+          tabBarIcon: () => <Entypo name="chat" size={24} color="black" />,
+          headerShown: false,
+        }}
       />
       {/* <Tab.Screen
         name="D"

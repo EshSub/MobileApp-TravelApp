@@ -4,16 +4,35 @@ import { Text } from "@gluestack-ui/themed";
 import { headerStyles, subHeaderStyles } from "./styles";
 import { COLORS } from "../../helpers/constants";
 import CalendarPicker from "react-native-calendar-picker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fade } from "../animated/Fade";
+import { useDispatch, useSelector } from "react-redux";
+import { getDuration, getPlaces, getSelectedEndDate, getSelectedStartDate } from "../../redux/selectors";
+import { setDuration, setSelectedEndDate, setSelectedStartDate } from "../../redux/slices/formStateSlice";
 
 export const ChooseDates = () => {
-  const [dates, setDates] = useState();
+  const dispatch = useDispatch()
+  const selectedStartDate = useSelector(getSelectedStartDate)
+  const selectedEndDate = useSelector(getSelectedEndDate)
+  const duration = useSelector(getDuration)
 
-  const onDateChange = (date) => {
-    setDates(date);
+  const onDateChange = (date, type) => {
+    if (type === "END_DATE"){
+      dispatch(setSelectedEndDate(date))
+    }else {
+      dispatch(setSelectedStartDate(date))
+    }
+
   };
 
+  useEffect(() => {
+    const timeDiff = selectedEndDate?.getTime() - selectedStartDate?.getTime();
+    const diffInDays = timeDiff/(1000*3600*24) + 1
+    dispatch(setDuration(diffInDays))
+    console.log({duration})
+  }),[selectedStartDate, selectedEndDate]
+
+  console.log({selectedStartDate, selectedEndDate})
   return (
     <VStack gap={20}>
       <AnimatedText delay={100} style={{ ...headerStyles }}>
@@ -28,13 +47,20 @@ export const ChooseDates = () => {
           <CalendarPicker
             style={{ margin: 20 }}
             todayTextStyle={{ fontWeight: "bold" }}
-            onDateChange={this.onDateChange}
+            onDateChange={onDateChange}
             allowRangeSelection
+            selectedStartDate={selectedStartDate ?? ''}
+            selectedEndDate={selectedEndDate ?? ''}
             // disabledDates={(date) => new Date() > date}
             minDate={new Date()}
 
           />
-          <Button onPress={() => setDates(null)} variant={"link"}>
+          <Button 
+            onPress={() => { 
+              dispatch(setSelectedEndDate(null))
+              dispatch(setSelectedStartDate(null))
+            }}
+            variant={"link"}>
             <Text>Clear</Text>
           </Button>
         </Fade>
