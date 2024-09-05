@@ -1,76 +1,123 @@
-import { useCallback, useEffect, useState } from "react"
-import { Background } from "../components/background"
-import { GiftedChat } from "react-native-gifted-chat"
-import { Button, ButtonIcon, Input, InputField, View } from "@gluestack-ui/themed"
-import { HEIGHT, WIDTH } from "../helpers/constants"
-import { SendHorizonalIcon } from "lucide-react-native"
-import { TouchableOpacity } from "react-native"
+import { useCallback, useEffect, useState } from "react";
+import { Background } from "../components/background";
+import { GiftedChat } from "react-native-gifted-chat";
+import {
+  Button,
+  ButtonIcon,
+  Input,
+  InputField,
+  Text,
+  View,
+} from "@gluestack-ui/themed";
+import { HEIGHT, WIDTH } from "../helpers/constants";
+import { SendHorizonalIcon } from "lucide-react-native";
+import { TouchableOpacity } from "react-native";
+import { useDataProvider } from "../apis";
+import authAxios from "../apis/axios";
+import { currentDateString, getDateObjFromDateAndTime } from "../helpers/utils";
+import { useRoute } from "@react-navigation/native";
 
-export const ChatView = () => {
-    const [messages, setMessages] = useState([])
-    const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages =>
-          GiftedChat.append(previousMessages, messages),
-        )
+export const ChatView = ({ route }) => {
+  const [messages, setMessages] = useState([]);
+  // const [conversationId, setConversationId] = useState(6);
 
-        const hardCodedReplies = [
-            `Sigiriya, often referred to as the "Lion Rock," is a stunning ancient fortress located in Sri Lanka. 
-            It's famous for its impressive rock summit, which features the ruins of a 5th-century palace complex.
-             Visitors can explore beautiful frescoes, landscaped gardens, and a mirror wall with ancient graffiti. 
-             Climbing to the top offers breathtaking panoramic views of the surrounding countryside. 
-            It's a UNESCO World Heritage site and a must-visit for history buffs and adventure seekers!`,
-            'Welcome to TourAcross'
-        ]
-        const userMessage = messages[0].text
-        const botReplyText = hardCodedReplies[0]
+  const { conversationId } = route.params;
 
-        const botMessage = {
-            _id: 1,
-            text: botReplyText,
-            createdAt: new Date(),
-            user: {
-                _id: 1,
-                name: 'React Native',
-                avatar: 'https://www.disneyplusinformer.com/wp-content/uploads/2021/06/Luca-Profile-Avatars-3.png',
-            },
-            sent: true,
-            received: true,
-            pending: true
-        }
-        setTimeout(() => {
-            setMessages((prev) => GiftedChat.append(prev, botMessage))
-        }, 1000)
-      }, [])
-    useEffect(() => {
-        setMessages([
-            {
-                _id: 1,
-                text: 'Hello developer',
-                createdAt: new Date(),
-                user: {
-                    _id: 1,
-                    name: 'React Native',
-                    avatar: 'https://www.disneyplusinformer.com/wp-content/uploads/2021/06/Luca-Profile-Avatars-3.png',
-                },
-                sent: true,
-                received: true,
-                pending: true
-            }
-        ])
-    }, [])
+  useEffect(() => {
+    console.log({ conversationId });
+  }, [conversationId]);
 
-    return (
-        <Background>
-            <View width={WIDTH} height={"100%"}>
-            <GiftedChat
-                messages={messages}
-                onSend={messages => onSend(messages)}
-                user={{
-                    _id: 2
-                }}
-                isTyping={true}
-                />
-            </View>
-        </Background>
-    )
-}
+  const getMessageObjectFromResponse = (message) => {
+    const user = message.guide ? "guide" : "user";
+
+
+    return {
+      _id: message.id,
+      text: message.message,
+      createdAt: getDateObjFromDateAndTime(message.date, message.time),
+      user: {
+        _id: user,
+        name: user,
+        avatar: (props) => {
+          console.log({ props });
+          return (
+            <View
+              style={{
+                height: props[0].height,
+                width: props[0].width,
+                backgroundColor: "red",
+              }}
+            />
+          );
+        },
+      },
+    };
+  };
+
+  useEffect(() => {
+    if (conversationId) {
+      authAxios
+        .get(`/message/`, { params: { conversation: conversationId } })
+        .then((response) => {
+          // console.log({ messages_get: response.data });
+          const data = response.data;
+
+          if (data) {
+            setMessages(
+              data
+                .reverse()
+                .map((message) => getMessageObjectFromResponse(message))
+            );
+          }
+        });
+    }
+  }, [conversationId]);
+
+  const onSend = useCallback((messages = []) => {
+
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [
+        {
+          _id: (Math.random()* 1000000).toString(),
+          text: messages[0].text,
+          createdAt: new Date(),
+          user: {
+            _id: "user",
+            name: "user",
+          },
+        },
+      ])
+    );
+
+    authAxios
+      .post(`/message/`, {
+        conversation: conversationId,
+        message: messages[0].text,
+      })
+      .then((response) => {
+        console.log({ data: response.data });
+        setMessages((previousMessages) =>
+          GiftedChat.append(previousMessages, 
+            getMessageObjectFromResponse(response.data.res_message),
+          )
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  return (
+    <Background>
+      <View width={WIDTH} height={"100%"}>
+        <GiftedChat
+          messages={messages}
+          onSend={(messages) => onSend(messages)}
+          user={{
+            _id: "user",
+          }}
+        />
+      </View>
+    </Background>
+  );
+};

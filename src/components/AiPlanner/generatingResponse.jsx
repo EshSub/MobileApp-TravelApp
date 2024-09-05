@@ -4,15 +4,32 @@ import { WIDTH } from "../../helpers/constants";
 import { AnimatedTextSwitching } from "../animated/AnimatedTextSwitching";
 import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useDataProvider } from "../../apis";
+import { useDispatch, useSelector } from "react-redux";
+import { getAiPlan, getDescription, getDuration, getSelectedActivities } from "../../redux/selectors";
+import { setAiPlan } from "../../redux/slices/formStateSlice";
 
 const GeneratingResponse = () => {
-
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+  const dataprovider = useDataProvider()
+  const { mutate } = dataprovider.aiPlanner.plan() 
+  const duration = useSelector(getDuration)
+  const description = useSelector(getDescription)
+  const preferred_activities = useSelector(getSelectedActivities)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate("Plan");
-    }, 3000);
+    mutate({
+      duration: duration,
+      description: description,
+      preferred_activities: preferred_activities
+    }, {
+      onSuccess: (data) => {
+        dispatch(setAiPlan(data.data.created_plan))
+        navigation.navigate("Plan")
+      },
+      onError: (error) => console.log(error)
+    })
   }, []);
 
   return (

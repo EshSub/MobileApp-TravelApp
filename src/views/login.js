@@ -14,59 +14,59 @@ import {
   LinkText,
   Text,
   VStack,
-} from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { BACKEND_URL } from '../helpers/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, selectUser } from '../redux/slices/userSlice';
-import { Background } from '../components/background';
-import { GoogleLogin } from '../components/googleLogin';
-import { AppleLogin } from '../components/appleLogin';
-import { GradientButton } from '../components/common/gradientButton';
-import { StyleSheet, View } from 'react-native';
+} from "@gluestack-ui/themed";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { BACKEND_URL } from "../helpers/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { login, selectUser } from "../redux/slices/userSlice";
+import { Background } from "../components/background";
+import { GoogleLogin } from "../components/googleLogin";
+import { AppleLogin } from "../components/appleLogin";
+import { GradientButton } from "../components/common/gradientButton";
+import { StyleSheet, View } from "react-native";
+import { useDataProvider } from "../apis";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const dataprovider = useDataProvider()
+  const user = useSelector(selectUser)
   const handleState = () => {
     setShowPassword((showState) => {
       return !showState;
     });
   };
   useEffect(() => {
-    setUsername(user?.name);
-    setPassword(user?.password);
-  }, [user]);
+    setUsername(user?.name)
+    setPassword(user?.password)
+  }, [user])
 
+  const { mutate } = dataprovider.auth.login()
+
+  
   const handleClick = async () => {
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/token/`, {
-        username: username,
-        password: password,
-      });
-      if (response) {
-        navigation.navigate('Intro');
-        dispatch(
-          login({
-            name: username,
-            accessToken: response.data.access,
-          })
-        );
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
+    mutate({ username, password }, {
+      onSuccess: (data) => {
+        dispatch(login({
+          name: username,
+          accessToken: data.data.access
+        }))
+        navigation.navigate("Intro")
+        console.log(data.data.access)
+
+      },
+      onError: (error) => console.log(error)
+    })
+  }
   return (
     <Background>
       <FormControl
-        w='100%'
+        w="100%"
         // p='$4'
         // borderWidth='$1'
         style={{ borderRadius: 10, padding: 10 }}
@@ -99,12 +99,12 @@ function Login() {
             <Input textAlign='center' style={{ height: 50 }}>
               <InputField
                 value={password}
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 onChangeText={(text) => setPassword(text)}
                 placeholder='Password' // Added placeholder for password
                 style={{ paddingHorizontal: 10 }}
               />
-              <InputSlot pr='$3' onPress={handleState}>
+              <InputSlot pr="$3" onPress={handleState}>
                 {/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
                 <InputIcon
                   as={showPassword ? EyeIcon : EyeOffIcon}
