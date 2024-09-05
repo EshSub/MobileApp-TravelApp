@@ -27,6 +27,7 @@ import { AppleLogin } from "../components/appleLogin";
 import { GradientButton } from "../components/common/gradientButton";
 import { StyleSheet, View } from "react-native";
 import { useDataProvider } from "../apis";
+import { showErrorToast, showSuccessToast } from "../components/basic/ToastComponent";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,7 +43,7 @@ function Login() {
     });
   };
   useEffect(() => {
-    setUsername(user?.name)
+    setUsername(user?.username)
     setPassword(user?.password)
   }, [user])
 
@@ -53,14 +54,17 @@ function Login() {
     mutate({ username, password }, {
       onSuccess: (data) => {
         dispatch(login({
-          name: username,
-          accessToken: data.data.access
+          user: data.data.user,
+          access: data.data.access,
         }))
+        showSuccessToast("Success", "Login Successful.")
         navigation.navigate("Intro")
-        console.log(data.data.access)
+        console.log(data.data)
 
       },
-      onError: (error) => console.log(error)
+      onError: (error) => {
+        showErrorToast("Error", "Username or password incorrect")
+        console.log(error)}
     })
   }
   return (

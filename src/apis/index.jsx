@@ -43,7 +43,6 @@ export const useDataProvider = () => {
         "auth": {
             "login": () => useMutation({
                 mutationFn: ({username, password}) => {
-                    console.log({ username, password })
                     return axios.post(`${BACKEND_URL}/api/token/`, { username, password })
                 }
             })

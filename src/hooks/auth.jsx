@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
-import { selectUser } from "../redux/slices/userSlice"
+import { selectAccessToken, selectUser } from "../redux/slices/userSlice"
 
 export const useIsAuthenticated = () => {
-    const user = useSelector(selectUser)
-    return !!user
+    const access = useSelector(selectAccessToken)
+    return !!access
 }
