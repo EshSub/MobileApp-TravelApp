@@ -13,10 +13,10 @@ export const PlaceCard = ({ index, name, location, rating, image }) => {
     const place = places?.find((item) => item.place_id == index)
     return (
         <TouchableOpacity onPress={() => navigation.navigate('Map', {place: place})}>
-            <Card backgroundColor="#ffffff" width={'100px'} p="$3" style={{borderRadius: 10}} mx={"$2"}>
+            <Card backgroundColor="#ffffff" width={'100px'} pb="$3" p="$0" style={{borderRadius: 10}} mx={"$2"}>
                 <VStack justifyContent="center" alignItems="center">
                     <Image
-                        style={{borderRadius: 10}}
+                        style={{borderTopLeftRadius: 10,borderTopRightRadius:10, width:'100%'}}
                         alt="placeImage"
                         source={{ uri: image ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg" }}
                         width={300}

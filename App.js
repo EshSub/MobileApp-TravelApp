@@ -12,25 +12,39 @@ import { LogBox } from "react-native";
 import { SettingsPage } from "./src/views/settings";
 import { persistor, store } from "./src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import Constants from 'expo-constants';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Constants from "expo-constants";
+import { CheckUpdates } from "./src/components/UpdatesCheck";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 
 LogBox.ignoreAllLogs();
 
+const queryClient = new QueryClient();
+
 export default function App() {
-  
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <Provider store={store}>
+      <CheckUpdates />
       <PersistGate loading={null} persistor={persistor}>
-        <GluestackUIProvider config={config}>
-          <View style={{height: Constants.statusBarHeight}}>
-            <StatusBar style="auto"/>
-          </View>
-          <NavigationContainer>
-            <GestureHandlerRootView>
-              <RootNavigator />
-            </GestureHandlerRootView>
-          </NavigationContainer>
-        </GluestackUIProvider>
+        <QueryClientProvider client={queryClient}>
+          <GluestackUIProvider config={config}>
+            <View style={{ height: Constants.statusBarHeight }}>
+              <StatusBar style="auto" />
+            </View>
+            <NavigationContainer>
+              <GestureHandlerRootView>
+                <RootNavigator />
+              </GestureHandlerRootView>
+            </NavigationContainer>
+          </GluestackUIProvider>
+        </QueryClientProvider>
       </PersistGate>
     </Provider>
   );
