@@ -16,6 +16,7 @@ import { useDataProvider } from "../apis";
 import authAxios from "../apis/axios";
 import { currentDateString, getDateObjFromDateAndTime } from "../helpers/utils";
 import { useRoute } from "@react-navigation/native";
+import LottieView from "lottie-react-native";
 
 export const ChatView = ({ route }) => {
   const [messages, setMessages] = useState([]);
@@ -30,7 +31,6 @@ export const ChatView = ({ route }) => {
   const getMessageObjectFromResponse = (message) => {
     const user = message.guide ? "guide" : "user";
 
-
     return {
       _id: message.id,
       text: message.message,
@@ -41,13 +41,19 @@ export const ChatView = ({ route }) => {
         avatar: (props) => {
           console.log({ props });
           return (
-            <View
-              style={{
-                height: props[0].height,
-                width: props[0].width,
-                backgroundColor: "red",
-              }}
+            <LottieView
+              source={require("../assets/animations/aiWorking.json")}
+              autoPlay
+              loop
+              style={{ width: props[0].height, height: props[0].width }}
             />
+            // <View
+            //   style={{
+            //     height: props[0].height,
+            //     width: props[0].width,
+            //     backgroundColor: "red",
+            //   }}
+            // />
           );
         },
       },
@@ -74,11 +80,10 @@ export const ChatView = ({ route }) => {
   }, [conversationId]);
 
   const onSend = useCallback((messages = []) => {
-
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, [
         {
-          _id: (Math.random()* 1000000).toString(),
+          _id: (Math.random() * 1000000).toString(),
           text: messages[0].text,
           createdAt: new Date(),
           user: {
@@ -97,8 +102,9 @@ export const ChatView = ({ route }) => {
       .then((response) => {
         console.log({ data: response.data });
         setMessages((previousMessages) =>
-          GiftedChat.append(previousMessages, 
-            getMessageObjectFromResponse(response.data.res_message),
+          GiftedChat.append(
+            previousMessages,
+            getMessageObjectFromResponse(response.data.res_message)
           )
         );
       })

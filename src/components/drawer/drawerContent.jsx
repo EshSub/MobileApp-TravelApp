@@ -25,7 +25,7 @@ import { HStack, Icon, VStack } from "@gluestack-ui/themed";
 import { House , Settings , Shield , FileText , PlayCircle, LogOut, AlertTriangle} from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
-import { USER_LOGOUT } from "../../helpers/constants";
+import { BACKGROUND_COLOR, USER_LOGOUT } from "../../helpers/constants";
 import { VERSION } from "../../helpers/constants";
 import { selectAccessToken } from "../../redux/slices/userSlice";
 import { useIsAuthenticated } from "../../hooks/auth";
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: "#DCDCDC",
+    backgroundColor: BACKGROUND_COLOR,
   },
   headerContent: {
     padding: 30,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   body: {
-    backgroundColor: "#778899",
+    // backgroundColor: "#778899",
     // height: 700,
     // alignItems: "flex-start",
   },
