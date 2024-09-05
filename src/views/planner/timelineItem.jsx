@@ -21,9 +21,25 @@ import { useGetBackgroundColorFromUrl } from "../../hooks/color";
 import { BORDER_RADIUS } from "../../helpers/constants";
 import { TouchableOpacity } from "react-native";
 import { PlacePopup } from "./placePopup";
+import { useDataProvider } from "../../apis";
 
-export const TimelineItem = ({ item }) => {
-  const places = useSelector(getPlaces);
+export const TimelineItem = ({ item, time }) => {
+  const _places = useSelector(getPlaces);
+
+  console.log({ item, time });
+
+  // const { data: districts, isLoading } = useDataProvider().district.get();
+
+  // const { data: place, isLoading } = useDataProvider().places.getPlaceForPlan({
+  //   // type: item?.type,
+  //   // price: item?.price,
+  //   // type: "restaurant",
+  //   district: item?.district,
+  // });
+
+  // console.log({ districts });
+
+  const places = _places?.filter(p => p.district_name === item?.district);
 
   const place = places[Math.floor(Math.random() * places?.length)];
 
@@ -37,80 +53,39 @@ export const TimelineItem = ({ item }) => {
         overflow: "hidden",
       }}
     >
-      {/* <Accordion
-        size="md"
-        variant="filled"
-        type="single"
-        isCollapsible={true}
-        isDisabled={false}
-        m="$0"
-        p="$0"
-        sx={{ borderRadius: 20 }}
-        style={{
-          borderRadius: 10,
-          margin: 0,
-          padding: 0,
-          backgroundColor: backgroundColor,
-        }}
-        _item={{ margin: 0, padding: 0 }}
-      >
-        <AccordionItem
-          value="a"
-          m={"$0"}
-          p={"$0"}
-          backgroundColor={backgroundColor}
-          borderRadius={BORDER_RADIUS}
-        > */}
-      <PlacePopup
-        place={place}
-        backgroundColor={backgroundColor}
-        renderPressable={({ onPress }) => (
-          <AccordionHeader m={"$0"} p={"$0"} bg={backgroundColor}>
-            <AccordionTrigger
-              m={"$0"}
-              p={"$0"}
-              onPress={onPress}
-            >
-              {({ isExpanded }) => {
-                return (
-                  <>
-                    <AccordionTitleText>
-                      <VStack>
-                        <Heading>{place.place_name}</Heading>
-                        <Text fontSize={12}>{place.description}</Text>
-                      </VStack>
-                    </AccordionTitleText>
-                    {isExpanded ? (
-                      <AccordionIcon as={ChevronUpIcon} className="ml-3" />
-                    ) : (
-                      <AccordionIcon as={ChevronDownIcon} className="ml-3" />
-                    )}
-                  </>
-                );
-              }}
-            </AccordionTrigger>
-          </AccordionHeader>
-        )}
-      />
+      {/* <Text>{JSON.stringify(item)}</Text> */}
 
-      {/* <AccordionContent
-            _content={{
-              padding: 0,
-              margin: 0,
-            }}
-            m={"$0"}
-            p={"$0"}
-            style={{
-              borderRadius: 10,
-              padding: 0,
-              margin: 0,
-              backgroundColor: backgroundColor,
-            }}
-          >
-            <Place place={place} />
-          </AccordionContent> */}
-      {/* </AccordionItem>
-      </Accordion> */}
+      {/* {!isLoading && place ? ( */}
+        <PlacePopup
+          place={place}
+          backgroundColor={backgroundColor}
+          renderPressable={({ onPress }) => (
+            <AccordionHeader m={"$0"} p={"$0"} bg={backgroundColor}>
+              <AccordionTrigger m={"$0"} p={"$0"} onPress={onPress}>
+                {({ isExpanded }) => {
+                  return (
+                    <>
+                      <AccordionTitleText>
+                        <VStack>
+                          <Heading>{place.place_name}</Heading>
+                          <Text fontSize={12}>{place.description}</Text>
+                        </VStack>
+                      </AccordionTitleText>
+                      {isExpanded ? (
+                        <AccordionIcon as={ChevronUpIcon} className="ml-3" />
+                      ) : (
+                        <AccordionIcon as={ChevronDownIcon} className="ml-3" />
+                      )}
+                    </>
+                  );
+                }}
+              </AccordionTrigger>
+            </AccordionHeader>
+          )}
+        />
+      {/* ) : (
+        <Text>Loading...</Text>
+      )} */}
     </View>
   );
 };

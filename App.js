@@ -40,8 +40,8 @@ export default function App() {
             </View>
             <NavigationContainer>
               <GestureHandlerRootView>
-                <RootNavigator />
-                {/* <Plan /> */}
+                {/* <RootNavigator /> */}
+                <Plan />
               </GestureHandlerRootView>
             </NavigationContainer>
           </GluestackUIProvider>

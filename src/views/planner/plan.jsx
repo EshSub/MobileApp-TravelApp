@@ -50,18 +50,21 @@ const ActivityIcon = ({ time, props }) => {
 export const Plan = () => {
   const [data, setData] = React.useState([]);
   const aiPlan = useSelector(getAiPlan) || plan;
-  console.log({aiPlan})
-  const planTemplate = {
-    
-  }
+  console.log({ aiPlan });
+  // const planTemplate = {};
+
+  // const indexedPlan = aiPlan.reduce((acc, subList, index) => {
+  //   acc[index + 1] = subList;
+  //   return acc;
+  // }, {});
 
   const activityTimes = [
-    "breakfast",
+    // "breakfast",
     "morning",
-    "lunch",
+    // "lunch",
     "evening",
-    "dinner",
-    "accommodation",
+    // "dinner",
+    // "accommodation",
   ];
 
   useEffect(() => {
@@ -76,7 +79,9 @@ export const Plan = () => {
           time: time,
           // description: 'test',
           // title: "test2",
-          title: <TimelineItem item={aiPlan[day][time]} />,
+          title: (
+            <TimelineItem item={aiPlan[day][time]} time={time}/>
+          ),
           icon: (
             <ActivityIcon
               time={time}
@@ -87,7 +92,7 @@ export const Plan = () => {
       });
     });
     setData(d);
-    console.log({d})
+    console.log({ d });
   }, []);
 
   if (!data) {
@@ -120,23 +125,24 @@ export const Plan = () => {
 
 const TimeLineDate = ({ items, day }) => {
   // console.log({ items });
-  console.log({items, day})
+  console.log({ items, day });
   const allTags = Object.values(items)
     .map((item) => item?.Tags)
     .flat()
     .filter((f) => f)
     .sort(randomSort);
 
-  console.log({ allTags });
+  // console.log({ allTags });
 
   return (
     <Card
       size="md"
       variant="elevated"
-      className="m-3 w-70"
+      className="m-3"
       borderRadius={BORDER_RADIUS}
       variant="filled"
-      // style={{ width: WIDTH * 0.7 }}
+      w={WIDTH * 0.85}
+      h={"100%"}
     >
       <VStack
         style={{
@@ -146,10 +152,10 @@ const TimeLineDate = ({ items, day }) => {
         }}
         gap={5}
       >
-        <Heading>Day {parseInt(day)+1}</Heading>
+        <Heading>Day {parseInt(day) + 1}</Heading>
         <Text>{items.activities}</Text>
         <HStack gap={3} flex={1}>
-          {allTags.slice(0, 3).map((tag, index) => (
+          {allTags.slice(0, 2).map((tag, index) => (
             <Badge size="md" variant="solid" action="success" key={index}>
               <BadgeText>{tag}</BadgeText>
             </Badge>

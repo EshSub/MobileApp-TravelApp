@@ -410,6 +410,314 @@ export const places = [
   },
 ];
 
+// export const plan = [
+//   [
+//       {
+//           "type": "restaurant",
+//           "time": "breakfast",
+//           "district": "Colombo",
+//           "price": "medium",
+//           "props": {
+//               "food": "breakfast",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "morning",
+//           "district": "Colombo",
+//           "activities": "Wildlife Safari",
+//           "price": "medium",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "lunch",
+//           "district": "Colombo",
+//           "price": "medium",
+//           "props": {
+//               "food": "lunch",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "evening",
+//           "district": "Colombo",
+//           "activities": "Bird Watching",
+//           "price": "low",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "dinner",
+//           "district": "Colombo",
+//           "price": "medium",
+//           "props": {
+//               "food": "dinner",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "accommodation",
+//           "time": "night",
+//           "district": "Colombo",
+//           "price": "medium",
+//           "props": {
+//               "type": "hotel"
+//           }
+//       }
+//   ],
+//   [
+//       {
+//           "type": "restaurant",
+//           "time": "breakfast",
+//           "district": "Kandy",
+//           "price": "medium",
+//           "props": {
+//               "food": "breakfast",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "morning",
+//           "district": "Kandy",
+//           "activities": "Wildlife Safari",
+//           "price": "medium",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "lunch",
+//           "district": "Kandy",
+//           "price": "medium",
+//           "props": {
+//               "food": "lunch",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "evening",
+//           "district": "Kandy",
+//           "activities": "Bird Watching",
+//           "price": "low",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "dinner",
+//           "district": "Kandy",
+//           "price": "medium",
+//           "props": {
+//               "food": "dinner",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "accommodation",
+//           "time": "night",
+//           "district": "Kandy",
+//           "price": "medium",
+//           "props": {
+//               "type": "hotel"
+//           }
+//       }
+//   ],
+//   [
+//       {
+//           "type": "restaurant",
+//           "time": "breakfast",
+//           "district": "Jaffna",
+//           "price": "medium",
+//           "props": {
+//               "food": "breakfast",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "morning",
+//           "district": "Jaffna",
+//           "activities": "Wildlife Safari",
+//           "price": "medium",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "lunch",
+//           "district": "Jaffna",
+//           "price": "medium",
+//           "props": {
+//               "food": "lunch",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "evening",
+//           "district": "Jaffna",
+//           "activities": "Bird Watching",
+//           "price": "low",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "dinner",
+//           "district": "Jaffna",
+//           "price": "medium",
+//           "props": {
+//               "food": "dinner",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "accommodation",
+//           "time": "night",
+//           "district": "Jaffna",
+//           "price": "medium",
+//           "props": {
+//               "type": "hotel"
+//           }
+//       }
+//   ],
+//   [
+//       {
+//           "type": "restaurant",
+//           "time": "breakfast",
+//           "district": "Trincomalee",
+//           "price": "medium",
+//           "props": {
+//               "food": "breakfast",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "morning",
+//           "district": "Trincomalee",
+//           "activities": "Whale Watching",
+//           "price": "medium",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "lunch",
+//           "district": "Trincomalee",
+//           "price": "medium",
+//           "props": {
+//               "food": "lunch",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "evening",
+//           "district": "Trincomalee",
+//           "activities": "Snorkeling",
+//           "price": "low",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "dinner",
+//           "district": "Trincomalee",
+//           "price": "medium",
+//           "props": {
+//               "food": "dinner",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "accommodation",
+//           "time": "night",
+//           "district": "Trincomalee",
+//           "price": "medium",
+//           "props": {
+//               "type": "hotel"
+//           }
+//       }
+//   ],
+//   [
+//       {
+//           "type": "restaurant",
+//           "time": "breakfast",
+//           "district": "Anuradhapura",
+//           "price": "medium",
+//           "props": {
+//               "food": "breakfast",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "morning",
+//           "district": "Anuradhapura",
+//           "activities": "Wildlife Safari",
+//           "price": "medium",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "lunch",
+//           "district": "Anuradhapura",
+//           "price": "medium",
+//           "props": {
+//               "food": "lunch",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "destination",
+//           "time": "evening",
+//           "district": "Anuradhapura",
+//           "activities": "Bird Watching",
+//           "price": "low",
+//           "props": {
+//               "type": "animals"
+//           }
+//       },
+//       {
+//           "type": "restaurant",
+//           "time": "dinner",
+//           "district": "Anuradhapura",
+//           "price": "medium",
+//           "props": {
+//               "food": "dinner",
+//               "type": "local"
+//           }
+//       },
+//       {
+//           "type": "accommodation",
+//           "time": "night",
+//           "district": "Anuradhapura",
+//           "price": "medium",
+//           "props": {
+//               "type": "hotel"
+//           }
+//       }
+//   ]
+// ]
+
 export const plan = {
   1: {
     general: {
