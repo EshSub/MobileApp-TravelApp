@@ -25,12 +25,12 @@ export const activityList = [
         imageUrl: "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220"
     }
 ]
-export const ActivityCard = ({ name, imageUrl, id }) => {
+export const ActivityCard = ({ name, imageUrl, id, width=WIDTH * 0.4 }) => {
     const navigation = useNavigation()
     return (
         <TouchableOpacity onPress={() => navigation.navigate("Activity", {id : id, activityName:name})}>
             <Card 
-                width={WIDTH * 0.4}
+                width={width}
                 height={80} 
                 bgColor={"black"} 
                 style={{borderRadius: 10}} 
@@ -45,10 +45,11 @@ export const ActivityCard = ({ name, imageUrl, id }) => {
                     <Image 
                         alt="activity"
                         source={{uri: imageUrl ?? "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220"}}
-                        width={WIDTH*0.4}
+                        width={width}
                         height={80}
                         style={{borderRadius: 10}}
                         opacity={0.8}
+                        resizeMode="cover"
                         
                         />
                     <Heading fontSize={14} m="$2" color="$white" position="absolute" top={"50%"} textAlign="center">{name}</Heading>

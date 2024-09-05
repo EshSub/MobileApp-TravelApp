@@ -20,7 +20,15 @@
         "foregroundImage": "./assets/applogo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.touracross.mobile"
+      "package": "com.touracross.mobile",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "INTERNET"
+      ],
+      "config": {
+        "useCleartextTraffic": true
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

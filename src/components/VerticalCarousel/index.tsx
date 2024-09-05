@@ -30,6 +30,8 @@ import type { TransformsStyle } from "react-native";
 import type { ScaledSize } from "react-native";
 import { Dimensions } from "react-native";
 import { useDataProvider } from "../../apis";
+import { ActivityCard } from "../common/activityCard";
+import { WIDTH } from "../../helpers/constants";
 
 export const isWeb = Platform.OS === "web";
 
@@ -387,35 +389,30 @@ function VerticalCarousel() {
                       uri: `https://ychef.files.bbci.co.uk/1280x720/p0b7n6dm.jpg`,
                     }}
                   />
-                  <Text
+                  {/* <Text
                     numberOfLines={1}
                     style={{
                       maxWidth: ITEM_WIDTH * 0.3 - 40,
-                      color: "white",
+                      color: "blacks",
                     }}
                   >
-                    {"dog"}
-                  </Text>
+                    {item?.name}
+                  </Text> */}
                 </View>
                 <View
                   style={{
-                    width: ITEM_WIDTH * 0.6,
+                    width: ITEM_WIDTH * 0.8,
                     height: ITEM_HEIGHT - 20,
                     borderRadius: 10,
                     overflow: "hidden",
                   }}
                 >
-                  <Image
-                    style={{
-                      width: ITEM_WIDTH * 0.6,
-                      height: ITEM_HEIGHT - 20,
-                      borderRadius: 10,
-                      marginRight: 5,
-                    }}
-                    source={{
-                      uri: `https://ychef.files.bbci.co.uk/1280x720/p0b7n6dm.jpg`,
-                    }}
-                  />
+                 <ActivityCard
+                      name={item.name}
+                      imageUrl={item.imageUrl}
+                      id={item.id}
+                      width={WIDTH*0.8}
+                      />
                 </View>
               </View>
             </View>
