@@ -28,7 +28,7 @@ export const activityList = [
 export const ActivityCard = ({ name, imageUrl, id }) => {
     const navigation = useNavigation()
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("Activity", {id : id})}>
+        <TouchableOpacity onPress={() => navigation.navigate("Activity", {id : id, activityName:name})}>
             <Card 
                 width={WIDTH * 0.4}
                 height={80} 

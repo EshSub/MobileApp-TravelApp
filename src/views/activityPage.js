@@ -100,20 +100,21 @@ export const ActivityPage = ({ route }) => {
         setActivity(activityList.find((o) => o.activity_id === activityId));
     }, [activityId]);
     return (
-        <Background>
+        // <Background>
             <ParallaxScrollView
                 headerImage={
                     <Image
-                        style={{borderRadius: 10}}
+                        // style={{borderRadius: 10}}
+                        width={'100%'}
                         size="full"
                         source={{ uri: activity?.imageUrl ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg" }}
                     />
                 }
                 headerBackgroundColor={BACKGROUND_COLOR}
             >
-                <Text>{activity?.description}</Text>
-            <Heading color="#5E6A81" pl={"$2"}>
-                Top picks
+                <Text p={"$3"} textAlign="center">{activity?.description}</Text>
+            <Heading color="#5E6A81" pl={"$3"}>
+                Top Picks
             </Heading>
             <Carousel
                 ref={ref}
@@ -135,8 +136,8 @@ export const ActivityPage = ({ route }) => {
                     </View>
                 )}
             />
-            <Heading fontSize={"$lg"} color="#5E6A81" pl={"$2"}>
-                Other locations
+            <Heading fontSize={"$lg"} color="#5E6A81" pl={"$3"}>
+                Other Locations
             </Heading>
             <Carousel
                 ref={ref}
@@ -160,6 +161,6 @@ export const ActivityPage = ({ route }) => {
                 )}
             />
             </ParallaxScrollView>
-        </Background>
+        // </Background>
     );
 };

@@ -109,7 +109,12 @@ export default function RootNavigator() {
         <Stack.Screen
           name="Activity"
           component={ActivityPage}
-          options={{ headerTransparent: true }}
+          options={({route})=>({
+            headerTransparent: true,
+            headerStyle:{backgroundColor: "rgba(255,255,255,0.8)"},
+            headerTitle:route.params?.activityName || "Activity"
+          })}
+          // options={{ headerTransparent: true,  headerStyle:{backgroundColor: "rgba(255,255,255,0.8)"} , headerTitle:activityName}}
         />
         
         <Stack.Screen name="Login" component={Login} />

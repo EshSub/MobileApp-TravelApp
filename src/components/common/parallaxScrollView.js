@@ -5,6 +5,7 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from 'react-native-reanimated';
+import { BACKGROUND_COLOR } from '../../helpers/constants';
 
 // import { useThemeColor } from '@hooks/useThemeColor';
 
@@ -47,7 +48,7 @@ export default function ParallaxScrollView({
         <Animated.View
           style={[
             styles.header,
-            { backgroundColor: headerBackgroundColor[colorScheme] },
+            { backgroundColor: BACKGROUND_COLOR },
             headerAnimatedStyle,
           ]}>
           {headerImage}
@@ -71,5 +72,6 @@ const styles = StyleSheet.create({
     // padding: 32,
     gap: 16,
     overflow: 'hidden',
+    backgroundColor: BACKGROUND_COLOR,
   },
 });
