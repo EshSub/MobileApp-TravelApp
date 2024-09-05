@@ -48,15 +48,15 @@ export const IntroView = () => {
       component: WelcomeScreen,
     },
     {
-      title: "Thousands of activities",
-      description: "Discover experiences around you",
+      title: "Thousands of Activities",
+      description: "Collect memories for a lifetime",
       component: (props) => (
         <IntroLayout {...props} content={<TextMarquee />} />
       ),
     },
     {
-      title: "Thousands of places",
-      description: "Discover experiences around you",
+      title: "Thousands of Places",
+      description: "Explore breathtaking destinations",
       component: (props) => (
         <IntroLayout {...props} content={<ImageMarquee />} />
       ),
@@ -105,7 +105,7 @@ export const IntroView = () => {
                   alignItems: "center",
                   marginBottom: 20,
                 }}>
-                  <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+                  <Text style={{ fontSize: 30, fontWeight: "bold" }}>
                     {screen?.title}
                   </Text>
                   <Text style={{ fontSize: 16, color: "gray" }}>

@@ -37,7 +37,7 @@ export const WelcomeScreen = ({ setCurrentScreen }) => {
           alignItems="flex-start"
           space="sm"
           p={"$8"}
-          pt={"$10"}
+          pt={"$0"}
         >
           <Heading color="#425884" size="2xl" fontWeight={300}>
             {"LET'S"}
