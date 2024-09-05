@@ -25,6 +25,8 @@ import { Background } from "../../components/background";
 import { randomSort } from "../../helpers/utils";
 import { BORDER_RADIUS, WIDTH } from "../../helpers/constants";
 import { TimelineItem } from "./timelineItem";
+import { useSelector } from "react-redux";
+import { getAiPlan } from "../../redux/selectors";
 
 const ActivityIcon = ({ time, props }) => {
   switch (time) {
@@ -47,7 +49,8 @@ const ActivityIcon = ({ time, props }) => {
 
 export const Plan = () => {
   const [data, setData] = React.useState([]);
-
+  const aiPlan = useSelector(getAiPlan)
+  console.log({aiPlan})
   const planTemplate = {
     
   }
@@ -63,17 +66,17 @@ export const Plan = () => {
 
   useEffect(() => {
     const d = [];
-    Object.keys(plan).map((day) => {
+    Object.keys(aiPlan).map((day) => {
       d.push({
         time: `Day ${day}`,
-        title: <TimeLineDate day={day} items={plan[day]} />,
+        title: <TimeLineDate day={day} items={aiPlan[day]} />,
       });
       activityTimes.map((time) => {
         d.push({
           time: time,
           // description: 'test',
           // title: "test2",
-          title: <TimelineItem item={plan[day][time]} />,
+          title: <TimelineItem item={aiPlan[day][time]} />,
           icon: (
             <ActivityIcon
               time={time}
@@ -84,6 +87,7 @@ export const Plan = () => {
       });
     });
     setData(d);
+    console.log({d})
   }, []);
 
   if (!data) {
@@ -116,7 +120,7 @@ export const Plan = () => {
 
 const TimeLineDate = ({ items, day }) => {
   // console.log({ items });
-
+  console.log({items, day})
   const allTags = Object.values(items)
     .map((item) => item?.Tags)
     .flat()
@@ -142,8 +146,8 @@ const TimeLineDate = ({ items, day }) => {
         }}
         gap={5}
       >
-        <Heading>{`Day 1`}</Heading>
-        <Text>{items.general.description}</Text>
+        <Heading>Day {parseInt(day)+1}</Heading>
+        <Text>{items.activities}</Text>
         <HStack gap={3} flex={1}>
           {allTags.slice(0, 3).map((tag, index) => (
             <Badge size="md" variant="solid" action="success" key={index}>
