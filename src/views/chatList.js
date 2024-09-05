@@ -1,5 +1,5 @@
 import { Box, Divider, HStack, Text, View } from "@gluestack-ui/themed";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "react-native";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Background } from "../components/background";
@@ -7,12 +7,13 @@ import { useDataProvider } from "../apis";
 import axios from "axios";
 import authAxios from "../apis/axios";
 import { useNavigation } from "@react-navigation/native";
-import { WIDTH } from "../helpers/constants";
+import { BACKGROUND_COLOR, WIDTH } from "../helpers/constants";
 import {
   getDateObjFromDateAndTime,
   humanReadableDateTimeFromObj,
   sliceStringIfLong,
 } from "../helpers/utils";
+import LottieView from "lottie-react-native";
 
 export const ChatList = () => {
   const [conversations, setConversations] = useState([]);
@@ -32,14 +33,22 @@ export const ChatList = () => {
       });
     });
   };
-
-  if (isLoading) {
-    return <Text>Loading</Text>;
-  }
+  const animation = useRef(null);
 
   return (
     <Background>
-      <Box style={{ width: WIDTH, height: "100%" }}>
+      {isLoading ? <LottieView
+            autoPlay
+            ref={animation}
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: BACKGROUND_COLOR,
+            }}
+            // Find more Lottie files at https://lottiefiles.com/featured
+            source={require("../assets/animations/loading.json")}
+          />
+          : <Box style={{ width: WIDTH, height: "100%" }}>
         {data?.map((conversation) => {
           return (
             <TouchableOpacity
@@ -69,7 +78,7 @@ export const ChatList = () => {
             </TouchableOpacity>
           );
         })}
-      </Box>
+      </Box>}
     </Background>
   );
 };
