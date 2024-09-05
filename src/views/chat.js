@@ -8,6 +8,8 @@ import {
   InputField,
   Text,
   View,
+  Icon,
+  Image
 } from "@gluestack-ui/themed";
 import { HEIGHT, WIDTH } from "../helpers/constants";
 import { SendHorizonalIcon } from "lucide-react-native";
@@ -15,7 +17,6 @@ import { TouchableOpacity } from "react-native";
 import { useDataProvider } from "../apis";
 import authAxios from "../apis/axios";
 import { currentDateString, getDateObjFromDateAndTime } from "../helpers/utils";
-import { useRoute } from "@react-navigation/native";
 
 export const ChatView = ({ route }) => {
   const [messages, setMessages] = useState([]);
@@ -39,15 +40,16 @@ export const ChatView = ({ route }) => {
         _id: user,
         name: user,
         avatar: (props) => {
-          console.log({ props });
+          // console.log({ props });
           return (
             <View
               style={{
                 height: props[0].height,
                 width: props[0].width,
-                backgroundColor: "red",
               }}
-            />
+            >
+              <Image source={require("../assets/chip.png")} height={props[0].height} width={props[0].width} alt="aiChat" />
+            </View>
           );
         },
       },
