@@ -27,7 +27,6 @@ const GeneratingResponse = () => {
       onSuccess: (data) => {
         dispatch(setAiPlan(data.data.created_plan))
         navigation.navigate("Plan")
-        console.log(data.data.created_plan)
       },
       onError: (error) => console.log(error)
     })

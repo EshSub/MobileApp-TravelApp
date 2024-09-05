@@ -324,7 +324,7 @@ function VerticalCarousel() {
   
   const dataprovider = useDataProvider()
   const {data : activities} = dataprovider.activities.get();
-  console.log({activities})
+  
   return (
     <View style={{ flex: 1 }}>
       {/* <Image

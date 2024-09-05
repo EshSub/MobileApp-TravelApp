@@ -54,7 +54,6 @@ export const PlacesAndActivitiesScreen = () => {
   } = dataprovider.places.get();
   const { data: activities, loading: activityLoading } =
     dataprovider.activities.get();
-  console.log({ places, error });
 
   useEffect(() => {
     if (searchPlace) {
