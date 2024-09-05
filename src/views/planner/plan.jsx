@@ -49,7 +49,7 @@ const ActivityIcon = ({ time, props }) => {
 
 export const Plan = () => {
   const [data, setData] = React.useState([]);
-  const aiPlan = useSelector(getAiPlan)
+  const aiPlan = useSelector(getAiPlan) || plan;
   console.log({aiPlan})
   const planTemplate = {
     
