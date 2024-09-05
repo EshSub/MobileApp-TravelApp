@@ -62,7 +62,7 @@ const AiPlanner = () => {
     <View style={{ flex: 1, marginTop: 50 }}>
       <LottieView
         source={require("../../assets/animations/aiWave.json")}
-        style={{ height: 100, width: WIDTH, position: "absolute" }}
+        style={{ height: 100, width: WIDTH, position: "absolute", top: 0 }}
         autoPlay
         loop
       />
