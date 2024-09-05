@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIsMainDrawerOpen } from "../../redux/selectors";
 import { SlideIn } from "../animated/SlideIn";
 import { HStack, Icon, VStack } from "@gluestack-ui/themed";
-import { House } from "lucide-react-native";
+import { House , Settings , Shield , FileText , PlayCircle, LogOut, AlertTriangle} from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
 import { USER_LOGOUT } from "../../helpers/constants";
@@ -36,11 +36,12 @@ export const DrawerContent = (props) => {
   const menuItems = [
     // { id: "HomeScreen", label: "Home", icon: House },
     // { id: "Profile", label: "Profile" },
-    { id: "Settings", label: "Settings" , path: "Settings"},
-    { id: "PrivacyPolicy", label: "Privacy Policy", path: "PrivacyPolicy" },
-    { id: "TermsOfService", label: "Terms of Service" },
-    { id: "Intro", label: "Intro", path: "Intro" },
-    { id: "Logout", label: "Logout", path: "Login" },
+    { id: "Settings", label: "Settings" , path: "Settings" , icon: Settings},
+    { id: "PrivacyPolicy", label: "Privacy Policy", path: "PrivacyPolicy" , icon: Shield},
+    { id: "TermsOfService", label: "Terms of Service" , icon: FileText},
+    { id: "Intro", label: "Intro", path: "Intro", icon: PlayCircle},
+    { id: "Logout", label: "Logout", path: "Login" , icon: LogOut},
+    {id: "Emergency", label: "Emergency", path: "Emergency" , icon: AlertTriangle , color: "orange"}
   ];
 
   const navigation = useNavigation();
@@ -100,8 +101,8 @@ export const DrawerContent = (props) => {
                       gap={10}
                       alignItems="center"
                     >
-                      <Icon as={item.icon ?? House} size="xl" />
-                      <Text>{item.label}</Text>
+                      <Icon as={item.icon ?? House} size="xl" color={item.color ?? "black"} />
+                      <Text style={{color:item.color}}>{item.label}</Text>
                     </HStack>
                   </SlideIn>
                 </TouchableOpacity>

@@ -32,6 +32,7 @@ import { RandomDestination } from "../components/AiPlanner/randomDestination";
 import { ActivityPage } from "../views/activityPage";
 import { SettingsPage } from "../views/settings";
 import { PrivacyPolicy } from "../views/privacyPolicy";
+import { EmergencyPage } from "../views/emergencyPage";
 
 // import HomeNavigator from "./homeNavigator";
 
@@ -119,6 +120,7 @@ export default function RootNavigator() {
         
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Emergency" component={EmergencyPage} />
 
       </Stack.Navigator>
     </MainDrawer>
