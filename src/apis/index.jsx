@@ -54,6 +54,16 @@ export const useDataProvider = () => {
                     return authAxios.post(`${BACKEND_URL}/plan/`, { "input_data" : {duration, description, preferred_activities} },)
                 }
             })
+        },
+        "conversation": {
+            "get": () => useQuery({
+                queryKey: ["conversation"], queryFn: async () => {
+                    const response = await authAxios.get(
+                        `${BACKEND_URL}/conversation/`,
+                    );
+                    return response.data;
+                }
+            }),
         }
     }
 }
