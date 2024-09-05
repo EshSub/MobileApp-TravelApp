@@ -8,6 +8,11 @@ import axios from "axios";
 import authAxios from "../apis/axios";
 import { useNavigation } from "@react-navigation/native";
 import { WIDTH } from "../helpers/constants";
+import {
+  getDateObjFromDateAndTime,
+  humanReadableDateTimeFromObj,
+  sliceStringIfLong,
+} from "../helpers/utils";
 
 export const ChatList = () => {
   const [conversations, setConversations] = useState([]);
@@ -34,21 +39,6 @@ export const ChatList = () => {
 
   return (
     <Background>
-      <Button title="add new" onPress={addNewConversation}>
-        <Text>New conversation</Text>
-      </Button>
-      <TouchableOpacity
-        onPress={() => {
-          navigateToConversation(1);
-        }}
-      >
-        <HStack>
-          <Box>
-            <Text>{"test"}</Text>
-            <Text>{"lastMessage"}</Text>
-          </Box>
-        </HStack>
-      </TouchableOpacity>
       <Box style={{ width: WIDTH, height: "100%" }}>
         {data?.map((conversation) => {
           return (
@@ -58,8 +48,23 @@ export const ChatList = () => {
               }}
             >
               <ListItem
-                title={conversation.id}
-                subtitle={conversation?.lastMessage}
+                title={sliceStringIfLong(
+                  conversation?.last_message?.message,
+                  50,
+                  "No previous messages"
+                )}
+                subtitle={
+                  conversation?.last_message
+                    ? `${
+                        conversation?.last_message?.guide ? "Guide" : "User"
+                      } | ${humanReadableDateTimeFromObj(
+                        getDateObjFromDateAndTime(
+                          conversation?.last_message?.date,
+                          conversation?.last_message?.time
+                        )
+                      )}`
+                    : "Click to start the chat"
+                }
               />
             </TouchableOpacity>
           );

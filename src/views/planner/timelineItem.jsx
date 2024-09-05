@@ -19,6 +19,8 @@ import { getPlaces } from "../../redux/selectors";
 import { Place } from "./place";
 import { useGetBackgroundColorFromUrl } from "../../hooks/color";
 import { BORDER_RADIUS } from "../../helpers/constants";
+import { TouchableOpacity } from "react-native";
+import { PlacePopup } from "./placePopup";
 
 export const TimelineItem = ({ item }) => {
   const places = useSelector(getPlaces);
@@ -28,8 +30,14 @@ export const TimelineItem = ({ item }) => {
   const backgroundColor = useGetBackgroundColorFromUrl();
 
   return (
-    <View sx={{borderRadius: 20, backgroundColor: backgroundColor, overflow: 'hidden'}}>
-      <Accordion
+    <View
+      sx={{
+        borderRadius: 20,
+        backgroundColor: backgroundColor,
+        overflow: "hidden",
+      }}
+    >
+      {/* <Accordion
         size="md"
         variant="filled"
         type="single"
@@ -52,9 +60,17 @@ export const TimelineItem = ({ item }) => {
           p={"$0"}
           backgroundColor={backgroundColor}
           borderRadius={BORDER_RADIUS}
-        >
+        > */}
+      <PlacePopup
+        place={place}
+        backgroundColor={backgroundColor}
+        renderPressable={({ onPress }) => (
           <AccordionHeader m={"$0"} p={"$0"} bg={backgroundColor}>
-            <AccordionTrigger m={"$0"} p={"$0"}>
+            <AccordionTrigger
+              m={"$0"}
+              p={"$0"}
+              onPress={onPress}
+            >
               {({ isExpanded }) => {
                 return (
                   <>
@@ -74,7 +90,10 @@ export const TimelineItem = ({ item }) => {
               }}
             </AccordionTrigger>
           </AccordionHeader>
-          <AccordionContent
+        )}
+      />
+
+      {/* <AccordionContent
             _content={{
               padding: 0,
               margin: 0,
@@ -89,12 +108,9 @@ export const TimelineItem = ({ item }) => {
             }}
           >
             <Place place={place} />
-            {/* <AccordionContentText>
-            
-          </AccordionContentText> */}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+          </AccordionContent> */}
+      {/* </AccordionItem>
+      </Accordion> */}
     </View>
   );
 };

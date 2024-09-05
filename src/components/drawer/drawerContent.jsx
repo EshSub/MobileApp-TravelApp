@@ -19,7 +19,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { getIsMainDrawerOpen } from "../../redux/selectors";
+import { getIsMainDrawerOpen, getLastName, gettFirstName, getUser, getUserEmail } from "../../redux/selectors";
 import { SlideIn } from "../animated/SlideIn";
 import { HStack, Icon, VStack } from "@gluestack-ui/themed";
 import { House , Settings , Shield , FileText , PlayCircle, LogOut, AlertTriangle} from "lucide-react-native";
@@ -27,25 +27,26 @@ import { useNavigation } from "@react-navigation/native";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
 import { USER_LOGOUT } from "../../helpers/constants";
 import { VERSION } from "../../helpers/constants";
+import { selectAccessToken } from "../../redux/slices/userSlice";
+import { useIsAuthenticated } from "../../hooks/auth";
 
 export const DrawerContent = (props) => {
   const open = useSelector(getIsMainDrawerOpen);
-
+  const authenticated = useIsAuthenticated()
   const dispatch = useDispatch();
-
+  console.log({authenticated})
   const menuItems = [
-    // { id: "HomeScreen", label: "Home", icon: House },
-    // { id: "Profile", label: "Profile" },
     { id: "Settings", label: "Settings" , path: "Settings" , icon: Settings},
     { id: "PrivacyPolicy", label: "Privacy Policy", path: "PrivacyPolicy" , icon: Shield},
     { id: "TermsOfService", label: "Terms of Service" , icon: FileText},
     { id: "Intro", label: "Intro", path: "Intro", icon: PlayCircle},
     { id: "Logout", label: "Logout", path: "Login" , icon: LogOut},
-    {id: "Emergency", label: "Emergency", path: "Emergency" , icon: AlertTriangle , color: "orange"}
+    { id: "Emergency", label: "Emergency", path: "Emergency" , icon: AlertTriangle , color: "orange"},
+    { id: "SignUp", label: "SignUp", path: "SignUp"}
   ];
 
   const navigation = useNavigation();
-
+  const user = useSelector(getUser)
   const onPress = (item) => {
     if (item.path) {
       dispatch(setMainDrawerOpen(false));
@@ -55,6 +56,7 @@ export const DrawerContent = (props) => {
       dispatch({type: USER_LOGOUT})
     }
   };
+  const filteredMenuItem = authenticated ? menuItems.slice(0,5) : [...menuItems.slice(0,4), menuItems[5]] ;
 
   console.log("drawerProps", { props });
   return (
@@ -70,16 +72,15 @@ export const DrawerContent = (props) => {
             />
           </SafeAreaView>
 
-          <Text style={styles.name}>Subodha K.</Text>
-          <Text style={styles.userInfo}>subodha@mail.com </Text>
-          <Text style={styles.userInfo}>Colombo, Sri Lanka </Text>
+          { authenticated ? <Text style={styles.name}>{user?.username}</Text> : <Text style={styles.name}>{"Guest"}</Text>}
+          <Text style={styles.userInfo}>{""}</Text>
         </View>
       </View>
 
       <VStack style={styles.body} justifyContent="space-between" flex={1} >
         <VStack gap={10} pt={"$10"}>
           {open &&
-            menuItems.map((item, index) => {
+            filteredMenuItem?.map((item, index) => {
               return (
                 <TouchableOpacity
                   onPress={() => {

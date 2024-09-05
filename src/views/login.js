@@ -27,6 +27,7 @@ import { AppleLogin } from "../components/appleLogin";
 import { GradientButton } from "../components/common/gradientButton";
 import { StyleSheet, View } from "react-native";
 import { useDataProvider } from "../apis";
+import { showErrorToast, showSuccessToast } from "../components/basic/ToastComponent";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,7 +43,7 @@ function Login() {
     });
   };
   useEffect(() => {
-    setUsername(user?.name)
+    setUsername(user?.username)
     setPassword(user?.password)
   }, [user])
 
@@ -53,14 +54,17 @@ function Login() {
     mutate({ username, password }, {
       onSuccess: (data) => {
         dispatch(login({
-          name: username,
-          accessToken: data.data.access
+          user: data.data.user,
+          access: data.data.access,
         }))
+        showSuccessToast("Success", "Login Successful.")
         navigation.navigate("Intro")
-        console.log(data.data.access)
+        console.log(data.data)
 
       },
-      onError: (error) => console.log(error)
+      onError: (error) => {
+        showErrorToast("Error", "Username or password incorrect")
+        console.log(error)}
     })
   }
   return (
@@ -69,73 +73,83 @@ function Login() {
         w="100%"
         // p='$4'
         // borderWidth='$1'
-        style={{ borderRadius: 10 }}
+        style={{ borderRadius: 10, padding: 10 }}
         borderColor='$borderLight300'
         $dark-borderWidth='$1'
-        //  $dark-borderRadius='$lg' 
+        //  $dark-borderRadius='$lg'
         $dark-borderColor='$borderDark800'
       >
-        <VStack space="xl">
-          <Heading color="$text900" lineHeight="$md">
-            Login
+        <VStack space='xl'>
+          <Heading
+            color='$text900'
+            lineHeight='$md'
+            style={{ alignSelf: 'center', fontSize: 25, padding: 10 }} // Center the heading
+          >
+            Log in
           </Heading>
-          <VStack space="xs">
-            <Text color="$text500" lineHeight="$xs">
-              Username
-            </Text>
-            <Input>
+          <VStack space='xl' style={{ padding: 15 }}>
+            <Input textAlign='center' style={{ height: 50 }}>
               <InputField
-                type="text"
+                type='text'
                 value={username}
                 onChangeText={(text) => setUsername(text)}
+                placeholder='Username' // Added placeholder for username
+                style={{
+                  paddingHorizontal: 10,
+                }}
               />
             </Input>
-          </VStack>
-          <VStack space="xs">
-            <Text color="$text500" lineHeight="$xs">
-              Password
-            </Text>
-            <Input textAlign="center">
+
+            <Input textAlign='center' style={{ height: 50 }}>
               <InputField
                 value={password}
                 type={showPassword ? "text" : "password"}
                 onChangeText={(text) => setPassword(text)}
+                placeholder='Password' // Added placeholder for password
+                style={{ paddingHorizontal: 10 }}
               />
               <InputSlot pr="$3" onPress={handleState}>
                 {/* EyeIcon, EyeOffIcon are both imported from 'lucide-react-native' */}
                 <InputIcon
                   as={showPassword ? EyeIcon : EyeOffIcon}
-                  color="$darkBlue500"
+                  color='$darkBlue500'
                 />
               </InputSlot>
             </Input>
           </VStack>
+          <View style={{ marginHorizontal: 25 }}>
+            <GradientButton onPress={handleClick} title={'Login'} p={'$2'} />
+          </View>
 
-          <GradientButton onPress={handleClick} title={"Login"} />
-
-          <HStack justifyContent="center" alignItems="center">
+          <HStack justifyContent='center' alignItems='center'>
             <View
               style={{
-                borderBottomColor: "black",
+                borderBottomColor: 'black',
                 flex: 1 / 2,
                 borderBottomWidth: StyleSheet.hairlineWidth,
               }}
             />
-            <Text ml={"$2"} mr={"$2"}>
+            <Text ml={'$2'} mr={'$2'}>
               OR
             </Text>
             <View
               style={{
-                borderBottomColor: "black",
+                borderBottomColor: 'black',
                 flex: 1 / 2,
                 borderBottomWidth: StyleSheet.hairlineWidth,
               }}
             />
           </HStack>
-          <GoogleLogin />
-          <AppleLogin />
-          <Link onPress={() => navigation.navigate("SignUp")}>
-            <LinkText size="sm">Don't have an account ? Sign up</LinkText>
+          <VStack space='md' style={{ padding: 10 }}>
+            <GoogleLogin text='Login with Google' />
+            <AppleLogin text='Login with Apple' />
+          </VStack>
+
+          <Link
+            style={{ alignItems: 'center' }}
+            onPress={() => navigation.navigate('SignUp')}
+          >
+            <LinkText size='sm'>Don't have an account ? Sign up</LinkText>
           </Link>
         </VStack>
       </FormControl>

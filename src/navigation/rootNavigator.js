@@ -4,7 +4,7 @@ import SignUp from "../views/signUp";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectUser } from "../redux/slices/userSlice";
-import { Button, ButtonText, Icon } from "@gluestack-ui/themed";
+import { Alert, AlertIcon, AlertText, Button, ButtonText, Icon, Link, LinkText, InfoIcon } from "@gluestack-ui/themed";
 import axios from "axios";
 import { BACKEND_URL } from "../helpers/constants";
 import { HomeScreen } from "../views/home";
@@ -33,6 +33,7 @@ import { ActivityPage } from "../views/activityPage";
 import { SettingsPage } from "../views/settings";
 import { PrivacyPolicy } from "../views/privacyPolicy";
 import { EmergencyPage } from "../views/emergencyPage";
+import Toast, { InfoToast } from "react-native-toast-message";
 
 // import HomeNavigator from "./homeNavigator";
 
@@ -41,9 +42,36 @@ const Stack = createNativeStackNavigator();
 export default function RootNavigator() {
   const user = useSelector(selectUser);
   const isAuthenticated = useIsAuthenticated();
-
-  const isIntroDone = useSelector(getIsIntroDone);
   const navigation = useNavigation();
+  const isIntroDone = useSelector(getIsIntroDone);
+
+  const toastConfig = {
+    info: (props) => (
+      <InfoToast
+        {...props}
+        style={{ height: 75 }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 17,
+          fontWeight: '800'
+        }}
+        text2Style={{
+          fontSize: 15,
+          fontWeight: '400'
+        }}
+      />
+    ),
+    custom: ({ text1, text2, prop }) => (
+      <Alert mx="$2.5" action="warning" variant="solid">
+        <AlertIcon as={InfoIcon} mr="$3" />
+        <AlertText>
+          <Link onPress={() => navigation.navigate("SignUp")}>
+            <LinkText size="sm">{text1}</LinkText>
+          </Link>
+        </AlertText>
+      </Alert>
+    )
+  }
 
   // useEffect(() => {
   //   if (!isIntroDone) {
@@ -117,12 +145,13 @@ export default function RootNavigator() {
           })}
           // options={{ headerTransparent: true,  headerStyle:{backgroundColor: "rgba(255,255,255,0.8)"} , headerTitle:activityName}}
         />
-        
+
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Emergency" component={EmergencyPage} />
 
       </Stack.Navigator>
+      <Toast config={toastConfig} />
     </MainDrawer>
   );
 }
