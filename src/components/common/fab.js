@@ -14,12 +14,16 @@ import {
   SearchIcon,
   ShuffleIcon,
 } from 'lucide-react-native';
-import { Icon } from '@gluestack-ui/themed';
+import { Icon, Link, LinkText } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useIsAuthenticated } from '../../hooks/auth';
+import { showCustomToast, showInfoToast, showSuccessToast } from '../basic/ToastComponent';
+import Toast from 'react-native-toast-message';
 
 export function Fab() {
   const [expanded, setExpanded] = useState(false);
+
   return (
     <View style={styles.container}>
       {/* <Text style={{ color: 'white', textAlign: 'center' }}>
@@ -84,7 +88,7 @@ const transitionValueByIndex = (index) => {
 
 function ActionButton({ action, index }) {
   const navigation = useNavigation();
-
+  const authenticated = useIsAuthenticated()
   return (
     <MotiView
       transition={{ delay: index * 100, damping: 15, mass: 1 }}
@@ -102,7 +106,9 @@ function ActionButton({ action, index }) {
     >
       <TouchableOpacity
         onPress={() => {
-          if (action.path) {
+          if (!authenticated) {
+            showCustomToast("Sign In required.")
+          } else if (action.path) {
             navigation.navigate(action.path);
           }
         }}
