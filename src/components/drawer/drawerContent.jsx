@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIsMainDrawerOpen, getLastName, gettFirstName, getUser, getUserEmail } from "../../redux/selectors";
 import { SlideIn } from "../animated/SlideIn";
 import { HStack, Icon, VStack } from "@gluestack-ui/themed";
-import { House , Settings , Shield , FileText , PlayCircle, LogOut, AlertTriangle} from "lucide-react-native";
+import { House , Settings , Shield , FileText , PlayCircle, LogOut, AlertTriangle, LogIn} from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { setMainDrawerOpen } from "../../redux/slices/appSlice";
 import { USER_LOGOUT } from "../../helpers/constants";
@@ -40,9 +40,9 @@ export const DrawerContent = (props) => {
     { id: "PrivacyPolicy", label: "Privacy Policy", path: "PrivacyPolicy" , icon: Shield},
     { id: "TermsOfService", label: "Terms of Service" , icon: FileText},
     { id: "Intro", label: "Intro", path: "Intro", icon: PlayCircle},
-    { id: "Logout", label: "Logout", path: "Login" , icon: LogOut},
     { id: "Emergency", label: "Emergency", path: "Emergency" , icon: AlertTriangle , color: "orange"},
-    { id: "SignUp", label: "SignUp", path: "SignUp"}
+    { id: "Logout", label: "Logout", path: "Login" , icon: LogOut},
+    { id: "SignIn", label: "SignIn", path: "Login", icon: LogOut}
   ];
 
   const navigation = useNavigation();
@@ -56,7 +56,7 @@ export const DrawerContent = (props) => {
       dispatch({type: USER_LOGOUT})
     }
   };
-  const filteredMenuItem = authenticated ? menuItems.slice(0,5) : [...menuItems.slice(0,4), menuItems[5]] ;
+  const filteredMenuItem = authenticated ? menuItems.slice(0,6) : [...menuItems.slice(0,5), menuItems[6]] ;
 
   console.log("drawerProps", { props });
   return (

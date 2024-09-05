@@ -62,12 +62,10 @@ export default function RootNavigator() {
       />
     ),
     custom: ({ text1, text2, prop }) => (
-      <Alert mx="$2.5" action="warning" variant="solid">
+      <Alert mx="$3" action="warning" variant="solid" borderRadius={10}>
         <AlertIcon as={InfoIcon} mr="$3" />
-        <AlertText>
-          <Link onPress={() => navigation.navigate("SignUp")}>
-            <LinkText size="sm">{text1}</LinkText>
-          </Link>
+        <AlertText my="$4">
+          <Text style={{fontWeight: 600}} onPress={() => navigation.navigate("Login")}>SignIn required. Tap here to Sign In.</Text>
         </AlertText>
       </Alert>
     )
