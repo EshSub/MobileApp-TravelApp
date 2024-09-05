@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native"
 import { useSelector } from "react-redux"
 import { getPlaces } from "../../redux/selectors"
 import { useDataProvider } from "../../apis"
+import { getRandomImage } from "../../helpers/data"
 
 export const PlaceCard = ({ index, name, location, rating, image }) => {
     const navigation = useNavigation()
@@ -18,7 +19,7 @@ export const PlaceCard = ({ index, name, location, rating, image }) => {
                     <Image
                         style={{borderTopLeftRadius: 10,borderTopRightRadius:10, width:'100%'}}
                         alt="placeImage"
-                        source={{ uri: image ?? "https://media.funalive.com/article/tb_social/179631617_297809918491520_474324617186027743_n.jpg" }}
+                        source={{ uri: image ?? getRandomImage() }}
                         width={300}
                         height={180}
                     />

@@ -2,6 +2,7 @@ import { Box, Heading, HStack, Image, Text, Card } from "@gluestack-ui/themed"
 import { TouchableOpacity } from "react-native"
 import { WIDTH } from "../../helpers/constants"
 import { useNavigation } from "@react-navigation/native"
+import { getRandomImage } from "../../helpers/data"
 
 export const activityList = [
     {
@@ -44,15 +45,15 @@ export const ActivityCard = ({ name, imageUrl, id, width=WIDTH * 0.4 }) => {
                 <Box>
                     <Image 
                         alt="activity"
-                        source={{uri: imageUrl ?? "https://tse2.mm.bing.net/th?id=OIP.Hxm4Wr6uccQwifp7HH7uYQHaE8&pid=Api&P=0&h=220"}}
                         width={width}
+                        source={{uri: imageUrl ?? getRandomImage()}}
                         height={80}
                         style={{borderRadius: 10}}
                         opacity={0.8}
                         resizeMode="cover"
                         
                         />
-                    <Heading fontSize={14} m="$2" color="$white" position="absolute" top={"50%"} textAlign="center">{name}</Heading>
+                    <Heading fontSize={16} m="$2" color="$white" position="absolute" top={"50%"} textAlign="center">{name}</Heading>
                 </Box>
             </Card>
         </TouchableOpacity>

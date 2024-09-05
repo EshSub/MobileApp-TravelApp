@@ -10,16 +10,17 @@ import { useDataProvider } from "../apis";
 export const Map = ({route}) => {
     // const places = useSelector(getPlaces)
     const dataprovider = useDataProvider()
+    const [searchPlace, setSearchPlace] = useState()
     const {data: places} = dataprovider.places.get()
     const handlePress = () => {
-    
+        console.log("test")
     }
     useEffect(() => {
-      if (route.params?.place) {
-        setSearchPlace(route.params.place);
+      if (route?.params?.place) {
+        setSearchPlace(route?.params?.place);
       }
     }, []);
-    const [searchPlace, setSearchPlace] = useState()
+    
     const ASPECT_RATIO = WIDTH/HEIGHT
     const LATITUDE_DELTA = 0.0922
     const mapRef = useRef(null)
@@ -37,9 +38,9 @@ export const Map = ({route}) => {
         }
     }, [searchPlace])
     return (
-        <View flex={1} justifyContent="center" alignItems="center">
+        <View flex={1} justifyContent="center" alignItems="center" height={"100%"}>
             <MapView
-                style={{ width: WIDTH, height: HEIGHT }}
+                style={{ width: WIDTH, height: "100%"}}
                 initialRegion={{
                     latitude: 7.9483,
                     longitude: 80.7532,
@@ -47,6 +48,8 @@ export const Map = ({route}) => {
                     longitudeDelta: LATITUDE_DELTA*ASPECT_RATIO,
                 }}
                 ref={mapRef}
+                zoomControlEnabled={true}
+                zoomEnabled={true}
             >
                 <UrlTile
                     urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
