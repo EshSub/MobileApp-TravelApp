@@ -35,7 +35,9 @@ import { useDataProvider } from "../apis";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
-import { WIDTH } from "../helpers/constants";
+import { BACKGROUND_COLOR, WIDTH } from "../helpers/constants";
+import LottieView from "lottie-react-native";
+import { isLoading } from "expo-font";
 
 export const PlacesAndActivitiesScreen = () => {
   const width = Dimensions.get("window").width;
@@ -44,7 +46,7 @@ export const PlacesAndActivitiesScreen = () => {
   const [searchPlace, setSearchPlace] = useState();
   const navigation = useNavigation();
   // const places = useSelector(getPlaces);
-
+  const animation = useRef(null);
   const dataprovider = useDataProvider();
 
   const {
@@ -61,9 +63,6 @@ export const PlacesAndActivitiesScreen = () => {
     }
   }, [searchPlace]);
 
-  if (placeLoading || activityLoading) {
-    return <Text>Loading</Text>;
-  }
   return (
     <Background>
       <HStack justifyContent="flex-start" alignItems="center" width={WIDTH}>
@@ -75,16 +74,30 @@ export const PlacesAndActivitiesScreen = () => {
         fontWeight={600}
         textAlign="center"
       />
-      <ScrollView style={{ marginTop: 20 }}>
-        <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
-          <View flex={0.1} marginHorizontal={"$6"}>
-            <PlacesSearchBar
-              searchPlace={searchPlace}
-              setSearchPlace={setSearchPlace}
-            />
-          </View>
-          <View flex={0.4}>
-            {/* <Box flexDirection="row" justifyContent="space-between">
+      {
+        placeLoading || activityLoading ?
+          <LottieView
+            autoPlay
+            ref={animation}
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: BACKGROUND_COLOR,
+            }}
+            // Find more Lottie files at https://lottiefiles.com/featured
+            source={require("../assets/animations/loading.json")}
+          /> :
+
+          <ScrollView style={{ marginTop: 20 }}>
+            <VStack flex={1} rowGap={"$4"} height={"100%"} justifyContent="center">
+              <View flex={0.1} marginHorizontal={"$6"}>
+                <PlacesSearchBar
+                  searchPlace={searchPlace}
+                  setSearchPlace={setSearchPlace}
+                />
+              </View>
+              <View flex={0.4}>
+                {/* <Box flexDirection="row" justifyContent="space-between">
                             <GradientChip
                                 selected={selected}
                                 index={0}
@@ -104,59 +117,59 @@ export const PlacesAndActivitiesScreen = () => {
                                 text={"Adventure"}
                             />
                         </Box> */}
-            <View>
-              <HStack justifyContent="space-between" alignItems="center">
-                <Heading color="#5E6A81" ml="$6">
-                  Fun activities
-                </Heading>
-                <Button
-                  variant="link"
-                  onPress={() => navigation.navigate("Activities")}
-                >
-                  <Text mr="$6">View all</Text>
-                </Button>
-              </HStack>
-              <View display="flex" justifyContent="center" alignItems="center">
-                <FlatList
-                  numColumns={2}
-                  data={activities.slice(0, 4)}
-                  renderItem={({ item }) => (
-                    <ActivityCard
-                      name={item.activity_name}
-                      imageUrl={item.imageUrl}
-                      id={item.activity_id}
+                <View>
+                  <HStack justifyContent="space-between" alignItems="center">
+                    <Heading color="#5E6A81" ml="$6">
+                      Fun activities
+                    </Heading>
+                    <Button
+                      variant="link"
+                      onPress={() => navigation.navigate("Activities")}
+                    >
+                      <Text mr="$6">View all</Text>
+                    </Button>
+                  </HStack>
+                  <View display="flex" justifyContent="center" alignItems="center">
+                    <FlatList
+                      numColumns={2}
+                      data={activities.slice(0, 4)}
+                      renderItem={({ item }) => (
+                        <ActivityCard
+                          name={item.activity_name}
+                          imageUrl={item.imageUrl}
+                          id={item.activity_id}
+                        />
+                      )}
+                      keyExtractor={(item) => item.id}
                     />
+                  </View>
+                </View>
+                <Heading color="#5E6A81" ml="$6">
+                  Popular places
+                </Heading>
+                <Carousel
+                  ref={ref}
+                  loop
+                  width={width}
+                  height={width * 0.6}
+                  autoPlay={true}
+                  data={places}
+                  mode="parallax"
+                  scrollAnimationDuration={2000}
+                  renderItem={({ index, item }) => (
+                    <View style={{ flex: 1 }}>
+                      <PlaceCard
+                        index={item.place_id}
+                        name={item.place_name}
+                        image={item.header_image?.url}
+                        location={item.location}
+                        rating={item.rating}
+                      />
+                    </View>
                   )}
-                  keyExtractor={(item) => item.id}
                 />
               </View>
-            </View>
-            <Heading color="#5E6A81" ml="$6">
-              Popular places
-            </Heading>
-            <Carousel
-              ref={ref}
-              loop
-              width={width}
-              height={width * 0.6}
-              autoPlay={true}
-              data={places}
-              mode="parallax"
-              scrollAnimationDuration={2000}
-              renderItem={({ index, item }) => (
-                <View style={{ flex: 1 }}>
-                  <PlaceCard
-                    index={item.place_id}
-                    name={item.place_name}
-                    image={item.header_image?.url}
-                    location={item.location}
-                    rating={item.rating}
-                  />
-                </View>
-              )}
-            />
-          </View>
-          {/* <View>
+              {/* <View>
             <HStack>
               <Heading color="#5E6A81" ml="$6">
                 Popular places
@@ -176,8 +189,9 @@ export const PlacesAndActivitiesScreen = () => {
               keyExtractor={(item) => item.id}
             />
           </View> */}
-        </VStack>
-      </ScrollView>
+            </VStack>
+          </ScrollView>
+      }
       <Fab />
     </Background>
   );

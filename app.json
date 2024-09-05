@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "TravelAgent",
+    "name": "TourAcross",
     "slug": "tour-across-mobile-app",
-    "version": "1.0.3",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
