@@ -1,21 +1,22 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text } from "react-native";
-import { AnimatedTabBarNavigator } from "react-native-animated-nav-tab-bar";
-import { HomeScreen } from "../views/home";
-import { PlaceDetails } from "../views/placeDetails";
-import { HomeScreenHeader } from "../components/headers/HomeScreenHeader";
-import { PlacesAndActivitiesScreen } from "../views/placesAndActivities";
-import { DayPlanner } from "../views/dayPlanner";
-import { MainDrawer } from "../components/drawer";
-import { BACKGROUND_COLOR } from "../helpers/constants";
-import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
-import { Map } from "../views/Map";
-import { ChatView } from "../views/chat";
-import { ChatList } from "../views/chatList";
-import { ChatNavigator } from "./chatNavigator";
-import { Entypo } from "@expo/vector-icons";
-import { MessageCircleIcon } from "@gluestack-ui/themed";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text } from 'react-native';
+import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar';
+import { HomeScreen } from '../views/home';
+import { PlaceDetails } from '../views/placeDetails';
+import { HomeScreenHeader } from '../components/headers/HomeScreenHeader';
+import { PlacesAndActivitiesScreen } from '../views/placesAndActivities';
+import { DayPlanner } from '../views/dayPlanner';
+import { MainDrawer } from '../components/drawer';
+import { BACKGROUND_COLOR } from '../helpers/constants';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { Map } from '../views/Map';
+import { ChatView } from '../views/chat';
+import { ChatList } from '../views/chatList';
+import { ChatNavigator } from './chatNavigator';
+import { Entypo } from '@expo/vector-icons';
+import { MessageCircleIcon } from '@gluestack-ui/themed';
+import Profile from '../views/profile';
 
 export const BottomTabNavigator = () => {
   // const navigation = useNavigation()
@@ -29,36 +30,36 @@ export const BottomTabNavigator = () => {
     <Tab.Navigator
       // default configuration from React Navigation
       tabBarOptions={{
-        activeTintColor: "#2F7C6E",
-        inactiveTintColor: "#222222",
+        activeTintColor: '#2F7C6E',
+        inactiveTintColor: '#222222',
       }}
       appearance={{
-        whenActiveShow: "icon-only",
-        whenInactiveShow: "icon-only",
+        whenActiveShow: 'icon-only',
+        whenInactiveShow: 'icon-only',
         tabBarBackground: BACKGROUND_COLOR,
-        tabButtonLayout: "vertical",
-        tabBarLabel: "",
-        dotSize: "small",
+        tabButtonLayout: 'vertical',
+        tabBarLabel: '',
+        dotSize: 'small',
       }}
     >
       <Tab.Screen
-        name="H"
+        name='H'
         component={PlacesAndActivitiesScreen}
         options={{
           // headerTransparent: true,
           // header: HomeScreenHeader,
           headerShown: true,
-          tabBarIcon: () => <Entypo name="home" size={24} color="black" />
+          tabBarIcon: () => <Entypo name='home' size={24} color='black' />,
           // showLabel: false,
         }}
       />
       <Tab.Screen
-        name="A"
+        name='A'
         component={Map}
         options={{
           headerShown: true,
-          label: "",
-          tabBarIcon: () => <Entypo name="map" size={24} color="black" />,
+          label: '',
+          tabBarIcon: () => <Entypo name='map' size={24} color='black' />,
         }}
       />
       {/* <Tab.Screen
@@ -67,11 +68,11 @@ export const BottomTabNavigator = () => {
         options={{ headerTitle: "", tabBarIcon: () => <MessageCircleIcon /> }}
       /> */}
       <Tab.Screen
-        name="C"
+        name='C'
         component={ChatNavigator}
         options={{
-          headerTitle: "",
-          tabBarIcon: () => <Entypo name="chat" size={24} color="black" />,
+          headerTitle: '',
+          tabBarIcon: () => <Entypo name='chat' size={24} color='black' />,
           headerShown: false,
         }}
       />
@@ -80,6 +81,15 @@ export const BottomTabNavigator = () => {
         component={DayPlanner}
         options={{ tabBarIcon: () => <HomeIcon /> }}
       /> */}
+      <Tab.Screen
+        name='D'
+        component={Profile}
+        options={{
+          headerTitle: '',
+          tabBarIcon: () => <Entypo name='user' size={24} color='black' />,
+          headerShown: false,
+        }}
+      />
     </Tab.Navigator>
   );
 };
