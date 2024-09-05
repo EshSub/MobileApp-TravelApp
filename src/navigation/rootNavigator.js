@@ -84,7 +84,7 @@ export default function RootNavigator() {
   return (
     <MainDrawer>
       <Stack.Navigator
-      // screenOptions={{ header: HeaderWithBackButton }}
+      screenOptions={{ headerTitleAlign: "center" }}
       >
         <Stack.Screen
           name="Home"

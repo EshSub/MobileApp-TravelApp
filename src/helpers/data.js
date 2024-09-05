@@ -4,7 +4,7 @@ export const places = [
     place_name: "Sigiriya",
     description: "Ancient rock fortress with frescoes and gardens",
     district: 5,
-    city: 'Dambulla',
+    city: "Dambulla",
     province: 2,
     ticket_price: 30,
     currency: "USD",
@@ -410,6 +410,15 @@ export const places = [
   },
 ];
 
+export const ALL_IMAGES = places.reduce((acc, place) => {
+  return acc.concat([place?.header_image?.url, ...place.images.map((i) => i.url)]);
+}, []).filter((i) => i);
+
+export const getRandomImage = () => {
+  const index = Math.floor(Math.random() * ALL_IMAGES.length);
+  return ALL_IMAGES[index];
+}
+
 // export const plan = [
 //   [
 //       {
@@ -721,7 +730,8 @@ export const places = [
 export const plan = {
   1: {
     general: {
-      description: "Exiting day with beach activities and nightlife and a fine dining experience.",
+      description:
+        "Exiting day with beach activities and nightlife and a fine dining experience.",
     },
     morning: {
       District: "Matara",
@@ -758,7 +768,8 @@ export const plan = {
 
   2: {
     general: {
-      description: "Relaxing day with beach activities and wildlife in beautiful seaside.",
+      description:
+        "Relaxing day with beach activities and wildlife in beautiful seaside.",
     },
     morning: {
       District: "Matara",
