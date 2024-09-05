@@ -106,7 +106,7 @@ export default function RootNavigator() {
         <Stack.Screen
           name="Settings"
           component={SettingsPage}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="PrivacyPolicy"
