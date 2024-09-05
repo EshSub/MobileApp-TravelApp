@@ -128,7 +128,7 @@ export default function RootNavigator() {
         <Stack.Screen
           name="Planner"
           component={AiPlanner}
-          options={{ headerTransparent: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="RandomSearch"

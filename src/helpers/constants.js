@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native';
 import Constants from "expo-constants";
 const version = Constants.expoConfig.version;
 
-export const VERSION = version+"U5";
+export const VERSION = version+"U6";
 export const BACKEND_URL = "https://api.touracross.com";
 
 export const HEIGHT = Dimensions.get('window').height;
@@ -10,6 +10,8 @@ export const WIDTH = Dimensions.get('window').width;
 
 export const BORDER_RADIUS = 20;
 export const BACKGROUND_COLOR = '#F4FEFF';
+
+export const SELECTED_BACKGROUND_COLOR = "#F4FEFF";
 
 export const ROUTES = {
   HOME: 'H',
