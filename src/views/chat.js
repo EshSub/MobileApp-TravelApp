@@ -79,11 +79,6 @@ export const ChatView = ({ route }) => {
   }, [conversationId]);
 
   const onSend = useCallback((messages = []) => {
-    // setMessages(previousMessages =>
-    //   GiftedChat.append(previousMessages, messages),
-    // )
-
-    const previousMessages = [...messages];
 
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, [
@@ -99,19 +94,6 @@ export const ChatView = ({ route }) => {
       ])
     );
 
-    // setMessages([
-    //   ...previousMessages,
-    //   {
-    //     _id: "new",
-    //     text: messages[0].text,
-    //     createdAt: new Date(),
-    //     user: {
-    //       _id: "user",
-    //       name: "user",
-    //     },
-    //   },
-    // ]);
-
     authAxios
       .post(`/message/`, {
         conversation: conversationId,
@@ -124,13 +106,6 @@ export const ChatView = ({ route }) => {
             getMessageObjectFromResponse(response.data.res_message),
           )
         );
-        // setMessages([
-        //   ...previousMessages,
-        //   getMessageObjectFromResponse(response.data.message),
-        //   getMessageObjectFromResponse(response.data.res_message),
-        // ]);
-
-        // setMessages((prev) => GiftedChat.append(prev, response));
       })
       .catch((error) => {
         console.error(error);
@@ -140,9 +115,6 @@ export const ChatView = ({ route }) => {
   return (
     <Background>
       <View width={WIDTH} height={"100%"}>
-        {/* <Text>
-          {JSON.stringify(messages)}
-        </Text> */}
         <GiftedChat
           messages={messages}
           onSend={(messages) => onSend(messages)}
