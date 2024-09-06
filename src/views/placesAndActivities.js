@@ -161,7 +161,7 @@ export const PlacesAndActivitiesScreen = () => {
                       <PlaceCard
                         index={item.place_id}
                         name={item.place_name}
-                        image={item.header_image?.url}
+                        image={item.header_image_url}
                         location={item.location}
                         rating={item.rating}
                       />
